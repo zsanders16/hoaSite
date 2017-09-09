@@ -16,27 +16,27 @@ import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
 
-  // createRoutes = () => {
-  //   const activeRoutes = this.props.adminModules.filter( module => {
-  //     return module.active === true
-  //   })
-  //   return activeRoutes.map( (module, i) => {
+  createRoutes = () => {
+    const activeRoutes = this.props.adminModules.filter( module => {
+      return module.active === true
+    })
+    let finishedRoutes =  activeRoutes.map( (module, i) => {
 
-  //     const all = {
-  //       'Newsletters' : Newsletters
-  //     }
+      const all = {
+        'Newsletters' : Newsletters
+      }
       
-  //     const Type = all[module.display_name]
-
-  //     if(module.security === 'admin'){
-  //       return <AdminRoute key={'admin'} exact path={module.route} component={module.display_name} />
-  //     }else if( module.security === 'ho'){
-  //       return <ProtectedRoute key={'ho'} exact path={module.route} component={module.display_name} />
-  //     }else{
-  //       return <Route key={'open'} exact path='`${module.route}`' component={Type} />
-  //     }
-  //   })
-  // }
+      const Type = all[module.display_name]
+      if(module.security === 'admin'){
+        return <AdminRoute key={i} exact path={module.route} component={Type} />
+      }else if( module.security === 'ho'){
+        return <ProtectedRoute key={i} exact path={module.route} component={Type} />
+      }else{
+        return <Route key={i} exact path={module.route} component={Type} />
+      }
+    })
+    return finishedRoutes
+  }
 
   render() {
     const { adminModules } = this.props  
@@ -54,18 +54,13 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
-              { adminModules.includes('newsletter') ? 
+              {/* { adminModules.includes('newsletter') ? 
                 <Route key={'open'} exact path='/newsletters' component={Newsletters} /> :
                 undefined
-              }
-              {/* <Route exact path='/covenants' component={Covenants} /> */}
-              {/* <ProtectedRoute exact path='/contacts' component={Contacts} />
-              <ProtectedRoute exact path='/news' component={News} />
-              <ProtectedRoute exact path='/documents' component={Documents} />
-              <ProtectedRoute exact path='/discussion' component={Discussion} /> */}
+              } */}
+              { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />
-              {/* <AdminRoute exact path='/admin/homeowners' component={Homeowners} />
-              <AdminRoute exact path='/admin/newsletters' component={Newsletters} /> */}
+              
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

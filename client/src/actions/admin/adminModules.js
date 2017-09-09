@@ -5,7 +5,7 @@ import { setHeaders } from '../headers';
 
 export const getNewsletterModule = () => {
     return(dispatch) => {
-        axios.get('api/admin_modules_status/newsletters')
+        axios.get('api/newsletters_admin/index')
             .then( res => {
                 dispatch({ type: 'ADD_MODULE', newsletter: res.data })
                 dispatch(setHeaders(res.headers))
@@ -17,13 +17,11 @@ export const getNewsletterModule = () => {
     }
 }
 
-export const updateComponentActiveStatus = () => {
+export const updateNewsletters = (newsletterAdmin) => {
     return(dispatch) => {
-        debugger
-        axios.get('api/admin_modules_status/updateNewslettersActiveStatus')
+        axios.post('/api/newsletters_admin/update', {newsletterAdmin})
             .then( res => {
-                debugger
-                dispatch({ type: 'UPDATE_NEWSLETTER_ACTIVE', newsletter: res.data })
+                dispatch({ type: 'UPDATE_NEWSLETTER', newsletter: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {

@@ -11,20 +11,16 @@ class NavBar extends Component {
 
 
   componentWillReceiveProps(nextProps){
-    
     if(nextProps.adminModules !== this.props.adminModules){
-
+      this.setState( { open: [], ho: [], admin: [] })
       nextProps.adminModules.forEach( obj => {
         if(obj.active === true){
           if(obj.security === 'admin'){
             this.setState({ admin: [...this.state.admin, obj] })
-            // open.push(obj)
           }else if(obj.security === 'ho') {
             this.setState({ ho: [...this.state.ho, obj] })
-            // ho.push(obj)
           }else{
             this.setState({ open: [...this.state.open, obj] })
-            // admin.push(obj)
           }
         }
       });
@@ -45,45 +41,6 @@ class NavBar extends Component {
       return <NavbarLink key={i} linkItem={module} />
     })
   }
-
-  // rightNavs = () => {
-  //   const { user, dispatch, history } = this.props;
-  //   const { open, ho, admin } = this.state
-  //   if(user.id) {
-  //     return(
-  //       <Menu.Menu position='right'>
-  //         <Link to='/contacts' >
-  //           <Menu.Item name='Contacts' style={{color: '#FDFEFE'}} />
-  //         </Link>
-  //         <Link to='/news' >
-  //           <Menu.Item name='News' style={{color: '#FDFEFE'}} />
-  //         </Link>
-  //         <Link to='/documents' >
-  //           <Menu.Item name='Documents' style={{color: '#FDFEFE'}} />
-  //         </Link>
-  //         <Link to='discussion' >
-  //           <Menu.Item name='Discussion Board' style={{color: '#FDFEFE'}} />
-  //         </Link>
-  //         <Menu.Item
-  //           name='Logout'
-  //           style={{color: '#FDFEFE'}}
-  //           onClick={() => dispatch(handleLogout(history))}
-  //         />
-  //       </Menu.Menu>
-  //     );
-  //   } else {
-  //     return(
-  //       <Menu.Menu position='right'>
-  //         <Link to='/register' >
-  //           <Menu.Item name='Register' style={{color: '#FDFEFE'}} />
-  //         </Link>
-  //         <Link to='/login'>
-  //           <Menu.Item name='Login' style={{color: '#FDFEFE'}}/>
-  //         </Link>
-  //       </Menu.Menu>
-  //     );
-  //   }
-  // }
 
   showAdmin = () => {
     const { user } = this.props

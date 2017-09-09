@@ -8,8 +8,15 @@ Rails.application.routes.draw do
     # patch '/homeowners/change_admin_status/:id', to: 'homeowners#change_admin_status', as: 'admin_status'
 
     #adminModules controller routes
-    get '/admin_modules_status/newsletters', to: 'admin_modules_status#newsletters'
-    get '/admin_modules_status/updateNewslettersActiveStatus', to: 'admin_modules_status#updateNewslettersActiveStatus'
+   
+    
+    # get '/admin_modules_status/newsletters', to: 'admin_modules_status#newsletters'
+    # get '/admin_modules_status/updateNewslettersActiveStatus', to: 'admin_modules_status#updateNewslettersActiveStatus'
+    # put '/admin_modules_status/updateNewslettersSecurityStatus', to: 'admin_modules_status#updateNewslettersSecurityStatus'
+
+    get '/newsletters_admin/index', to: 'newsletters_admin#index'
+    
+    post '/newsletters_admin/update', to: 'newsletters_admin#update'
 
   end
 

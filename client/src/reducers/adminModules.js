@@ -2,14 +2,12 @@ const adminModules = (state = [], action) => {
     switch(action.type) {
       case 'ADD_MODULE':
         return [ ...state, action.newsletter ]
-      case 'UPDATE_NEWSLETTER_ACTIVE':
-        let modules = state
-        modules.forEach( module => {
-          if(module.name === 'newsletter'){
-            module.active = action.newsletter.active
-          }
-        });
-        return modules
+      case 'UPDATE_NEWSLETTER':
+        let updateModules = state.filter( module => {
+          return module.name !== 'newsletter'
+        })
+        updateModules.push(action.newsletter)
+        return [...updateModules]
       default:
         return state;
     }
