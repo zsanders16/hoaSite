@@ -1,10 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid } from 'semantic-ui-react'
+import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
 import { updateNewsletters } from '../../actions/admin/adminModules'
+import { addNewsletter } from '../../actions/newsletters'
+import FileInputBox from 'react-file-input-box'
+
 
 class NewslettersAdmin extends React.Component{
-    state = { active: false, security: 'admin', visible: false, showOpen: false, showHO: false, showAdmin: false, showActive: false, module: {} }
+    state = { active: false, security: 'admin', visible: false, showOpen: false, showHO: false, showAdmin: false, showActive: false, module: {}, form: false }
 
     componentDidMount(){
         this.props.adminModules.forEach( module =>{
@@ -68,6 +71,96 @@ class NewslettersAdmin extends React.Component{
     handleCancelAdmin = () => this.setState({ showAdmin: false })
     handleCancelActive = () => this.setState({ showActive: false })
 
+    displayNoNewsletters = () => {
+        return(
+            <Message>
+                <Message.Header>
+                    No Newsletters to display.
+                </Message.Header>
+                <p>
+                    Please Select the Add Newsletter button to add a Newsletter.
+                </p>
+            </Message>
+        )
+    }
+
+    displayTable = () => {
+        return(
+            <Table definition>
+                <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell />
+                    <Table.HeaderCell>Arguments</Table.HeaderCell>
+                    <Table.HeaderCell>Description</Table.HeaderCell>
+                </Table.Row>
+                </Table.Header>
+            
+                <Table.Body>
+                <Table.Row>
+                    <Table.Cell>reset rating</Table.Cell>
+                    <Table.Cell>None</Table.Cell>
+                    <Table.Cell>Resets rating to default value</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                    <Table.Cell>set rating</Table.Cell>
+                    <Table.Cell>rating (integer)</Table.Cell>
+                    <Table.Cell>Sets the current star rating to specified value</Table.Cell>
+                </Table.Row>
+                </Table.Body>
+            </Table>
+        )
+    }
+
+    selectFile = (event) => {
+        let { dispatch } = this.props
+        debugger
+        let newsletter = { name: event.target.files[0].name, attachment: event.target.files[0] }
+        dispatch(addNewsletter(newsletter))
+        this.setState({ form: false })
+
+    }
+
+    displayForm = () => {
+        return(
+            <Segment basic>
+                <Header as='h3'>Please select the file you want to upload.</Header>
+                <FileInputBox name="string" handleInput={this.selectFile} >Example</FileInputBox>
+            </Segment>
+
+        )
+    }
+
+    displayNewsletters = () => {
+        let { newsletters } = this.props
+        let { form } = this.state
+        if(form){
+            return this.displayForm()
+        }else{
+            if(newsletters.length > 0){
+                return this.displayTable()
+            }else{
+                return this.displayNoNewsletters()
+            }
+        }
+    }
+
+    notActive = () => {
+        return(
+            <Message>
+                <Message.Header>
+                    The Newsletter Module is Inactive
+                </Message.Header>
+                <p>
+                    Select the Newsletter Setting Button to Activate this module.
+                </p>
+            </Message>
+        )
+    }
+
+    clickShowForm = () => {
+        this.setState({ form: true })
+    }
+
     render(){
         const { active, visible } = this.state
         let correctWords = active ? 'Click to Deactivate' : 'Click to Activate'
@@ -75,7 +168,6 @@ class NewslettersAdmin extends React.Component{
         let correctPhrase = `Are you sure you want to ${correctWords} the Newsletter Module?`
         return(
             <Segment raised  >
-
                 <div style={{height: '300px'}} >
                     <Grid>
                         <Grid.Column width={13} >
@@ -156,7 +248,15 @@ class NewslettersAdmin extends React.Component{
                     </Sidebar>
                     <Sidebar.Pusher>
                         <Segment basic>
-                        <Header as='h1' textAlign='center' >Newsletter Administration</Header>
+                            <Header as='h1' textAlign='center' >Newsletter Administration</Header>
+                            { active ? this.displayNewsletters() : this.notActive() }
+                            <Grid>
+                                <Grid.Column width={13} >
+                                </Grid.Column >
+                                <Grid.Column width={3} >
+                                    <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button>
+                                </Grid.Column >
+                            </Grid>
                         </Segment>
                     </Sidebar.Pusher>
                     </Sidebar.Pushable>
@@ -167,7 +267,7 @@ class NewslettersAdmin extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { adminModules: state.adminModules }
+    return { adminModules: state.adminModules, newsletters: state.newsletters }
 }
 
 

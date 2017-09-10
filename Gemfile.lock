@@ -41,6 +41,10 @@ GEM
     arel (8.0.0)
     bcrypt (3.1.11)
     builder (3.2.3)
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     devise (4.3.0)
@@ -146,6 +150,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave (~> 1.0)
   devise
   devise_token_auth
   listen (>= 3.0.5, < 3.2)

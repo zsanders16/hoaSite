@@ -3,34 +3,19 @@ import App from './App'
 import { getNewsletterModule } from '../actions/admin/adminModules'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import { getNewsletters } from '../actions/newsletters'
+
 
 class BeforeAppSetup extends React.Component{
     state = { modules: [] }
 
     componentDidMount(){
         this.props.dispatch(getNewsletterModule())
+        this.props.dispatch(getNewsletters())
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.adminModules !== this.props.adminModules){
-            // if(nextProps.adminModules !== this.props.adminModules){
-            //     this.setState( { open: [], ho: [], admin: [] })
-            //     nextProps.adminModules.forEach( obj => {
-            //       if(obj.active === true){
-            //         if(obj.security === 'admin'){
-            //           this.setState({ admin: [...this.state.admin, obj] })
-            //         }else if(obj.security === 'ho') {
-            //           this.setState({ ho: [...this.state.ho, obj] })
-            //         }else{
-            //           this.setState({ open: [...this.state.open, obj] })
-            //         }
-            //       }
-            //     });
-            // }
-
-            // nextProps.adminModules.forEach( (module) => {
-            //     this.setState({ activeModules: [...this.state.activeModules, module.name] })
-            // });
             this.setState( { modules: nextProps.adminModules })
 
         }

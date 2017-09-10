@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do
     #API ROUTES SHOULD GO HERE
@@ -7,17 +8,13 @@ Rails.application.routes.draw do
     resources :homeowners, only: [:index, :update, :destroy]
     # patch '/homeowners/change_admin_status/:id', to: 'homeowners#change_admin_status', as: 'admin_status'
 
-    #adminModules controller routes
-   
-    
-    # get '/admin_modules_status/newsletters', to: 'admin_modules_status#newsletters'
-    # get '/admin_modules_status/updateNewslettersActiveStatus', to: 'admin_modules_status#updateNewslettersActiveStatus'
-    # put '/admin_modules_status/updateNewslettersSecurityStatus', to: 'admin_modules_status#updateNewslettersSecurityStatus'
-
+    #NewsletterAdmin controller routes
     get '/newsletters_admin/index', to: 'newsletters_admin#index'
-    
     post '/newsletters_admin/update', to: 'newsletters_admin#update'
 
+    #Newletter controller routes
+    resources :newsletters, only: [:index, :create, :destroy]
+    
   end
 
     
