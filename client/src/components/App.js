@@ -12,6 +12,7 @@ import AdminRoute from './AdminRoute'
 import { Switch, Route } from 'react-router-dom';
 import FetchUser from './FetchUser';
 import { Container, Segment } from 'semantic-ui-react'
+import ViewPDF from './ViewPDF'
 import 'semantic-ui-css/semantic.min.css';
 
 class App extends Component {
@@ -54,10 +55,7 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
-              {/* { adminModules.includes('newsletter') ? 
-                <Route key={'open'} exact path='/newsletters' component={Newsletters} /> :
-                undefined
-              } */}
+              <Route exact path='/viewpdf' component={ViewPDF} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />
               

@@ -4,6 +4,7 @@ import flash from './flash'
 import homeowners from './homeowners'
 import adminModules from './adminModules'
 import newsletters from './newsletters'
+import displayPDF from './displayPDF'
 
 const rootReducer = combineReducers({
     user,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     homeowners,
     adminModules,
     newsletters,
+    displayPDF,
 })
 
 export default rootReducer

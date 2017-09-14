@@ -1,9 +1,14 @@
 class Api::NewslettersController < ApplicationController
-  before_action :set_newsletter, only: [:destroy]
+  before_action :set_newsletter, only: [:show, :destroy]
   
   def index
     newsletters = Newsletter.all
+    newsletters.each { | newsletter |  newsletter["attachment"] = [] }
     render json: newsletters
+  end
+
+  def show
+    render json: @newsletter
   end
 
   def create
@@ -14,23 +19,9 @@ class Api::NewslettersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @newsletter.destroy
   end  
 
-  #custom method
-
-  def download
-    binding.pry
-    id = params['newsletter']['newsletter']['id']
-    url = params['newsletter']['newsletter']['attachment']['url']
-    binding.pry
-    data = open(File.join(Rails.root, url))
-
-
-    binding.pry
-    
-  end
 
   private
 

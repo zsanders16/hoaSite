@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170909190142) do
 
   create_table "newsletters", force: :cascade do |t|
     t.string "name", null: false
-    t.string "attachment"
+    t.text "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setFlash } from './flash';
 import { setHeaders } from './headers';
+import base64 from 'file-base64';
 
 
 export const getNewsletters = () => {
@@ -39,12 +40,24 @@ export const addNewsletter = (newsletter) => {
     
 // }
 
+export const displayNewsletter = (newsletter) => {
+    return(dispatch) => {
+        axios.get(`/api/newsletters/${newsletter.id}`)
+            .then( res => {
+                dispatch({ type: 'SET_DISPLAYPDF', object: res.data })
+                dispatch(setHeaders(res.headers))
+            })
+            .catch( res => {
+                const message = res.response.data.errors.join(',');
+                dispatch(setFlash(message, 'error'));
+            })
+    }
+}
+
 export const deleteNewsletter = (newsletter) => {
     return(dispatch) => {
-        debugger
         axios.delete(`/api/newsletters/${newsletter.id}`)
             .then( res => {
-                debugger
                 dispatch({ type: 'REMOVE_NEWSLETTER', newsletter: newsletter })
                 dispatch(setHeaders(res.headers))
             })

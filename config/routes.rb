@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     post '/newsletters_admin/update', to: 'newsletters_admin#update'
 
     #Newletter controller routes
-    resources :newsletters, only: [:index, :create, :destroy]
+    resources :newsletters, only: [:index, :show, :create, :destroy]
     
   end
 

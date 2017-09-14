@@ -1,16 +1,22 @@
 import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
-import { deleteNewsletter } from '../actions/newsletters'
+import { deleteNewsletter, displayNewsletter } from '../actions/newsletters'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 
 class SingleNewletter extends React.Component {
 
     handleDelete = () => {
-        debugger
-        let { newsletter } = this.props
-        this.props.dispatch(deleteNewsletter(newsletter))
+        let { newsletter, dispatch } = this.props
+        dispatch(deleteNewsletter(newsletter))
     }
+
+    handleView = () => {
+        let { newsletter, dispatch } = this.props
+        dispatch(displayNewsletter(newsletter))
+    }
+
 
     render(){
         let { newsletter } = this.props
@@ -18,7 +24,7 @@ class SingleNewletter extends React.Component {
             <Table.Row>
                 <Table.Cell>{newsletter.name}</Table.Cell>
                 <Table.Cell collapsing >
-                    <Button color='blue'><a href={`file:///Users/zacharysanders/Documents/WoodStock/woodstockvillage/public${newsletter.attachment['url']}`}></a>Download</Button>
+                    <Link to='/viewpdf'><Button color='blue' onClick={this.handleView} >View</Button></Link>
                     <Button color='blue' onClick={this.handleDelete}>Delete</Button>
                 </Table.Cell>
             </Table.Row>

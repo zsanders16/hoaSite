@@ -8,7 +8,6 @@ const newsletters = (state = [], action) => {
             let newList = state.filter( newsletter => {
                 return newsletter.id !== action.newsletter.id
             })
-            debugger
             return [ ...newList ]
         default:
             return state;
