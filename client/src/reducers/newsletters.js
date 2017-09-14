@@ -1,10 +1,15 @@
 const newsletters = (state = [], action) => {
     switch(action.type) {
         case 'SET_NEWSLETTERS':
-            debugger
             return [ ...action.newsletter ]
         case 'ADD_NEWSLETTER':
             return [ ...state, action.newsletter ]
+        case 'REMOVE_NEWSLETTER':
+            let newList = state.filter( newsletter => {
+                return newsletter.id !== action.newsletter.id
+            })
+            debugger
+            return [ ...newList ]
         default:
             return state;
     }

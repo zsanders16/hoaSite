@@ -27,24 +27,29 @@ class NavBar extends Component {
     }
   }
 
-  displayUserLinks = () => {
-    const { open, ho } = this.state
-    const combined = [...open, ...ho]
-    return combined.map( (module, i) => {
-      return <NavbarLink key={i} linkItem={module} />
-    })
+  displayLinks = () => {
+    const { open, ho, admin } = this.state
+    let { user } = this.props
+    if(user.admin){
+      const combined = [...open, ...ho, ...admin]
+      return combined.map( (module, i) => {
+        return <NavbarLink key={i} linkItem={module} />
+      })
+    }else if(user.id){
+      const combined = [...open, ...ho]
+      return combined.map( (module, i) => {
+        return <NavbarLink key={i} linkItem={module} />
+      })
+    }else{
+      return open.map( (module, i) => {
+        return <NavbarLink key={i} linkItem={module} />
+      })
+    }
   }
 
-  displayOpenLinks = () => {
-    const { open } = this.state
-    return open.map( (module, i) => {
-      return <NavbarLink key={i} linkItem={module} />
-    })
-  }
 
   showAdmin = () => {
     const { user } = this.props
-
     if(user.admin){
       return(
         <Link to='/admin' >
@@ -64,7 +69,7 @@ class NavBar extends Component {
           </Link>
           { this.showAdmin() }
           <Menu.Menu position='right'> 
-            { user.id ? this.displayUserLinks() : this.displayOpenLinks() }
+            { this.displayLinks() }
             { user.id ?  <Menu.Item
                             name='Logout'
                             style={{color: '#FDFEFE'}}

@@ -29,6 +29,7 @@ gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64'
 
 
 group :development, :test do

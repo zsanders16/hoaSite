@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
 import { updateNewsletters } from '../../actions/admin/adminModules'
 import { addNewsletter } from '../../actions/newsletters'
-import FileInputBox from 'react-file-input-box'
+import FileBase64 from 'react-file-base64'
+import SingleNewsletter from '../SingleNewsletter'
 
 
 class NewslettersAdmin extends React.Component{
@@ -84,37 +85,32 @@ class NewslettersAdmin extends React.Component{
         )
     }
 
+    getNewsletterRows = () => {
+        return this.props.newsletters.map( (newsletter, i) => {
+            return <SingleNewsletter key={i} newsletter={newsletter} />
+        })
+    }
+
     displayTable = () => {
         return(
             <Table definition>
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
-                    <Table.HeaderCell>Arguments</Table.HeaderCell>
-                    <Table.HeaderCell>Description</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
             
                 <Table.Body>
-                <Table.Row>
-                    <Table.Cell>reset rating</Table.Cell>
-                    <Table.Cell>None</Table.Cell>
-                    <Table.Cell>Resets rating to default value</Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.Cell>set rating</Table.Cell>
-                    <Table.Cell>rating (integer)</Table.Cell>
-                    <Table.Cell>Sets the current star rating to specified value</Table.Cell>
-                </Table.Row>
+                    {this.getNewsletterRows()}
                 </Table.Body>
             </Table>
         )
     }
 
-    selectFile = (event) => {
+    selectFile = (file) => {
         let { dispatch } = this.props
-        debugger
-        let newsletter = { name: event.target.files[0].name, attachment: event.target.files[0] }
+        let newsletter = { name: file[0].name, attachment: file[0].base64 }
         dispatch(addNewsletter(newsletter))
         this.setState({ form: false })
 
@@ -124,7 +120,7 @@ class NewslettersAdmin extends React.Component{
         return(
             <Segment basic>
                 <Header as='h3'>Please select the file you want to upload.</Header>
-                <FileInputBox name="string" handleInput={this.selectFile} >Example</FileInputBox>
+                <FileBase64 multiple={ true } onDone={ this.selectFile } />
             </Segment>
 
         )
@@ -168,7 +164,7 @@ class NewslettersAdmin extends React.Component{
         let correctPhrase = `Are you sure you want to ${correctWords} the Newsletter Module?`
         return(
             <Segment raised  >
-                <div style={{height: '300px'}} >
+                <div  >
                     <Grid>
                         <Grid.Column width={13} >
                         </Grid.Column >
@@ -177,88 +173,88 @@ class NewslettersAdmin extends React.Component{
                         </Grid.Column >
                     </Grid>
                     <Sidebar.Pushable as={Segment}>
-                    <Sidebar
-                        as={Menu}
-                        animation='scale down'
-                        width='wide'
-                        direction='right'
-                        visible={visible}
-                        icon='labeled'
-                        vertical
-                        inverted
-                    >
-                        <Menu.Item name='home'>
-                            <Header color='grey'>
-                                <Header.Content>
-                                    Currently Newsletters is: {correctWord}
-                                </Header.Content>
-                            </Header>
-                            <Button inverted color='blue' onClick={this.showActive}>{ correctWords }</Button>
-                            <Confirm
-                                open={this.state.showActive}
-                                content={correctPhrase}
-                                cancelButton='No'
-                                confirmButton='Yes'
-                                onCancel={this.handleCancelActive}
-                                onConfirm={this.changeActiveStatus}
-                            />
-                            <Divider />
-                            <Header color='grey'>
-                                <Header.Content>
-                                    Security Level
-                                </Header.Content>
-                            </Header>
-                            <Form>
-                                <Form.Field>
-                                    <Header as='h2' color='grey' >Current value: <b>{this.displayLevelOfSecurity()}</b></Header>
-                                </Form.Field>
-                            </Form>
-                            <Button.Group>
-                                <Button inverted color='blue' onClick={this.showOpen}>Public</Button>
+                        <Sidebar
+                            as={Menu}
+                            animation='scale down'
+                            width='wide'
+                            direction='right'
+                            visible={visible}
+                            icon='labeled'
+                            vertical
+                            inverted
+                        >
+                            <Menu.Item name='home'>
+                                <Header color='grey'>
+                                    <Header.Content>
+                                        Currently Newsletters is: {correctWord}
+                                    </Header.Content>
+                                </Header>
+                                <Button inverted color='blue' onClick={this.showActive}>{ correctWords }</Button>
                                 <Confirm
-                                    open={this.state.showOpen}
-                                    content='Are you sure you want to set security to Public?'
+                                    open={this.state.showActive}
+                                    content={correctPhrase}
                                     cancelButton='No'
                                     confirmButton='Yes'
-                                    onCancel={this.handleCancelOpen}
-                                    onConfirm={this.changeSecurityOpen}
+                                    onCancel={this.handleCancelActive}
+                                    onConfirm={this.changeActiveStatus}
                                 />
-                                <Button.Or />
-                                <Button inverted color='blue' onClick={this.showHO}>Protected</Button>
-                                <Confirm
-                                    open={this.state.showHO}
-                                    content='Are you sure you want to set security to Protected?'
-                                    cancelButton='No'
-                                    confirmButton='Yes'
-                                    onCancel={this.handleCancelHO}
-                                    onConfirm={this.changeSecurityHO}
-                                />
-                                <Button.Or />
-                                <Button inverted color='blue' onClick={this.showAdmin}>Admin</Button>
-                                <Confirm
-                                    open={this.state.showAdmin}
-                                    content='Are you sure you want to set security to Admin?'
-                                    cancelButton='No'
-                                    confirmButton='Yes'
-                                    onCancel={this.handleCancelAdmin}
-                                    onConfirm={this.changeSecurityAdmin}
-                                />
-                            </Button.Group>
-                        </Menu.Item>
-                    </Sidebar>
-                    <Sidebar.Pusher>
-                        <Segment basic>
-                            <Header as='h1' textAlign='center' >Newsletter Administration</Header>
-                            { active ? this.displayNewsletters() : this.notActive() }
-                            <Grid>
-                                <Grid.Column width={13} >
-                                </Grid.Column >
-                                <Grid.Column width={3} >
-                                    <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button>
-                                </Grid.Column >
-                            </Grid>
-                        </Segment>
-                    </Sidebar.Pusher>
+                                <Divider />
+                                <Header color='grey'>
+                                    <Header.Content>
+                                        Security Level
+                                    </Header.Content>
+                                </Header>
+                                <Form>
+                                    <Form.Field>
+                                        <Header as='h2' color='grey' >Current value: <b>{this.displayLevelOfSecurity()}</b></Header>
+                                    </Form.Field>
+                                </Form>
+                                <Button.Group>
+                                    <Button inverted color='blue' onClick={this.showOpen}>Public</Button>
+                                    <Confirm
+                                        open={this.state.showOpen}
+                                        content='Are you sure you want to set security to Public?'
+                                        cancelButton='No'
+                                        confirmButton='Yes'
+                                        onCancel={this.handleCancelOpen}
+                                        onConfirm={this.changeSecurityOpen}
+                                    />
+                                    <Button.Or />
+                                    <Button inverted color='blue' onClick={this.showHO}>Protected</Button>
+                                    <Confirm
+                                        open={this.state.showHO}
+                                        content='Are you sure you want to set security to Protected?'
+                                        cancelButton='No'
+                                        confirmButton='Yes'
+                                        onCancel={this.handleCancelHO}
+                                        onConfirm={this.changeSecurityHO}
+                                    />
+                                    <Button.Or />
+                                    <Button inverted color='blue' onClick={this.showAdmin}>Admin</Button>
+                                    <Confirm
+                                        open={this.state.showAdmin}
+                                        content='Are you sure you want to set security to Admin?'
+                                        cancelButton='No'
+                                        confirmButton='Yes'
+                                        onCancel={this.handleCancelAdmin}
+                                        onConfirm={this.changeSecurityAdmin}
+                                    />
+                                </Button.Group>
+                            </Menu.Item>
+                        </Sidebar>
+                        <Sidebar.Pusher>
+                            <Segment basic>
+                                <Header as='h1' textAlign='center' >Newsletter Administration</Header>
+                                { active ? this.displayNewsletters() : this.notActive() }
+                                <Grid>
+                                    <Grid.Column width={13} >
+                                    </Grid.Column >
+                                    <Grid.Column width={3} >
+                                        <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button>
+                                    </Grid.Column >
+                                </Grid>
+                            </Segment>
+                        </Sidebar.Pusher>
                     </Sidebar.Pushable>
                 </div>
             </Segment>
