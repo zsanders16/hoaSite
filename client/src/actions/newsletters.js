@@ -6,7 +6,7 @@ import base64 from 'file-base64';
 
 export const getNewsletters = () => {
     return(dispatch) => {
-        axios.get('api/newsletters')
+        axios.get('/api/newsletters')
             .then( res => {
                 dispatch({ type: 'SET_NEWSLETTERS', newsletter: res.data })
                 dispatch(setHeaders(res.headers))
@@ -32,13 +32,10 @@ export const addNewsletter = (newsletter) => {
     }
 }
 
-// export const downloadNewsletter = (newsletter) => {
-//     axios.post('/api/newsletters/download', { newsletter: newsletter })
-//         .then( res => {
-//             debugger
-//         })
-    
-// }
+export const clearNewsletters = (dispatch) => {
+    dispatch({ type: 'CLEAR_NEWSLETTERS'})
+}
+
 
 export const displayNewsletter = (newsletter) => {
     return(dispatch) => {

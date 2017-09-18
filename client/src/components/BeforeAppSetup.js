@@ -3,7 +3,7 @@ import App from './App'
 import { getNewsletterModule } from '../actions/admin/adminModules'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { getNewsletters } from '../actions/newsletters'
+import { getNewsletters, clearNewsletters } from '../actions/newsletters'
 
 
 class BeforeAppSetup extends React.Component{
@@ -11,21 +11,32 @@ class BeforeAppSetup extends React.Component{
 
     componentDidMount(){
         this.props.dispatch(getNewsletterModule())
-        this.props.dispatch(getNewsletters())
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.adminModules !== this.props.adminModules){
-            this.setState( { modules: nextProps.adminModules })
-
+            this.setState( { modules: nextProps.adminModules }, this.getDocuments(nextProps.adminModules) )
         }
+
+    }
+
+    getDocuments = (modules) => {
+        let { dispatch } = this.props
+        modules.forEach( (element) => {
+            if(element.name ==='newsletter'){
+                if(element.active === true){
+                    dispatch(getNewsletters())
+                }else{
+                    clearNewsletters(dispatch)
+                }
+            }
+        });
     }
 
     render(){
         let { modules } = this.state
         return(
             <App adminModules={modules} />
-            // <App openModules={open} hoModels={ho} adminModules={admin}/>
         )
     }
 }

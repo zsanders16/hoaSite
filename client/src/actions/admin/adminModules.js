@@ -17,7 +17,8 @@ export const getNewsletterModule = () => {
     }
 }
 
-export const updateNewsletters = (newsletterAdmin) => {
+
+export const updateNewslettersModule = (newsletterAdmin) => {
     return(dispatch) => {
         axios.post('/api/newsletters_admin/update', {newsletterAdmin})
             .then( res => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
-import { updateNewsletters } from '../../actions/admin/adminModules'
-import { addNewsletter } from '../../actions/newsletters'
+import { updateNewslettersModule } from '../../actions/admin/adminModules'
+import { addNewsletter, getNewsletters } from '../../actions/newsletters'
 import FileBase64 from 'react-file-base64'
 import SingleNewsletter from '../SingleNewsletter'
 
@@ -16,6 +16,7 @@ class NewslettersAdmin extends React.Component{
                 this.setState( { active: module.active, security: module.security, module: module } )
             }
         })
+
     }
 
     changeActiveStatus = () => {
@@ -24,7 +25,7 @@ class NewslettersAdmin extends React.Component{
         let newsletterAdmin = module
         newsletterAdmin.active = !active
         this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewsletters(newsletterAdmin))
+        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -45,21 +46,21 @@ class NewslettersAdmin extends React.Component{
         let newsletterAdmin = this.state.module
         newsletterAdmin.security = 'open'
         this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewsletters(newsletterAdmin))
+        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
     }
     changeSecurityHO = () => {
         this.setState({ security: 'ho', showHO: false })
         let newsletterAdmin = this.state.module
         newsletterAdmin.security = 'ho'
         this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewsletters(newsletterAdmin))
+        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
     }
     changeSecurityAdmin = () => {
         this.setState({ security: 'admin', showAdmin: false })
         let newsletterAdmin = this.state.module
         newsletterAdmin.security = 'admin'
         this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewsletters(newsletterAdmin))
+        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
     }
 
     showOpen = () => this.setState({ showOpen: true })
@@ -198,48 +199,52 @@ class NewslettersAdmin extends React.Component{
                                     onCancel={this.handleCancelActive}
                                     onConfirm={this.changeActiveStatus}
                                 />
-                                <Divider />
-                                <Header color='grey'>
-                                    <Header.Content>
-                                        Security Level
-                                    </Header.Content>
-                                </Header>
-                                <Form>
-                                    <Form.Field>
-                                        <Header as='h2' color='grey' >Current value: <b>{this.displayLevelOfSecurity()}</b></Header>
-                                    </Form.Field>
-                                </Form>
-                                <Button.Group>
-                                    <Button inverted color='blue' onClick={this.showOpen}>Public</Button>
-                                    <Confirm
-                                        open={this.state.showOpen}
-                                        content='Are you sure you want to set security to Public?'
-                                        cancelButton='No'
-                                        confirmButton='Yes'
-                                        onCancel={this.handleCancelOpen}
-                                        onConfirm={this.changeSecurityOpen}
-                                    />
-                                    <Button.Or />
-                                    <Button inverted color='blue' onClick={this.showHO}>Protected</Button>
-                                    <Confirm
-                                        open={this.state.showHO}
-                                        content='Are you sure you want to set security to Protected?'
-                                        cancelButton='No'
-                                        confirmButton='Yes'
-                                        onCancel={this.handleCancelHO}
-                                        onConfirm={this.changeSecurityHO}
-                                    />
-                                    <Button.Or />
-                                    <Button inverted color='blue' onClick={this.showAdmin}>Admin</Button>
-                                    <Confirm
-                                        open={this.state.showAdmin}
-                                        content='Are you sure you want to set security to Admin?'
-                                        cancelButton='No'
-                                        confirmButton='Yes'
-                                        onCancel={this.handleCancelAdmin}
-                                        onConfirm={this.changeSecurityAdmin}
-                                    />
-                                </Button.Group>
+                                {active ? 
+                                <div>
+                                    <Divider />
+                                    <Header color='grey'>
+                                        <Header.Content>
+                                            Security Level
+                                        </Header.Content>
+                                    </Header>
+                                    <Form>
+                                        <Form.Field>
+                                            <Header as='h2' color='grey' >Current value: <b>{this.displayLevelOfSecurity()}</b></Header>
+                                        </Form.Field>
+                                    </Form>
+                                    <Button.Group>
+                                        <Button inverted color='blue' onClick={this.showOpen}>Public</Button>
+                                        <Confirm
+                                            open={this.state.showOpen}
+                                            content='Are you sure you want to set security to Public?'
+                                            cancelButton='No'
+                                            confirmButton='Yes'
+                                            onCancel={this.handleCancelOpen}
+                                            onConfirm={this.changeSecurityOpen}
+                                        />
+                                        <Button.Or />
+                                        <Button inverted color='blue' onClick={this.showHO}>Protected</Button>
+                                        <Confirm
+                                            open={this.state.showHO}
+                                            content='Are you sure you want to set security to Protected?'
+                                            cancelButton='No'
+                                            confirmButton='Yes'
+                                            onCancel={this.handleCancelHO}
+                                            onConfirm={this.changeSecurityHO}
+                                        />
+                                        <Button.Or />
+                                        <Button inverted color='blue' onClick={this.showAdmin}>Admin</Button>
+                                        <Confirm
+                                            open={this.state.showAdmin}
+                                            content='Are you sure you want to set security to Admin?'
+                                            cancelButton='No'
+                                            confirmButton='Yes'
+                                            onCancel={this.handleCancelAdmin}
+                                            onConfirm={this.changeSecurityAdmin}
+                                        />
+                                    </Button.Group>
+                                </div> : undefined
+                                }
                             </Menu.Item>
                         </Sidebar>
                         <Sidebar.Pusher>
@@ -250,7 +255,7 @@ class NewslettersAdmin extends React.Component{
                                     <Grid.Column width={13} >
                                     </Grid.Column >
                                     <Grid.Column width={3} >
-                                        <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button>
+                                        { active ? <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button> : undefined }
                                     </Grid.Column >
                                 </Grid>
                             </Segment>

@@ -9,6 +9,8 @@ const newsletters = (state = [], action) => {
                 return newsletter.id !== action.newsletter.id
             })
             return [ ...newList ]
+        case 'CLEAR_NEWSLETTERS':
+            return []
         default:
             return state;
     }

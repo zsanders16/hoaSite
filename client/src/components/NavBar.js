@@ -25,27 +25,21 @@ class NavBar extends Component {
 
     let { activeLinks } = this.state
     let { user } = this.props
-    debugger
     if(user.admin === true){
-      debugger
       return activeLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
     }else if(user.id){
-      debugger
       let filteredLinks = activeLinks.filter( link => {
         return link.security !== 'admin'
       })
-      debugger
       return filteredLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
     }else{
-      debugger
       let filteredLinks = activeLinks.filter( link => {
         return link.security === 'open'
       })
-      debugger
       return filteredLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
