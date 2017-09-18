@@ -7,41 +7,46 @@ import { withRouter } from 'react-router-dom';
 import NavbarLink from './NavbarLink'
 
 class NavBar extends Component {
-  state = { open: [], ho: [], admin: [] }
+  // state = { open: [], ho: [], admin: [] }
+  state = { activeLinks: [] }
 
 
   componentWillReceiveProps(nextProps){
     if(nextProps.adminModules !== this.props.adminModules){
-      this.setState( { open: [], ho: [], admin: [] })
-      nextProps.adminModules.forEach( obj => {
-        if(obj.active === true){
-          if(obj.security === 'admin'){
-            this.setState({ admin: [...this.state.admin, obj] })
-          }else if(obj.security === 'ho') {
-            this.setState({ ho: [...this.state.ho, obj] })
-          }else{
-            this.setState({ open: [...this.state.open, obj] })
-          }
-        }
+
+      let activeLinks = nextProps.adminModules.filter( element => {
+        return element.active === true
       });
+      this.setState({ activeLinks: activeLinks})
     }
   }
 
   displayLinks = () => {
-    const { open, ho, admin } = this.state
+
+    let { activeLinks } = this.state
     let { user } = this.props
-    if(user.admin){
-      const combined = [...open, ...ho, ...admin]
-      return combined.map( (module, i) => {
+    debugger
+    if(user.admin === true){
+      debugger
+      return activeLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
     }else if(user.id){
-      const combined = [...open, ...ho]
-      return combined.map( (module, i) => {
+      debugger
+      let filteredLinks = activeLinks.filter( link => {
+        return link.security !== 'admin'
+      })
+      debugger
+      return filteredLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
     }else{
-      return open.map( (module, i) => {
+      debugger
+      let filteredLinks = activeLinks.filter( link => {
+        return link.security === 'open'
+      })
+      debugger
+      return filteredLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
     }
