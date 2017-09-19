@@ -1,13 +1,19 @@
 const adminModules = (state = [], action) => {
     switch(action.type) {
       case 'ADD_MODULE':
-        return [ ...state, action.newsletter ]
+        return [ ...state, action.module ]
       case 'UPDATE_NEWSLETTER':
-        let updateModules = state.filter( module => {
+        let updateNewsletterModules = state.filter( module => {
           return module.name !== 'newsletter'
         })
-        updateModules.push(action.newsletter)
-        return [...updateModules]
+        updateNewsletterModules.push(action.newsletter)
+        return [...updateNewsletterModules]
+      case 'UPDATE_CCR':
+        let updateCcrModules = state.filter( module => {
+          return module.name !== 'ccr'
+        })
+        updateCcrModules.push(action.ccr)
+        return [...updateCcrModules]
       default:
         return state;
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import App from './App'
-import { getNewsletterModule } from '../actions/admin/adminModules'
+import { getNewsletterModule, getCcrModule } from '../actions/admin/adminModules'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { getNewsletters, clearNewsletters } from '../actions/newsletters'
@@ -10,7 +10,9 @@ class BeforeAppSetup extends React.Component{
     state = { modules: [] }
 
     componentDidMount(){
-        this.props.dispatch(getNewsletterModule())
+        let { dispatch } = this.props
+        dispatch(getNewsletterModule())
+        dispatch(getCcrModule())
     }
 
     componentWillReceiveProps(nextProps){
@@ -28,6 +30,12 @@ class BeforeAppSetup extends React.Component{
                     dispatch(getNewsletters())
                 }else{
                     clearNewsletters(dispatch)
+                }
+            }else if(element.name ==='ccr'){
+                if(element.active === true){
+                    // dispatch(getCcrs())
+                }else{
+                    // clearCcrs(dispatch)
                 }
             }
         });

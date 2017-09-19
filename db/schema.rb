@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909190142) do
+ActiveRecord::Schema.define(version: 20170919202809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ccr_admins", force: :cascade do |t|
+    t.string "name", default: "ccr"
+    t.string "display_name", default: "CCRs\\/ByLaws"
+    t.string "route", default: "/ccrs"
+    t.string "security", default: "admin"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ccr_by_laws", force: :cascade do |t|
+    t.string "name"
+    t.text "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ccr_by_laws_admins", force: :cascade do |t|
+    t.string "name", default: "ccrbylaws"
+    t.string "display_name", default: "CC\\&Rs\\/ByLaws"
+    t.string "route", default: "/ccrbylaws"
+    t.string "security", default: "admin"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "newsletters", force: :cascade do |t|
     t.string "name", null: false

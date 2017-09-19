@@ -1,0 +1,2 @@
+class CcrAdmin < ApplicationRecord
+end
