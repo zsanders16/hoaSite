@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { setFlash } from '../../actions/flash';
-import { setHeaders } from '../headers';
+import { setFlash } from './flash';
+import { setHeaders } from './headers';
+import base64 from 'file-base64';
 
 
-export const getNewsletterModule = () => {
+export const getCcrs = () => {
     return(dispatch) => {
-        axios.get('/api/newsletters_admin')
+        axios.get('/api/ccr')
             .then( res => {
-                dispatch({ type: 'ADD_MODULE', module: res.data })
+                dispatch({ type: 'SET_CCRS', ccr: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -17,12 +18,11 @@ export const getNewsletterModule = () => {
     }
 }
 
-
-export const updateNewslettersModule = (newsletterAdmin) => {
+export const addCcr = (ccr) => {
     return(dispatch) => {
-        axios.put('/api/newsletters_admin/1', {newsletterAdmin})
+        axios.post('/api/ccr', { ccr: ccr })
             .then( res => {
-                dispatch({ type: 'UPDATE_NEWSLETTER', newsletter: res.data })
+                dispatch({ type: 'ADD_CCR',  ccr: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -32,11 +32,16 @@ export const updateNewslettersModule = (newsletterAdmin) => {
     }
 }
 
-export const getCcrModule = () => {
+export const clearCcrs = (dispatch) => {
+    dispatch({ type: 'CLEAR_CCRS'})
+}
+
+
+export const displayCcr = (ccr) => {
     return(dispatch) => {
-        axios.get('/api/ccr_admin')
+        axios.get(`/api/ccr/${ccr.id}`)
             .then( res => {
-                dispatch({ type: 'ADD_MODULE', module: res.data })
+                dispatch({ type: 'SET_DISPLAYPDF', object: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -46,12 +51,11 @@ export const getCcrModule = () => {
     }
 }
 
-
-export const updateCcrModule = (ccrAdmin) => {
+export const deleteCcr = (ccr) => {
     return(dispatch) => {
-        axios.put('/api/ccr_admin/1', {ccrAdmin})
+        axios.delete(`/api/ccr/${ccr.id}`)
             .then( res => {
-                dispatch({ type: 'UPDATE_CCR', ccr: res.data })
+                dispatch({ type: 'REMOVE_CCR', ccr: ccr })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {

@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { setFlash } from '../../actions/flash';
-import { setHeaders } from '../headers';
+import { setFlash } from './flash';
+import { setHeaders } from './headers';
+import base64 from 'file-base64';
 
 
-export const getNewsletterModule = () => {
+export const getBylaws = () => {
     return(dispatch) => {
-        axios.get('/api/newsletters_admin')
+        axios.get('/api/bylaws')
             .then( res => {
-                dispatch({ type: 'ADD_MODULE', module: res.data })
+                dispatch({ type: 'SET_BYLAWS', bylaw: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -17,12 +18,11 @@ export const getNewsletterModule = () => {
     }
 }
 
-
-export const updateNewslettersModule = (newsletterAdmin) => {
+export const addBylaw = (bylaw) => {
     return(dispatch) => {
-        axios.put('/api/newsletters_admin/1', {newsletterAdmin})
+        axios.post('/api/bylaws', { bylaw: bylaw })
             .then( res => {
-                dispatch({ type: 'UPDATE_NEWSLETTER', newsletter: res.data })
+                dispatch({ type: 'ADD_BYLAW',  bylaw: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -32,11 +32,16 @@ export const updateNewslettersModule = (newsletterAdmin) => {
     }
 }
 
-export const getCcrModule = () => {
+export const clearBylaws = (dispatch) => {
+    dispatch({ type: 'CLEAR_BYLAWS'})
+}
+
+
+export const displayBylaw = (bylaw) => {
     return(dispatch) => {
-        axios.get('/api/ccr_admin')
+        axios.get(`/api/bylaws/${bylaw.id}`)
             .then( res => {
-                dispatch({ type: 'ADD_MODULE', module: res.data })
+                dispatch({ type: 'SET_DISPLAYPDF', object: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -46,12 +51,11 @@ export const getCcrModule = () => {
     }
 }
 
-
-export const updateCcrModule = (ccrAdmin) => {
+export const deleteBylaw = (bylaw) => {
     return(dispatch) => {
-        axios.put('/api/ccr_admin/1', {ccrAdmin})
+        axios.delete(`/api/bylaws/${bylaw.id}`)
             .then( res => {
-                dispatch({ type: 'UPDATE_CCR', ccr: res.data })
+                dispatch({ type: 'REMOVE_BYLAW', bylaw: bylaw })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {

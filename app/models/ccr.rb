@@ -1,3 +1,3 @@
-class Newsletter < ApplicationRecord
+class Ccr < ApplicationRecord
     validates :name, presence: true
 end

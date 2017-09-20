@@ -1,18 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
-import { updateNewslettersModule } from '../../actions/admin/adminModules'
-import { addNewsletter, getNewsletters } from '../../actions/newsletters'
+import { updateCcrModule } from '../../actions/admin/adminModules'
+import { addCcr } from '../../actions/ccrs'
+import { addBylaw } from '../../actions/bylaws'
 import FileBase64 from 'react-file-base64'
-import SingleNewsletter from '../SingleNewsletter'
+import SingleCcr from '../SingleCcr'
+import SingleBylaw from '../SingleBylaw'
 
 
-class NewslettersAdmin extends React.Component{
-    state = { active: false, security: 'admin', visible: false, showOpen: false, showHO: false, showAdmin: false, showActive: false, module: {}, form: false }
+class CcrsAdmin extends React.Component{
+    state = { active: false, security: 'admin', visible: false, showOpen: false, showHO: false, showAdmin: false, showActive: false, module: {}, formccr: false, formbylaw: false }
 
     componentDidMount(){
         this.props.adminModules.forEach( module =>{
-            if(module.name === 'newsletter'){
+            if(module.name === 'ccr'){
                 this.setState( { active: module.active, security: module.security, module: module } )
             }
         })
@@ -22,10 +24,10 @@ class NewslettersAdmin extends React.Component{
     changeActiveStatus = () => {
         let { active, module } = this.state
         this.setState( { active: !active, showActive: false } )
-        let newsletterAdmin = module
-        newsletterAdmin.active = !active
-        this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
+        let ccrAdmin = module
+        ccrAdmin.active = !active
+        this.setState({ module: ccrAdmin })
+        this.props.dispatch(updateCcrModule(ccrAdmin))
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -43,24 +45,24 @@ class NewslettersAdmin extends React.Component{
 
     changeSecurityOpen = () => {
         this.setState({ security: 'open', showOpen: false })
-        let newsletterAdmin = this.state.module
-        newsletterAdmin.security = 'open'
-        this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
+        let ccrAdmin = this.state.module
+        ccrAdmin.security = 'open'
+        this.setState({ module: ccrAdmin })
+        this.props.dispatch(updateCcrModule(ccrAdmin))
     }
     changeSecurityHO = () => {
         this.setState({ security: 'ho', showHO: false })
-        let newsletterAdmin = this.state.module
-        newsletterAdmin.security = 'ho'
-        this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
+        let ccrAdmin = this.state.module
+        ccrAdmin.security = 'ho'
+        this.setState({ module: ccrAdmin })
+        this.props.dispatch(updateCcrModule(ccrAdmin))
     }
     changeSecurityAdmin = () => {
         this.setState({ security: 'admin', showAdmin: false })
-        let newsletterAdmin = this.state.module
-        newsletterAdmin.security = 'admin'
-        this.setState({ module: newsletterAdmin })
-        this.props.dispatch(updateNewslettersModule(newsletterAdmin))
+        let ccrAdmin = this.state.module
+        ccrAdmin.security = 'admin'
+        this.setState({ module: ccrAdmin })
+        this.props.dispatch(updateCcrModule(ccrAdmin))
     }
 
     showOpen = () => this.setState({ showOpen: true })
@@ -73,26 +75,45 @@ class NewslettersAdmin extends React.Component{
     handleCancelAdmin = () => this.setState({ showAdmin: false })
     handleCancelActive = () => this.setState({ showActive: false })
 
-    displayNoNewsletters = () => {
+    displayNoCcrs = () => {
         return(
             <Message>
                 <Message.Header>
-                    No Newsletters to display.
+                    No CCRs to display.
                 </Message.Header>
                 <p>
-                    Please Select the Add Newsletter button to add a Newsletter.
+                    Please Select the Add CCRs button to add a CCR.
                 </p>
             </Message>
         )
     }
 
-    getNewsletterRows = () => {
-        return this.props.newsletters.map( (newsletter, i) => {
-            return <SingleNewsletter key={i} newsletter={newsletter} />
+    displayNoBylaws = () => {
+        return(
+            <Message>
+                <Message.Header>
+                    No Bylaws to display.
+                </Message.Header>
+                <p>
+                    Please Select the Add Bylaws button to add a Bylaw.
+                </p>
+            </Message>
+        )
+    }
+
+    getCcrRows = () => {
+        return this.props.ccrs.map( (ccr, i) => {
+            return <SingleCcr key={i} ccr={ccr} />
         })
     }
 
-    displayTable = () => {
+    getBylawsRows = () => {
+        return this.props.bylaws.map( (bylaw, i) => {
+            return <SingleBylaw key={i} bylaw={bylaw} />
+        })
+    }
+
+    displayccrTable = () => {
         return(
             <Table definition>
                 <Table.Header>
@@ -103,74 +124,126 @@ class NewslettersAdmin extends React.Component{
                 </Table.Header>
             
                 <Table.Body>
-                    {this.getNewsletterRows()}
+                    {this.getCcrRows()}
                 </Table.Body>
             </Table>
         )
     }
 
-    selectFile = (file) => {
-        let { dispatch } = this.props
-        let newsletter = { name: file[0].name, attachment: file[0].base64 }
-        dispatch(addNewsletter(newsletter))
-        this.setState({ form: false })
-
+    displaybylawTable = () => {
+        return(
+            <Table definition>
+                <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell />
+                    <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
+                </Table.Row>
+                </Table.Header>
+            
+                <Table.Body>
+                    {this.getBylawsRows()}
+                </Table.Body>
+            </Table>
+        )
     }
 
-    displayForm = () => {
+    selectccrFile = (file) => {
+        let { dispatch } = this.props
+        let ccr = { name: file[0].name, attachment: file[0].base64 }
+        dispatch(addCcr(ccr))
+        this.setState({ formccr: false })
+    }
+
+    selectbylawFile = (file) => {
+        let { dispatch } = this.props
+        let bylaw = { name: file[0].name, attachment: file[0].base64 }
+        dispatch(addBylaw(bylaw))
+        this.setState({ formbylaw: false })
+    }
+
+    displayccrForm = () => {
         return(
             <Segment basic>
                 <Header as='h3'>Please select the file you want to upload.</Header>
-                <FileBase64 multiple={ true } onDone={ this.selectFile } />
+                <FileBase64 multiple={ true } onDone={ this.selectccrFile } />
             </Segment>
 
         )
     }
 
-    displayNewsletters = () => {
-        let { newsletters } = this.props
-        let { form } = this.state
-        if(form){
-            return this.displayForm()
+    displaybylawForm = () => {
+        return(
+            <Segment basic>
+                <Header as='h3'>Please select the file you want to upload.</Header>
+                <FileBase64 multiple={ true } onDone={ this.selectbylawFile } />
+            </Segment>
+
+        )
+    }
+
+    displayCcrs = () => {
+        let { ccrs } = this.props
+        let { formccr } = this.state
+        if(formccr){
+            return this.displayccrForm()
         }else{
-            if(newsletters.length > 0){
-                return this.displayTable()
+            if(ccrs.length > 0){
+                return this.displayccrTable()
             }else{
-                return this.displayNoNewsletters()
+                return this.displayNoCcrs()
+            }
+        }
+    }
+
+    displayByLaws = () => {
+        let { bylaws } = this.props
+        let { formbylaw } = this.state
+        if(formbylaw){
+            return this.displaybylawForm()
+        }else{
+            if(bylaws.length > 0){
+                return this.displaybylawTable()
+            }else{
+                return this.displayNoBylaws()
             }
         }
     }
 
     notActive = () => {
         return(
-            <Message>
+            <Message style={{height: '150px'}}>
                 <Message.Header>
-                    The Newsletter Module is Inactive
+                    The CCRs | ByLaws Module is Inactive
                 </Message.Header>
                 <p>
-                    Select the Newsletter Settings Button to Activate this module.
+                    Select the CCRs | ByLaws Settings Button to Activate this module.
                 </p>
             </Message>
         )
     }
 
-    clickShowForm = () => {
-        this.setState({ form: true })
+    clickShowccrForm = () => {
+        this.setState({ formccr: true })
+    }
+
+    clickShowbylawForm = () => {
+        this.setState({ formbylaw: true })
     }
 
     render(){
         const { active, visible } = this.state
         let correctWords = active ? 'Click to Deactivate' : 'Click to Activate'
         let correctWord = active ? 'Active' : 'Inactive'
-        let correctPhrase = `Are you sure you want to ${correctWords} the Newsletter Module?`
+        let correctPhrase = `Are you sure you want to ${correctWords} the CCRs|ByLaws Module?`
         return(
             <Segment raised  >
-                <div  >
+                <Segment basic >
                     <Grid>
                         <Grid.Column width={13} >
+                            <Header as='h1' textAlign='center' >CCRs|ByLaws Administration</Header>
                         </Grid.Column >
                         <Grid.Column width={3} >
-                            <Button color='blue' onClick={this.toggleVisibility} >Newsletters Settings</Button>
+                            <Button color='blue' onClick={this.toggleVisibility} >CCRs|ByLaws Settings</Button>
                         </Grid.Column >
                     </Grid>
                     <Sidebar.Pushable as={Segment}>
@@ -187,7 +260,7 @@ class NewslettersAdmin extends React.Component{
                             <Menu.Item name='home'>
                                 <Header color='grey'>
                                     <Header.Content>
-                                        Currently Newsletters is: {correctWord}
+                                        Currently CCRs|ByLaws is: {correctWord}
                                     </Header.Content>
                                 </Header>
                                 <Button inverted color='blue' onClick={this.showActive}>{ correctWords }</Button>
@@ -248,28 +321,43 @@ class NewslettersAdmin extends React.Component{
                             </Menu.Item>
                         </Sidebar>
                         <Sidebar.Pusher>
-                            <Segment basic>
-                                <Header as='h1' textAlign='center' >Newsletter Administration</Header>
-                                { active ? this.displayNewsletters() : this.notActive() }
-                                <Grid>
-                                    <Grid.Column width={13} >
-                                    </Grid.Column >
-                                    <Grid.Column width={3} >
-                                        { active ? <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button> : undefined }
-                                    </Grid.Column >
-                                </Grid>
-                            </Segment>
+                            { active ? 
+                            <Segment>
+                                <Segment raised>
+                                    <Header as='h1' textAlign='center' >CCRs</Header>
+                                    { active ? this.displayCcrs() : undefined }
+                                    <Grid>
+                                        <Grid.Column width={13} >
+                                        </Grid.Column >
+                                        <Grid.Column width={3} >
+                                            { active ? <Button color='blue' onClick={this.clickShowccrForm}>Add CCR</Button> : undefined }
+                                        </Grid.Column >
+                                    </Grid>
+                                </Segment>
+                                <Segment raised>
+                                    <Header as='h1' textAlign='center' >ByLaws</Header>
+                                    { active ? this.displayByLaws() : undefined }
+                                    <Grid>
+                                        <Grid.Column width={13} >
+                                        </Grid.Column >
+                                        <Grid.Column width={3} >
+                                            { active ? <Button color='blue' onClick={this.clickShowbylawForm}>Add ByLaw</Button> : undefined }
+                                        </Grid.Column >
+                                    </Grid>
+                                </Segment>
+                            </Segment> : this.notActive()
+                            }
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>
-                </div>
+                </Segment>
             </Segment>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    return { adminModules: state.adminModules, newsletters: state.newsletters }
+    return { adminModules: state.adminModules, ccrs: state.ccrs, bylaws: state.bylaws }
 }
 
 
-export default connect(mapStateToProps)(NewslettersAdmin);
+export default connect(mapStateToProps)(CcrsAdmin);

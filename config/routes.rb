@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do
     #API ROUTES SHOULD GO HERE
@@ -18,6 +19,12 @@ Rails.application.routes.draw do
     
     #CCRs and ByLaws Admin controller routes
     resources :ccr_admin, only: [:index, :update]
+
+    #CCr controller routes
+    resources :ccr, only: [:index, :show, :create, :destroy]
+
+    #ByLaws controller routes
+    resources :bylaws, only: [:index, :show, :create, :destroy]
 
   end
 

@@ -4,6 +4,8 @@ import { getNewsletterModule, getCcrModule } from '../actions/admin/adminModules
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { getNewsletters, clearNewsletters } from '../actions/newsletters'
+import { getCcrs, clearCcrs } from '../actions/ccrs'
+import { getBylaws, clearBylaws } from '../actions/bylaws'
 
 
 class BeforeAppSetup extends React.Component{
@@ -33,9 +35,11 @@ class BeforeAppSetup extends React.Component{
                 }
             }else if(element.name ==='ccr'){
                 if(element.active === true){
-                    // dispatch(getCcrs())
+                    dispatch(getCcrs())
+                    dispatch(getBylaws())
                 }else{
-                    // clearCcrs(dispatch)
+                    clearCcrs(dispatch)
+                    clearBylaws(dispatch)
                 }
             }
         });

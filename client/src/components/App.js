@@ -7,6 +7,7 @@ import Home from './Home';
 import NavBar from './NavBar';
 import AdminRoutes from './admin/AdminRoutes'
 import Newsletters from './Newsletters'
+import CcrBylaws from './CcrBylaws'
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute'
 import { Switch, Route } from 'react-router-dom';
@@ -24,7 +25,8 @@ class App extends Component {
     let finishedRoutes =  activeRoutes.map( (module, i) => {
 
       const all = {
-        'Newsletters' : Newsletters
+        'Newsletters' : Newsletters,
+        'CCRs | ByLaws'   : CcrBylaws
       }
       
       const Type = all[module.display_name]

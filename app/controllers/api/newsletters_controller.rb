@@ -29,10 +29,6 @@ class Api::NewslettersController < ApplicationController
       params.require(:newsletter).permit(:name, :attachment)
     end
 
-    def download_params
-      
-    end
-
     def set_newsletter
       @newsletter = Newsletter.find(params[:id])
     end

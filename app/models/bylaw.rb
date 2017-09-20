@@ -1,3 +1,3 @@
-class Newsletter < ApplicationRecord
+class Bylaw < ApplicationRecord
     validates :name, presence: true
 end
