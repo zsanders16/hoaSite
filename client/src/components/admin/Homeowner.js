@@ -19,14 +19,15 @@ class Homeowner extends React.Component {
 
     handleAdminSwitch = (homeowner) => {
         let updateAdmin = homeowner.admin
-        homeowner.admin = updateAdmin
-        this.setState({admin: updateAdmin})
+        homeowner.admin = !updateAdmin
+        this.setState({admin: !updateAdmin})
         this.props.dispatch(updateHomeowner(homeowner))
     }
 
 
     render(){
         let { homeowner } = this.props
+        let { admin } = this.state
         return(
             <Table.Row>
                 <Table.Cell collapsing>
@@ -49,7 +50,7 @@ class Homeowner extends React.Component {
                 <Table.Cell>
                     {homeowner.email}
                 </Table.Cell>
-                <Table.Cell collapsing textAlign='center'><Checkbox checked={homeowner.admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
+                <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
             </Table.Row>
         )
     }

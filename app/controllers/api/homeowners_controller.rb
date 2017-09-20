@@ -18,16 +18,6 @@ class Api::HomeownersController < ApplicationController
         @homeowner.destroy
     end
 
-    ## custome methods
-
-    # def change_admin_status
-    #     status = @homeowner.admin
-    #     @homeowner.admin = !status
-    #     @homeowner.save
-    #     render json: @homeowner
-    # end
-
-    
     private
 
         def set_homeowner

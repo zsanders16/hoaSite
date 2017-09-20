@@ -8,7 +8,7 @@ import { registerUser } from '../../actions/auth';
 
 
 class Homeowners extends React.Component{
-    state = { showForm: false, email: '', password: '', passwordConfirmation: '', name: '', admin: false, id: 0 }
+    state = { showForm: false, email: '', password: '', passwordConfirmation: '', name: '', id: 0 }
 
     componentDidMount(){
         let { dispatch } = this.props

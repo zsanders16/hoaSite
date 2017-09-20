@@ -33,8 +33,7 @@ export const removeHomeowner = (id) => {
 
 export const updateHomeowner = (homeowner) => {
     return(dispatch) => {
-        const { name, email, admin } = homeowner
-        axios.put(`/api/homeowners/${homeowner.id}`, {homeowner: {name, email, admin}})
+        axios.put(`/api/homeowners/${homeowner.id}`, {homeowner: homeowner})
             .then( res => {
                 dispatch({ type: 'UPDATE_HOMEOWNER', homeowner: res.data })
                 dispatch(setHeaders(res.headers))
