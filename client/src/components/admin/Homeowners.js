@@ -1,14 +1,15 @@
 import React from 'react'
-import { Table, Button, Icon, Header, Form, Segment } from 'semantic-ui-react'
+import { Table, Button, Icon, Header, Form, Segment, Label } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getHomeowners, updateHomeowner } from '../../actions/homeowners'
 import Homeowner from './Homeowner'
 import { registerUser } from '../../actions/auth';
+import ReactPhoneInput from 'react-phone-input'
 
 
 
 class Homeowners extends React.Component{
-    state = { showForm: false, email: '', password: '', passwordConfirmation: '', name: '', id: 0 }
+    state = { showForm: false, email: '', password: '', passwordConfirmation: '', name: '', address: '', number: '', id: 0 }
 
     componentDidMount(){
         let { dispatch } = this.props
@@ -71,6 +72,9 @@ class Homeowners extends React.Component{
         this.setState({name: homeowner.name, email: homeowner.email, id: homeowner.id, showForm: true})
     }
 
+    handlePhoneChange = (e) => {
+        this.setState({number: e})
+    }
     
     viewHomeowners = () => {
         let { homeowners } = this.props
@@ -104,7 +108,7 @@ class Homeowners extends React.Component{
     }
 
     displayForm = () => {
-        const { email, password, passwordConfirmation, name, id } = this.state;
+        const { email, password, passwordConfirmation, name, address, number, id } = this.state;
         return(
             <Segment >
                 <Header as='h1' textAlign='center'>Add User</Header>
@@ -129,8 +133,20 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
+                <Header as='h5'>Phone Number</Header>
+                <ReactPhoneInput value={number} style={{marginTop: '-12ßpx'}} defaultCountry={'us'} onChange={this.handlePhoneChange} />
+                <Form.Field style={{marginTop: '15px'}}>
+                    <label>Address</label>
+                    <input
+                    id='address'
+                    placeholder='Address'
+                    required
+                    value={address}
+                    onChange={this.handleChange}
+                    />
+                </Form.Field>
                 { id ? '' : 
-                <div>
+                <div >
                     <Form.Field>
                         <label>Password</label>
                         <input
@@ -156,8 +172,8 @@ class Homeowners extends React.Component{
                     </div>
                 }
                 <Segment basic textAlign='right'>
-                    <Button onClick={ this.addUser }>Cancel</Button>
-                    <Button type='submit'>{ id ? 'Update' : 'Submit'}</Button>
+                    <Button primary onClick={ this.addUser }>Cancel</Button>
+                    <Button primary type='submit'>{ id ? 'Update' : 'Submit'}</Button>
                 </Segment>
                 </Form>
             </Segment>
