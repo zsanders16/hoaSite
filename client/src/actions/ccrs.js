@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { setFlash } from './flash';
 import { setHeaders } from './headers';
-import base64 from 'file-base64';
 
 
 export const getCcrs = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, Icon, Header, Form, Segment, Label } from 'semantic-ui-react'
+import { Table, Button, Icon, Header, Form, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getHomeowners, updateHomeowner } from '../../actions/homeowners'
 import Homeowner from './Homeowner'
@@ -9,7 +9,15 @@ import ReactPhoneInput from 'react-phone-input'
 
 
 class Homeowners extends React.Component{
-    state = { showForm: false, email: '', password: '', passwordConfirmation: '', name: '', address: '', number: '', id: 0 }
+    state = { showForm: false, 
+                email: '', 
+                password: '', 
+                passwordConfirmation: '', 
+                name: '', 
+                address: '', 
+                number: '', 
+                id: 0 
+            }
 
     componentDidMount(){
         let { dispatch } = this.props
@@ -19,7 +27,6 @@ class Homeowners extends React.Component{
     compare (a, b) {
         const homeownerA = a.name.toUpperCase();
         const homeownerB = b.name.toUpperCase();
-        
         let comparison = 0;
         if (homeownerA > homeownerB) {
           comparison = 1;
@@ -32,7 +39,7 @@ class Homeowners extends React.Component{
     displayHomeowners = () => {
         this.props.homeowners.sort(this.compare)
         return this.props.homeowners.map ( (homeowner, i)  => {
-            return ( <Homeowner key={i} homeowner={homeowner} handleAdminSwitch={this.handleAdminSwitch} editHomeowner={this.editHomeowner}/> )
+            return ( <Homeowner key={i} homeowner={homeowner} editHomeowner={this.editHomeowner}/> )
         })
     }
 
@@ -43,17 +50,25 @@ class Homeowners extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, passwordConfirmation, name, id} = this.state;
-        const { dispatch, history } = this.props;
-
-        if(id){
-            dispatch(updateHomeowner({name, email, id}))
-            this.setState({ showForm: false, email: '', password: '', passwordConfirmation: '', name: '' })
+        const { email, password, passwordConfirmation, name, id, number, address } = this.state;
+        const { dispatch } = this.props;
+    
+        if(id>0){
+            let homeowner = { id, name, email, number, address }
+            dispatch(updateHomeowner(homeowner))
+            this.setState({ showForm: false, email: '', name: '', number: '', address: '', id: 0 })
         }else{
             if(password === passwordConfirmation){
-                dispatch(registerUser(email, password, passwordConfirmation, name, history));
+                let user = { name, email, number, address, password, passwordConfirmation }
+                dispatch(registerUser(user));
                 this.addUser();
-                this.setState({ showForm: false, email: '', password: '', passwordConfirmation: '', name: '' })
+                this.setState({ showForm: false, 
+                                email: '', 
+                                password: '', 
+                                passwordConfirmation: '', 
+                                name: '', 
+                                number: '', 
+                                address: '' })
             }else{
             alert('Passwords do NOT match!');
             }
@@ -69,7 +84,13 @@ class Homeowners extends React.Component{
     }
 
     editHomeowner = (homeowner) => {
-        this.setState({name: homeowner.name, email: homeowner.email, id: homeowner.id, showForm: true})
+        this.setState({name: homeowner.name, 
+                        email: homeowner.email, 
+                        id: homeowner.id, 
+                        number: homeowner.number, 
+                        address: homeowner.address, 
+                        showForm: true,
+                    })
     }
 
     handlePhoneChange = (e) => {
@@ -80,30 +101,37 @@ class Homeowners extends React.Component{
         let { homeowners } = this.props
         return(
             <Table celled striped>
-            <Table.Header>
-                <Table.Row>
-                    <Table.HeaderCell colSpan='4' textAlign='center' >List of Homeowners</Table.HeaderCell>
-                </Table.Row>
-                <Table.Row>
-                    <Table.HeaderCell />
-                    <Table.HeaderCell>Homeowner</Table.HeaderCell>
-                    <Table.HeaderCell>Email Address</Table.HeaderCell>
-                    <Table.HeaderCell>IsAdmin</Table.HeaderCell>
-                </Table.Row>
-            </Table.Header>
-            <Table.Body>
-                {homeowners.length > 0 ? this.displayHomeowners() : <Table.Row><Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell></Table.Row>}
-            </Table.Body>
-            <Table.Footer fullWidth>
-                <Table.Row>
-                    <Table.HeaderCell colSpan='4'>
-                        <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
-                            <Icon name='user' /> Add User
-                        </Button>
-                    </Table.HeaderCell>
-                </Table.Row>
-            </Table.Footer>
-        </Table>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell colSpan='6' textAlign='center' >List of Homeowners</Table.HeaderCell>
+                    </Table.Row>
+                    <Table.Row>
+                        <Table.HeaderCell />
+                        <Table.HeaderCell>Homeowner</Table.HeaderCell>
+                        <Table.HeaderCell>Email Address</Table.HeaderCell>
+                        <Table.HeaderCell>Number</Table.HeaderCell>
+                        <Table.HeaderCell>Address</Table.HeaderCell>
+                        <Table.HeaderCell>IsAdmin</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    { homeowners.length > 0 ? 
+                        this.displayHomeowners() : 
+                        <Table.Row>
+                            <Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell>
+                        </Table.Row> 
+                    }
+                </Table.Body>
+                <Table.Footer fullWidth>
+                    <Table.Row>
+                        <Table.HeaderCell colSpan='6'>
+                            <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
+                                <Icon name='user' /> Add User
+                            </Button>
+                        </Table.HeaderCell>
+                    </Table.Row>
+                </Table.Footer>
+            </Table>
         )
     }
 
@@ -111,7 +139,7 @@ class Homeowners extends React.Component{
         const { email, password, passwordConfirmation, name, address, number, id } = this.state;
         return(
             <Segment >
-                <Header as='h1' textAlign='center'>Add User</Header>
+                <Header as='h1' textAlign='center'>{ id>0 ? 'Edit User' : 'Add User' }</Header>
                 <Form onSubmit={this.handleSubmit}>
                 <Form.Field>
                     <label>Email</label>
@@ -134,13 +162,16 @@ class Homeowners extends React.Component{
                     />
                 </Form.Field>
                 <Header as='h5'>Phone Number</Header>
-                <ReactPhoneInput value={number} style={{marginTop: '-12ßpx'}} defaultCountry={'us'} onChange={this.handlePhoneChange} />
+                <ReactPhoneInput value={number} 
+                                    style={{marginTop: '-12px'}} 
+                                    defaultCountry={'us'} 
+                                    onChange={this.handlePhoneChange} 
+                />
                 <Form.Field style={{marginTop: '15px'}}>
                     <label>Address</label>
                     <input
                     id='address'
                     placeholder='Address'
-                    required
                     value={address}
                     onChange={this.handleChange}
                     />

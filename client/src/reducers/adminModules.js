@@ -14,6 +14,18 @@ const adminModules = (state = [], action) => {
         })
         updateCcrModules.push(action.ccr)
         return [...updateCcrModules]
+      case 'UPDATE_LEGAL':
+        let updateLegalModules = state.filter( module => {
+          return module.name !== 'legal'
+        })
+        updateLegalModules.push(action.legal)
+        return [...updateLegalModules]
+      case 'UPDATE_MINUTES':
+        let updateMinutesModules = state.filter( module => {
+          return module.name !== 'minutes'
+        })
+        updateMinutesModules.push(action.minutes)
+        return [...updateMinutesModules]
       default:
         return state;
     }

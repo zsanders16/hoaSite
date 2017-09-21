@@ -19,17 +19,21 @@ class SingleBylaw extends React.Component {
 
 
     render(){
-        let { bylaw } = this.props
+        let { bylaw, user } = this.props
         return(
             <Table.Row>
                 <Table.Cell>{bylaw.name}</Table.Cell>
                 <Table.Cell collapsing >
                     <Link to='/viewpdf'><Button color='blue' onClick={this.handleView} >View</Button></Link>
-                    <Button color='blue' onClick={this.handleDelete}>Delete</Button>
+                    { user.admin ? <Button color='blue' onClick={this.handleDelete}>Delete</Button> : undefined }
                 </Table.Cell>
             </Table.Row>
         )
     }
 }
 
-export default connect()(SingleBylaw)
+const mapStateToProps = (state) => {
+    return { user: state.user }
+}
+
+export default connect(mapStateToProps)(SingleBylaw)

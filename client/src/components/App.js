@@ -41,8 +41,7 @@ class App extends Component {
     return finishedRoutes
   }
 
-  render() {
-    const { adminModules } = this.props  
+  render() {  
     return (
       <div style={{backgroundColor: '#922B21'}}>
         <Container>

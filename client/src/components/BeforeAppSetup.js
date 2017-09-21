@@ -1,6 +1,6 @@
 import React from 'react'
 import App from './App'
-import { getNewsletterModule, getCcrModule } from '../actions/admin/adminModules'
+import { getNewsletterModule, getCcrModule, getLegalModule, getMinutesModule  } from '../actions/admin/adminModules'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { getNewsletters, clearNewsletters } from '../actions/newsletters'
@@ -15,6 +15,8 @@ class BeforeAppSetup extends React.Component{
         let { dispatch } = this.props
         dispatch(getNewsletterModule())
         dispatch(getCcrModule())
+        dispatch(getLegalModule())
+        dispatch(getMinutesModule())
     }
 
     componentWillReceiveProps(nextProps){

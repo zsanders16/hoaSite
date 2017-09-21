@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
 import { updateNewslettersModule } from '../../actions/admin/adminModules'
-import { addNewsletter, getNewsletters } from '../../actions/newsletters'
+import { addNewsletter } from '../../actions/newsletters'
 import FileBase64 from 'react-file-base64'
 import SingleNewsletter from '../SingleNewsletter'
 

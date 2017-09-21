@@ -1,0 +1,2 @@
+class MinutesAdmin < ApplicationRecord
+end

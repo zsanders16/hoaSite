@@ -1,16 +1,22 @@
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
 
-export const registerUser = (email, password, passwordConfirmation, name, history) => {
+export const registerUser = (user) => {
   return(dispatch) => {
-    axios.post('/api/auth', { name, email, password, password_confirmation: passwordConfirmation })
+    axios.post('/api/auth', { name: user.name, 
+                              email: user.email, 
+                              password: user.password, 
+                              password_confirmation: user.password_confirmation,
+                              number: user.number,
+                              address: user.address,
+                             })
       // .then( res => {
       //   let { data: { data: user }, headers } = res;
         // dispatch({ type: 'LOGIN', user, headers });
         // history.push('/');
       // })
       .then(
-        dispatch({ type: 'ADD_HOMEOWNER', homeowner: { name, email, password, password_confirmation: passwordConfirmation }})
+        dispatch({ type: 'ADD_HOMEOWNER', homeowner: user})
       )
       .catch( res => {
         const message = res.response.data.errors.join(',');

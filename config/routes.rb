@@ -7,11 +7,8 @@ Rails.application.routes.draw do
 
     #routes for homeowners
     resources :homeowners, only: [:index, :update, :destroy]
-    # patch '/homeowners/change_admin_status/:id', to: 'homeowners#change_admin_status', as: 'admin_status'
 
     #NewsletterAdmin controller routes
-    # get '/newsletters_admin/index', to: 'newsletters_admin#index'
-    # post '/newsletters_admin/update', to: 'newsletters_admin#update'
     resources :newsletters_admin, only: [:index, :update]
 
     #Newletter controller routes
@@ -25,6 +22,18 @@ Rails.application.routes.draw do
 
     #ByLaws controller routes
     resources :bylaws, only: [:index, :show, :create, :destroy]
+
+    #Legal Admin controller routes
+    resources :legal_admin, only: [:index, :update]
+
+    #Legal controller routes
+    resources :legal, only: [:index, :show, :create, :destroy]
+
+    #Minutes Admin controller routes
+    resources :minutes_admin, only: [:index, :update]
+
+    #Minutes controller routes
+    resources :minutes, only: [:index, :show, :create, :destroy]
 
   end
 

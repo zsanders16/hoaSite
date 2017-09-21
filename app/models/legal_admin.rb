@@ -1,0 +1,2 @@
+class LegalAdmin < ApplicationRecord
+end

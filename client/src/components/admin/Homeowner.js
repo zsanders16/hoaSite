@@ -33,7 +33,7 @@ class Homeowner extends React.Component {
                 <Table.Cell collapsing>
                     <Segment basic textAlign='center'>
                         <Popup
-                            trigger={<Button color='twitter' size='mini' onClick={() => this.props.editHomeowner({ name: homeowner.name, email: homeowner.email, id: homeowner.id })} ><Icon name='sticky note outline' /></Button>}
+                            trigger={<Button color='twitter' size='mini' onClick={() => this.props.editHomeowner(homeowner)} ><Icon name='sticky note outline' /></Button>}
                             content='Edit Homeowner'
                             hideOnScroll
                         />
@@ -49,6 +49,12 @@ class Homeowner extends React.Component {
                 </Table.Cell>
                 <Table.Cell>
                     {homeowner.email}
+                </Table.Cell>
+                <Table.Cell collapsing>
+                    {homeowner.number}
+                </Table.Cell>
+                <Table.Cell>
+                    {homeowner.address}
                 </Table.Cell>
                 <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
             </Table.Row>
