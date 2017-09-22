@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921220840) do
+ActiveRecord::Schema.define(version: 20170922214849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,25 @@ ActiveRecord::Schema.define(version: 20170921220840) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.string "user_created"
+    t.bigint "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_comments_on_message_id"
+  end
+
+  create_table "discussion_admins", force: :cascade do |t|
+    t.string "name", default: "discussion"
+    t.string "display_name", default: "Discussion Forum"
+    t.string "route", default: "/discussion"
+    t.string "security", default: "admin"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "legal_admins", force: :cascade do |t|
     t.string "name", default: "legal"
     t.string "display_name", default: "Legal"
@@ -69,6 +88,15 @@ ActiveRecord::Schema.define(version: 20170921220840) do
   create_table "legals", force: :cascade do |t|
     t.string "name"
     t.text "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "user_created"
+    t.boolean "archive"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -139,4 +167,5 @@ ActiveRecord::Schema.define(version: 20170921220840) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "comments", "messages"
 end

@@ -5,6 +5,7 @@ namespace :setup do
     CcrAdmin.create
     Minute.create
     Legal.create
+    Discussion.create
   end
 
 end

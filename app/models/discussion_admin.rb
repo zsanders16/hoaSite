@@ -1,0 +1,2 @@
+class DiscussionAdmin < ApplicationRecord
+end
