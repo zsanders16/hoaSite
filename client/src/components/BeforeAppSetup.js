@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { getNewsletters, clearNewsletters } from '../actions/newsletters'
 import { getCcrs, clearCcrs } from '../actions/ccrs'
 import { getBylaws, clearBylaws } from '../actions/bylaws'
+import { getLegals, clearLegals } from '../actions/legal'
+import { getMinutes, clearMinutes } from '../actions/minutes'
 
 
 class BeforeAppSetup extends React.Component{
@@ -42,6 +44,19 @@ class BeforeAppSetup extends React.Component{
                 }else{
                     clearCcrs(dispatch)
                     clearBylaws(dispatch)
+                }
+            }else if(element.name ==='legal'){
+                if(element.active === true){
+                    dispatch(getLegals())
+                }else{
+                    clearLegals(dispatch)
+                }
+            }
+            else if(element.name ==='minutes'){
+                if(element.active === true){
+                    dispatch(getMinutes())
+                }else{
+                    clearMinutes(dispatch)
                 }
             }
         });

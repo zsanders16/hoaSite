@@ -4,24 +4,24 @@ class Api::LegalController < ApplicationController
     
     
     def index
-    legal = Legal.all
-    legal.each { | legal | legal["attachment"] = [] }
-    render json: legal
+        legal = Legal.all
+        legal.each { | legal | legal["attachment"] = [] }
+        render json: legal
     end
 
     def show
-    render json: @legal
+        render json: @legal
     end
 
     def create
-    legal = legal.new(legal_params)
-    if legal.save
-        render json: legal
-    end
+        legal = Legal.new(legal_params)
+        if legal.save
+            render json: legal
+        end
     end
 
     def destroy
-    @legal.destroy
+        @legal.destroy
     end
 
     private
@@ -31,6 +31,6 @@ class Api::LegalController < ApplicationController
         end
 
         def set_legal
-            @legal = legal.find(params[:id])
+            @legal = Legal.find(params[:id])
         end
 end

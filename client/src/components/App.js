@@ -8,6 +8,8 @@ import NavBar from './NavBar';
 import AdminRoutes from './admin/AdminRoutes'
 import Newsletters from './Newsletters'
 import CcrBylaws from './CcrBylaws'
+import Legal from './Legal'
+import Minutes from './Minutes'
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute'
 import { Switch, Route } from 'react-router-dom';
@@ -25,8 +27,10 @@ class App extends Component {
     let finishedRoutes =  activeRoutes.map( (module, i) => {
 
       const all = {
-        'Newsletters' : Newsletters,
-        'CCRs | ByLaws'   : CcrBylaws
+        'Newsletters'   : Newsletters,
+        'CCRs | ByLaws' : CcrBylaws,
+        'Legal'         : Legal,
+        'Meeting Minutes'       : Minutes,
       }
       
       const Type = all[module.display_name]

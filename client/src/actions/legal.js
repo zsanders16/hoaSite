@@ -3,11 +3,11 @@ import { setFlash } from './flash';
 import { setHeaders } from './headers';
 
 
-export const getNewsletters = () => {
+export const getLegals = () => {
     return(dispatch) => {
-        axios.get('/api/newsletters')
+        axios.get('/api/legal')
             .then( res => {
-                dispatch({ type: 'SET_NEWSLETTERS', newsletter: res.data })
+                dispatch({ type: 'SET_LEGALS', legal: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -17,11 +17,11 @@ export const getNewsletters = () => {
     }
 }
 
-export const addNewsletter = (newsletter) => {
+export const addLegal = (legal) => {
     return(dispatch) => {
-        axios.post('/api/newsletters', { newsletter: newsletter })
+        axios.post('/api/legal', { legal: legal })
             .then( res => {
-                dispatch({ type: 'ADD_NEWSLETTER',  newsletter: res.data })
+                dispatch({ type: 'ADD_LEGAL',  legal: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -31,13 +31,13 @@ export const addNewsletter = (newsletter) => {
     }
 }
 
-export const clearNewsletters = (dispatch) => {
-    dispatch({ type: 'CLEAR_NEWSLETTERS'})
+export const clearLegals = (dispatch) => {
+    dispatch({ type: 'CLEAR_LEGALS'})
 }
 
-export const displayNewsletter = (newsletter) => {
+export const displayLegal = (legal) => {
     return(dispatch) => {
-        axios.get(`/api/newsletters/${newsletter.id}`)
+        axios.get(`/api/legal/${legal.id}`)
             .then( res => {
                 dispatch({ type: 'SET_DISPLAYPDF', object: res.data })
                 dispatch(setHeaders(res.headers))
@@ -49,11 +49,13 @@ export const displayNewsletter = (newsletter) => {
     }
 }
 
-export const deleteNewsletter = (newsletter) => {
+export const deleteLegal = (legal) => {
     return(dispatch) => {
-        axios.delete(`/api/newsletters/${newsletter.id}`)
+        debugger
+        axios.delete(`/api/legal/${legal.id}`)
             .then( res => {
-                dispatch({ type: 'REMOVE_NEWSLETTER', newsletter: newsletter })
+                debugger
+                dispatch({ type: 'REMOVE_LEGAL', legal: legal })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {

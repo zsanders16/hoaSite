@@ -3,11 +3,11 @@ import { setFlash } from './flash';
 import { setHeaders } from './headers';
 
 
-export const getNewsletters = () => {
+export const getMinutes = () => {
     return(dispatch) => {
-        axios.get('/api/newsletters')
+        axios.get('/api/minutes')
             .then( res => {
-                dispatch({ type: 'SET_NEWSLETTERS', newsletter: res.data })
+                dispatch({ type: 'SET_MINUTES', minutes: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -17,11 +17,11 @@ export const getNewsletters = () => {
     }
 }
 
-export const addNewsletter = (newsletter) => {
+export const addMinute = (minutes) => {
     return(dispatch) => {
-        axios.post('/api/newsletters', { newsletter: newsletter })
+        axios.post('/api/minutes', { minutes: minutes })
             .then( res => {
-                dispatch({ type: 'ADD_NEWSLETTER',  newsletter: res.data })
+                dispatch({ type: 'ADD_MINUTE',  minutes: res.data })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {
@@ -31,13 +31,13 @@ export const addNewsletter = (newsletter) => {
     }
 }
 
-export const clearNewsletters = (dispatch) => {
-    dispatch({ type: 'CLEAR_NEWSLETTERS'})
+export const clearMinutes = (dispatch) => {
+    dispatch({ type: 'CLEAR_MINUTES'})
 }
 
-export const displayNewsletter = (newsletter) => {
+export const displayMinute = (minutes) => {
     return(dispatch) => {
-        axios.get(`/api/newsletters/${newsletter.id}`)
+        axios.get(`/api/minutes/${minutes.id}`)
             .then( res => {
                 dispatch({ type: 'SET_DISPLAYPDF', object: res.data })
                 dispatch(setHeaders(res.headers))
@@ -49,11 +49,11 @@ export const displayNewsletter = (newsletter) => {
     }
 }
 
-export const deleteNewsletter = (newsletter) => {
+export const deleteMinute = (minutes) => {
     return(dispatch) => {
-        axios.delete(`/api/newsletters/${newsletter.id}`)
+        axios.delete(`/api/minutes/${minutes.id}`)
             .then( res => {
-                dispatch({ type: 'REMOVE_NEWSLETTER', newsletter: newsletter })
+                dispatch({ type: 'REMOVE_MINUTE', minutes: minutes })
                 dispatch(setHeaders(res.headers))
             })
             .catch( res => {

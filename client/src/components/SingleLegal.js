@@ -1,28 +1,28 @@
 import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
-import { deleteNewsletter, displayNewsletter } from '../actions/newsletters'
+import { deleteLegal, displayLegal } from '../actions/legal'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
-class SingleNewletter extends React.Component {
+class SingleLegal extends React.Component {
 
     handleDelete = () => {
-        let { newsletter, dispatch } = this.props
-        dispatch(deleteNewsletter(newsletter))
+        let { legal, dispatch } = this.props
+        dispatch(deleteLegal(legal))
     }
 
     handleView = () => {
-        let { newsletter, dispatch } = this.props
-        dispatch(displayNewsletter(newsletter))
+        let { legal, dispatch } = this.props
+        dispatch(displayLegal(legal))
     }
 
 
     render(){
-        let { newsletter, user } = this.props
+        let { legal, user } = this.props
         return(
             <Table.Row>
-                <Table.Cell>{newsletter.name}</Table.Cell>
+                <Table.Cell>{legal.name}</Table.Cell>
                 <Table.Cell collapsing >
                     <Link to='/viewpdf'><Button color='blue' onClick={this.handleView} >View</Button></Link>
                     { user.admin ? <Button color='blue' onClick={this.handleDelete}>Delete</Button> : undefined }
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => {
     return { user: state.user }
 }
 
-export default connect(mapStateToProps)(SingleNewletter)
+export default connect(mapStateToProps)(SingleLegal)

@@ -6,6 +6,8 @@ import adminModules from './adminModules'
 import newsletters from './newsletters'
 import ccrs from './ccrs'
 import bylaws from './bylaws'
+import legal from './legal'
+import minutes from './minutes'
 import displayPDF from './displayPDF'
 
 const rootReducer = combineReducers({
@@ -16,6 +18,8 @@ const rootReducer = combineReducers({
     newsletters,
     ccrs,
     bylaws,
+    legal,
+    minutes,
     displayPDF,
 })
 

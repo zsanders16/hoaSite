@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SingleCcr from './SingleCcr'
 import SingleBylaw from './SingleBylaw'
-import { Segment, Header, Button, Grid, Table, Message } from 'semantic-ui-react'
+import { Segment, Header, Grid, Table, Message } from 'semantic-ui-react'
 
 class CcrBylaws extends React.Component{
 

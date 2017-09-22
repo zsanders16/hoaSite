@@ -13,7 +13,7 @@ class Api::MinutesController < ApplicationController
     end
 
     def create
-    minutes = minutes.new(minutes_params)
+    minutes = Minute.new(minutes_params)
     if minutes.save
         render json: minutes
     end
@@ -30,6 +30,6 @@ class Api::MinutesController < ApplicationController
         end
 
         def set_minutes
-            @minutes = minutes.find(params[:id])
+            @minutes = Minute.find(params[:id])
         end
 end
