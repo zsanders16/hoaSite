@@ -35,11 +35,13 @@ Rails.application.routes.draw do
     #Minutes controller routes
     resources :minutes, only: [:index, :show, :create, :destroy]
 
-    #Messages controller
+    #Messages controller routes
     resources :messages, only: [:index, :show, :create, :destroy] do
       resources :comments, only: [:index, :create, :destroy]
     end
     
+    #Discussion admin controller routes
+    resources :discussion_admin, only: [:index, :update]
 
 
   end
