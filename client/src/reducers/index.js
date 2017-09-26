@@ -8,7 +8,9 @@ import ccrs from './ccrs'
 import bylaws from './bylaws'
 import legal from './legal'
 import minutes from './minutes'
+import discussion from './discussion'
 import displayPDF from './displayPDF'
+import comments from './comments'
 
 const rootReducer = combineReducers({
     user,
@@ -20,7 +22,9 @@ const rootReducer = combineReducers({
     bylaws,
     legal,
     minutes,
+    discussion,
     displayPDF,
+    comments,
 })
 
 export default rootReducer

@@ -10,6 +10,8 @@ import Newsletters from './Newsletters'
 import CcrBylaws from './CcrBylaws'
 import Legal from './Legal'
 import Minutes from './Minutes'
+import Discussion from './Discussion'
+import ViewDiscussion from './ViewDiscussion'
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute'
 import { Switch, Route } from 'react-router-dom';
@@ -27,10 +29,11 @@ class App extends Component {
     let finishedRoutes =  activeRoutes.map( (module, i) => {
 
       const all = {
-        'Newsletters'   : Newsletters,
-        'CCRs | ByLaws' : CcrBylaws,
-        'Legal'         : Legal,
-        'Meeting Minutes'       : Minutes,
+        'Newsletters'     : Newsletters,
+        'CCRs | ByLaws'   : CcrBylaws,
+        'Legal'           : Legal,
+        'Meeting Minutes' : Minutes,
+        "Discussion Forum": Discussion,  
       }
       
       const Type = all[module.display_name]
@@ -61,6 +64,7 @@ class App extends Component {
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/viewpdf' component={ViewPDF} />
+              <Route exact path='/viewdiscussion/:id' component={ViewDiscussion} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />
               

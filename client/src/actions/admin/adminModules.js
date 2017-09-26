@@ -120,3 +120,33 @@ import { setHeaders } from '../headers';
                 })
         }
     }
+
+//Discussion Admin controllers
+    export const getDiscussionModule = () => {
+        return(dispatch) => {
+            axios.get('/api/discussion_admin')
+                .then( res => {
+                    dispatch({ type: 'ADD_MODULE', module: res.data })
+                    dispatch(setHeaders(res.headers))
+                })
+                .catch( res => {
+                    const message = res.response.data.errors.join(',');
+                    dispatch(setFlash(message, 'error'));
+                })
+        }
+    }
+
+
+    export const updateDiscussionModule = (discussionAdmin) => {
+        return(dispatch) => {
+            axios.put('/api/discussion_admin/1', {discussionAdmin})
+                .then( res => {
+                    dispatch({ type: 'UPDATE_DISCUSSION', discussion: res.data })
+                    dispatch(setHeaders(res.headers))
+                })
+                .catch( res => {
+                    const message = res.response.data.errors.join(',');
+                    dispatch(setFlash(message, 'error'));
+                })
+        }
+    }

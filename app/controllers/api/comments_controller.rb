@@ -1,5 +1,5 @@
 class Api::CommentsController < ApplicationController
-    before_action :set_message
+    before_action :set_message, only: [:index, :create]
     before_action :set_comment, only: [:destroy]
     
     
@@ -9,7 +9,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def create
-        comment = @messge.comment.new(comment_params)
+        comment = @message.comments.new(comment_params)
         if comment.save
             render json: comment
         else

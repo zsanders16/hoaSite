@@ -1,6 +1,10 @@
 import React from 'react'
 import App from './App'
-import { getNewsletterModule, getCcrModule, getLegalModule, getMinutesModule  } from '../actions/admin/adminModules'
+import {    getNewsletterModule, 
+            getCcrModule, 
+            getLegalModule, 
+            getMinutesModule, 
+            getDiscussionModule } from '../actions/admin/adminModules'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { getNewsletters, clearNewsletters } from '../actions/newsletters'
@@ -8,6 +12,7 @@ import { getCcrs, clearCcrs } from '../actions/ccrs'
 import { getBylaws, clearBylaws } from '../actions/bylaws'
 import { getLegals, clearLegals } from '../actions/legal'
 import { getMinutes, clearMinutes } from '../actions/minutes'
+import { getDiscussions, clearDiscussions } from '../actions/discussion'
 
 
 class BeforeAppSetup extends React.Component{
@@ -19,11 +24,15 @@ class BeforeAppSetup extends React.Component{
         dispatch(getCcrModule())
         dispatch(getLegalModule())
         dispatch(getMinutesModule())
+        dispatch(getDiscussionModule())
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.adminModules !== this.props.adminModules){
-            this.setState( { modules: nextProps.adminModules }, this.getDocuments(nextProps.adminModules) )
+            this.setState( { modules: nextProps.adminModules }, this.filterModulesByLogin(nextProps.adminModules) )
+        }
+        if(nextProps.user !== this.props.user){
+            this.filterModulesByLogin(nextProps.adminModules, nextProps.user)
         }
 
     }
@@ -58,8 +67,30 @@ class BeforeAppSetup extends React.Component{
                 }else{
                     clearMinutes(dispatch)
                 }
+            }else if(element.name ==='discussion'){
+                if(element.active === true){
+                    dispatch(getDiscussions())
+                }else{
+                    clearDiscussions(dispatch)
+                }
             }
         });
+    }
+
+    filterModulesByLogin = (modules, user = this.props) => {
+        if(user.admin){
+            this.getDocuments(modules)
+        }else if(user.id){
+            let loginFilter = modules.filter( module => {
+                return module.security !== 'admin'
+            }) 
+            this.getDocuments(loginFilter)
+        }else{
+            let noLoginFilter = modules.filter( module => {
+               return module.security === 'open'
+            })
+            this.getDocuments(noLoginFilter)
+        }
     }
 
     render(){
@@ -71,7 +102,7 @@ class BeforeAppSetup extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { adminModules: state.adminModules }
+    return { adminModules: state.adminModules, user: state.user }
 }
 
 export default withRouter(connect(mapStateToProps)(BeforeAppSetup))

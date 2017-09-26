@@ -3,9 +3,9 @@ namespace :setup do
   task admin_modules: :environment do
     NewslettersAdmin.create
     CcrAdmin.create
-    Minute.create
-    Legal.create
-    Discussion.create
+    MinutesAdmin.create
+    LegalAdmin.create
+    DiscussionAdmin.create
   end
 
 end

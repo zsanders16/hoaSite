@@ -26,6 +26,12 @@ const adminModules = (state = [], action) => {
         })
         updateMinutesModules.push(action.minutes)
         return [...updateMinutesModules]
+      case 'UPDATE_DISCUSSION':
+        let updateDiscussionModules = state.filter( module => {
+          return module.name !== 'discussion'
+        })
+        updateDiscussionModules.push(action.discussion)
+        return [...updateDiscussionModules]
       default:
         return state;
     }

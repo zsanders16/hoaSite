@@ -10,7 +10,7 @@ class Api::MessagesController < ApplicationController
     end
 
     def create
-        message = Message.new
+        message = Message.new(message_params)
         if message.save
             render json: message
         else
@@ -24,9 +24,12 @@ class Api::MessagesController < ApplicationController
 
     private 
 
+        def message_params
+            params.require(:message).permit(:title, :description)
+        end
+
         def set_message
             @message = Message.find(params[:id])
         end
-
-
+        
 end

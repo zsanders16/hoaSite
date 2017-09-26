@@ -79,6 +79,20 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
+                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                            <Link to='admin/discussion' >
+                                <Card>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Discussions
+                                        </Card.Header>
+                                        <Card.Description>
+                                            View all Discussions, add, remove, or archive them.
+                                        </Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Link>
+                        </Grid.Column>
                     </Grid.Row>
                 </Grid>
             </Segment>
