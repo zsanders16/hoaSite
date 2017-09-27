@@ -3,11 +3,10 @@ const comments = (state = [], action) => {
         case 'SET_COMMENTS':
             return [ ...action.comments ]
         case 'ADD_COMMENT':
-        debugger
             return [ ...state, action.comment]
         case 'REMOVE_COMMENT':
             let newcommentsList = state.filter( comments=> {
-                return comments.id !== action.comments.id
+                return comments.id !== action.comment.id
             })
             return [ ...newcommentsList ]
         case 'CLEAR_COMMENTS':

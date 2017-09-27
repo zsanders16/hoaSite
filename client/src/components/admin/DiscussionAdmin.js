@@ -202,14 +202,18 @@ class DiscussionAdmin extends React.Component{
         }else{
             if(discussions.length > 0){
                 return (
-                    <Grid.Row columns={3}>
-                        <Grid.Column floated='left' style={{marginTop: '5px', marginBottom: '5px'}} >
-                            { this.displayAllDiscussions() }
-                        </Grid.Column >
-                    </Grid.Row>
+                    <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}} >
+                        { this.displayAllDiscussions() }
+                    </Grid.Column >
                 )
             }else{
-                return this.displayNoDiscussions()
+                return (
+                    <div>
+                        <Grid.Column >
+                            {this.displayNoDiscussions()}
+                        </Grid.Column>
+                    </div>
+                )
             }
         }
     }
@@ -238,7 +242,16 @@ class DiscussionAdmin extends React.Component{
             if(form){
                 return undefined
             }else{
-                return <Button color='blue' onClick={this.clickShowForm}>Start Discussion</Button>
+                return (
+                    <Grid columns={2}>
+                        <Grid.Column >
+                            <Button color='blue' onClick={this.clickShowForm}>Start Discussion</Button>
+                        </Grid.Column>
+                        <Grid.Column >
+                            <Link to='/admin/discussion/archive'><Button color='blue'>View Archive</Button></Link>
+                        </Grid.Column>
+                    </Grid>
+                )
             }
         }else{
             return undefined
@@ -327,13 +340,17 @@ class DiscussionAdmin extends React.Component{
                         <Sidebar.Pusher>
                             <Segment basic> 
                                 <Grid>
-                                    <Grid.Column width={13} >
-                                        <Header as='h1' textAlign='center' >Discussion Administration</Header>
-                                    </Grid.Column >
-                                    <Grid.Column width={3} >
-                                        { this.showStartButton() }
-                                    </Grid.Column >
-                                    { active ? this.displayDiscussions() : this.notActive() }
+                                    <Grid.Row>
+                                        <Grid.Column width={12} >
+                                            <Header as='h1' textAlign='center' >Discussion Administration</Header>
+                                        </Grid.Column >
+                                        <Grid.Column width={4} >
+                                            { this.showStartButton() }
+                                        </Grid.Column >
+                                    </Grid.Row>
+                                    <Grid.Row columns={3}>
+                                        { active ? this.displayDiscussions() : this.notActive() }
+                                    </Grid.Row>
                                 </Grid>
                             </Segment>
                         </Sidebar.Pusher>

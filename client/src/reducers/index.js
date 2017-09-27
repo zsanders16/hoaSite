@@ -11,6 +11,7 @@ import minutes from './minutes'
 import discussion from './discussion'
 import displayPDF from './displayPDF'
 import comments from './comments'
+import archived from './archived'
 
 const rootReducer = combineReducers({
     user,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     discussion,
     displayPDF,
     comments,
+    archived,
 })
 
 export default rootReducer

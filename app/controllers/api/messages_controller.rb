@@ -1,8 +1,14 @@
 class Api::MessagesController < ApplicationController
-    before_action :set_message, only: [:show, :destroy] 
+    before_action :set_message, only: [:show, :update, :destroy] 
 
     def index
-        render json: Message.all
+        not_archived_list = Message.all.select { |message| message.archive == false }
+        render json: not_archived_list
+    end
+
+    def archivedMessages
+        archived_list = Message.all.select { |message| message.archive == true }
+        render json: archived_list
     end
 
     def show
@@ -18,6 +24,15 @@ class Api::MessagesController < ApplicationController
         end
     end
 
+    def update
+        if @message.update(message_params)
+            render json: @message
+        else
+            render :json => { :errors => @message.errors.full_messages }
+        end
+    end
+        
+
     def destroy
         @message.destroy
     end
@@ -25,7 +40,7 @@ class Api::MessagesController < ApplicationController
     private 
 
         def message_params
-            params.require(:message).permit(:title, :description)
+            params.require(:message).permit(:title, :description, :archive)
         end
 
         def set_message

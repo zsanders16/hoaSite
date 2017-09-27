@@ -36,9 +36,11 @@ Rails.application.routes.draw do
     resources :minutes, only: [:index, :show, :create, :destroy]
 
     #Messages controller routes
-    resources :messages, only: [:index, :show, :create, :destroy] do
+    resources :messages, only: [:index, :show, :create, :update, :destroy] do
       resources :comments, only: [:index, :create, :destroy]
     end
+
+    get '/archived_messages', to: 'messages#archivedMessages'
     
     #Discussion admin controller routes
     resources :discussion_admin, only: [:index, :update]

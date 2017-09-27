@@ -4,7 +4,7 @@ class CreateMessages < ActiveRecord::Migration[5.1]
       t.string :title
       t.text :description
       t.string :user_created
-      t.boolean :archive
+      t.boolean :archive, default: false
 
       t.timestamps
     end

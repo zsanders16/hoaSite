@@ -1,5 +1,5 @@
 class Api::CommentsController < ApplicationController
-    before_action :set_message, only: [:index, :create]
+    before_action :set_message, only: [:index, :create, :destroy]
     before_action :set_comment, only: [:destroy]
     
     

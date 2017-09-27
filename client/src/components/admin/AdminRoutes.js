@@ -7,6 +7,7 @@ import CcrsAdmin from './CcrsAdmin'
 import Legal from './LegalAdmin'
 import Minutes from './MinutesAdmin'
 import Discussion from './DiscussionAdmin'
+import ArchiveDiscussion from './ArchiveDiscussion'
 import { Switch, Route } from 'react-router-dom'
 import NoMatch from '../NoMatch';
 
@@ -21,6 +22,7 @@ class AdminRoutes extends Component {
             <AdminRoute exact path='/admin/legal' component={Legal} />
             <AdminRoute exact path='/admin/minutes' component={Minutes} />
             <AdminRoute exact path='/admin/discussion' component={Discussion} />
+            <AdminRoute exact path='/admin/discussion/archive' component={ArchiveDiscussion} />
             <Route component={NoMatch} />
         </Switch>
     );

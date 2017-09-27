@@ -20,7 +20,6 @@ export const addComment = (messageId, comment) => {
     return(dispatch) => {
         axios.post(`/api/messages/${messageId}/comments`, { comment: comment })
             .then( res => {
-                debugger
                 dispatch({ type: 'ADD_COMMENT',  comment: res.data })
                 dispatch(setHeaders(res.headers))
             })
@@ -31,14 +30,14 @@ export const addComment = (messageId, comment) => {
     }
 }
 
-export const clearDiscussions = (dispatch) => {
+export const clearComments = (dispatch) => {
     dispatch({ type: 'CLEAR_COMMENTS'})
 }
 
 
-export const deleteDiscussion = (messageId, comment) => {
+export const deleteComment = (comment) => {
     return(dispatch) => {
-        axios.delete(`/api/messages/${messageId}/comments/${comment.id}`)
+        axios.delete(`/api/messages/${comment.message_id}/comments/${comment.id}`)
             .then( res => {
                 dispatch({ type: 'REMOVE_COMMENT', comment: comment })
                 dispatch(setHeaders(res.headers))
