@@ -1,3 +1,83 @@
+# == Route Map
+#
+#                      Prefix Verb     URI Pattern                                      Controller#Action
+#            new_user_session GET      /api/auth/sign_in(.:format)                      devise_token_auth/sessions#new
+#                user_session POST     /api/auth/sign_in(.:format)                      devise_token_auth/sessions#create
+#        destroy_user_session DELETE   /api/auth/sign_out(.:format)                     devise_token_auth/sessions#destroy
+#           new_user_password GET      /api/auth/password/new(.:format)                 devise_token_auth/passwords#new
+#          edit_user_password GET      /api/auth/password/edit(.:format)                devise_token_auth/passwords#edit
+#               user_password PATCH    /api/auth/password(.:format)                     devise_token_auth/passwords#update
+#                             PUT      /api/auth/password(.:format)                     devise_token_auth/passwords#update
+#                             POST     /api/auth/password(.:format)                     devise_token_auth/passwords#create
+#    cancel_user_registration GET      /api/auth/cancel(.:format)                       devise_token_auth/registrations#cancel
+#       new_user_registration GET      /api/auth/sign_up(.:format)                      devise_token_auth/registrations#new
+#      edit_user_registration GET      /api/auth/edit(.:format)                         devise_token_auth/registrations#edit
+#           user_registration PATCH    /api/auth(.:format)                              devise_token_auth/registrations#update
+#                             PUT      /api/auth(.:format)                              devise_token_auth/registrations#update
+#                             DELETE   /api/auth(.:format)                              devise_token_auth/registrations#destroy
+#                             POST     /api/auth(.:format)                              devise_token_auth/registrations#create
+#             new_user_unlock GET      /api/auth/unlock/new(.:format)                   devise/unlocks#new
+#                 user_unlock GET      /api/auth/unlock(.:format)                       devise/unlocks#show
+#                             POST     /api/auth/unlock(.:format)                       devise/unlocks#create
+#     api_auth_validate_token GET      /api/auth/validate_token(.:format)               devise_token_auth/token_validations#validate_token
+#            api_auth_failure GET      /api/auth/failure(.:format)                      devise_token_auth/omniauth_callbacks#omniauth_failure
+#                             GET      /api/auth/:provider/callback(.:format)           devise_token_auth/omniauth_callbacks#omniauth_success
+#                             GET|POST /omniauth/:provider/callback(.:format)           devise_token_auth/omniauth_callbacks#redirect_callbacks
+#            omniauth_failure GET|POST /omniauth/failure(.:format)                      devise_token_auth/omniauth_callbacks#omniauth_failure
+#                             GET      /api/auth/:provider(.:format)                    redirect(301)
+#        status_api_homeowner PATCH    /api/homeowners/:id/status(.:format)             api/homeowners#status
+#              api_homeowners GET      /api/homeowners(.:format)                        api/homeowners#index
+#               api_homeowner PATCH    /api/homeowners/:id(.:format)                    api/homeowners#update
+#                             PUT      /api/homeowners/:id(.:format)                    api/homeowners#update
+#                             DELETE   /api/homeowners/:id(.:format)                    api/homeowners#destroy
+# api_newsletters_admin_index GET      /api/newsletters_admin(.:format)                 api/newsletters_admin#index
+#       api_newsletters_admin PATCH    /api/newsletters_admin/:id(.:format)             api/newsletters_admin#update
+#                             PUT      /api/newsletters_admin/:id(.:format)             api/newsletters_admin#update
+#             api_newsletters GET      /api/newsletters(.:format)                       api/newsletters#index
+#                             POST     /api/newsletters(.:format)                       api/newsletters#create
+#              api_newsletter GET      /api/newsletters/:id(.:format)                   api/newsletters#show
+#                             DELETE   /api/newsletters/:id(.:format)                   api/newsletters#destroy
+#         api_ccr_admin_index GET      /api/ccr_admin(.:format)                         api/ccr_admin#index
+#               api_ccr_admin PATCH    /api/ccr_admin/:id(.:format)                     api/ccr_admin#update
+#                             PUT      /api/ccr_admin/:id(.:format)                     api/ccr_admin#update
+#               api_ccr_index GET      /api/ccr(.:format)                               api/ccr#index
+#                             POST     /api/ccr(.:format)                               api/ccr#create
+#                     api_ccr GET      /api/ccr/:id(.:format)                           api/ccr#show
+#                             DELETE   /api/ccr/:id(.:format)                           api/ccr#destroy
+#                  api_bylaws GET      /api/bylaws(.:format)                            api/bylaws#index
+#                             POST     /api/bylaws(.:format)                            api/bylaws#create
+#                   api_bylaw GET      /api/bylaws/:id(.:format)                        api/bylaws#show
+#                             DELETE   /api/bylaws/:id(.:format)                        api/bylaws#destroy
+#       api_legal_admin_index GET      /api/legal_admin(.:format)                       api/legal_admin#index
+#             api_legal_admin PATCH    /api/legal_admin/:id(.:format)                   api/legal_admin#update
+#                             PUT      /api/legal_admin/:id(.:format)                   api/legal_admin#update
+#             api_legal_index GET      /api/legal(.:format)                             api/legal#index
+#                             POST     /api/legal(.:format)                             api/legal#create
+#                   api_legal GET      /api/legal/:id(.:format)                         api/legal#show
+#                             DELETE   /api/legal/:id(.:format)                         api/legal#destroy
+#     api_minutes_admin_index GET      /api/minutes_admin(.:format)                     api/minutes_admin#index
+#           api_minutes_admin PATCH    /api/minutes_admin/:id(.:format)                 api/minutes_admin#update
+#                             PUT      /api/minutes_admin/:id(.:format)                 api/minutes_admin#update
+#                 api_minutes GET      /api/minutes(.:format)                           api/minutes#index
+#                             POST     /api/minutes(.:format)                           api/minutes#create
+#                  api_minute GET      /api/minutes/:id(.:format)                       api/minutes#show
+#                             DELETE   /api/minutes/:id(.:format)                       api/minutes#destroy
+#        api_message_comments GET      /api/messages/:message_id/comments(.:format)     api/comments#index
+#                             POST     /api/messages/:message_id/comments(.:format)     api/comments#create
+#         api_message_comment DELETE   /api/messages/:message_id/comments/:id(.:format) api/comments#destroy
+#                api_messages GET      /api/messages(.:format)                          api/messages#index
+#                             POST     /api/messages(.:format)                          api/messages#create
+#                 api_message GET      /api/messages/:id(.:format)                      api/messages#show
+#                             PATCH    /api/messages/:id(.:format)                      api/messages#update
+#                             PUT      /api/messages/:id(.:format)                      api/messages#update
+#                             DELETE   /api/messages/:id(.:format)                      api/messages#destroy
+#       api_archived_messages GET      /api/archived_messages(.:format)                 api/messages#archivedMessages
+#  api_discussion_admin_index GET      /api/discussion_admin(.:format)                  api/discussion_admin#index
+#        api_discussion_admin PATCH    /api/discussion_admin/:id(.:format)              api/discussion_admin#update
+#                             PUT      /api/discussion_admin/:id(.:format)              api/discussion_admin#update
+#                             GET      /*other(.:format)                                static#index
+# 
+
 Rails.application.routes.draw do
 
 
@@ -6,14 +86,16 @@ Rails.application.routes.draw do
     #API ROUTES SHOULD GO HERE
 
     #routes for homeowners
-    resources :homeowners, only: [:index, :update, :destroy]
+    resources :homeowners, only: [:index, :update, :destroy] do
+      patch 'status', on: :member
+    end
 
     #NewsletterAdmin controller routes
     resources :newsletters_admin, only: [:index, :update]
 
     #Newletter controller routes
     resources :newsletters, only: [:index, :show, :create, :destroy]
-    
+
     #CCRs and ByLaws Admin controller routes
     resources :ccr_admin, only: [:index, :update]
 
@@ -41,14 +123,14 @@ Rails.application.routes.draw do
     end
 
     get '/archived_messages', to: 'messages#archivedMessages'
-    
+
     #Discussion admin controller routes
     resources :discussion_admin, only: [:index, :update]
 
 
   end
 
-    
+
 
   #Do not place any routes below this one
   get '*other', to: 'static#index'

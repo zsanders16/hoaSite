@@ -14,10 +14,18 @@ const homeowner = (state = [], action) => {
           return homeowner.id !== action.homeowner.id;
         })
         return [ action.homeowner, ...updatedHomeowners ]
+      case 'STATUS_HOMEOWNERS':
+        const index = state.findIndex( ho => ho.id === action.userId )
+        let homeowner = state[index]
+        homeowner.status = action.status
+        return [
+          ...state.slice(0,index),
+          homeowner,
+          ...state.slice(index + 1),
+        ]
       default:
         return state;
     }
   }
-  
+
   export default homeowner;
-  

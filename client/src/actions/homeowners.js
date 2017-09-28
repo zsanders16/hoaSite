@@ -45,3 +45,21 @@ export const updateHomeowner = (homeowner) => {
     }
 }
 
+export const statusHomeowners = ( userId, status ) => {
+  return (dispatch) => {
+    axios.patch(`/api/homeowners/${userId}/status?status=${status}`)
+    .then( resp => {
+      dispatch({
+        type: 'STATUS_HOMEOWNERS',
+        status: resp.data.status,
+        userId: userId,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Homeowners Status Not Updated!','error')
+      )
+    })
+  }
+}

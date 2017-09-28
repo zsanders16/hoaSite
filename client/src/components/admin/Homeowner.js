@@ -1,15 +1,15 @@
 import React from 'react'
 import { Table, Checkbox, Segment, Button, Icon, Popup } from 'semantic-ui-react'
 import { removeHomeowner } from '../../actions/homeowners';
-import { updateHomeowner } from '../../actions/homeowners'
+import { updateHomeowner, statusHomeowners } from '../../actions/homeowners'
 import { connect } from 'react-redux'
 
 class Homeowner extends React.Component {
-    state = {admin: false}
+    state = { admin: false, status: '' }
 
     componentDidMount() {
         let { homeowner } = this.props
-        this.setState({admin: homeowner.admin})
+        this.setState({admin: homeowner.admin, status: homeowner.status })
     }
 
     deleteUser = () => {
@@ -24,10 +24,16 @@ class Homeowner extends React.Component {
         this.props.dispatch(updateHomeowner(homeowner))
     }
 
+    handleStatusToggle = ( userId, status ) => {
+      const { dispatch, homeowner, redisplayHomeowners } = this.props
+      dispatch(statusHomeowners(userId,status))
+      this.setState({ status: homeowner.status })
+    }
+
 
     render(){
         let { homeowner } = this.props
-        let { admin } = this.state
+        let { admin, status } = this.state
         return(
             <Table.Row>
                 <Table.Cell collapsing>
@@ -57,6 +63,14 @@ class Homeowner extends React.Component {
                     {homeowner.address}
                 </Table.Cell>
                 <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
+                <Table.Cell>
+                  <Button
+                    toggle
+                    active={status === 'true'}
+                    onClick={()=>this.handleStatusToggle(homeowner.id, homeowner.status)}>
+                    { status === 'true' ? 'Active' : 'Inactive' }
+                  </Button>
+                </Table.Cell>
             </Table.Row>
         )
     }

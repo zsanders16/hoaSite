@@ -1,9 +1,10 @@
 class Api::HomeownersController < ApplicationController
-    before_action :set_homeowner, only: [:destroy, :update, :change_admin_status]
-    
+    before_action :set_homeowner, only: [:destroy, :update, :change_admin_status, :status]
 
     def index
-        render json: User.all.order(:name)
+      users = User.all.select('*, NULL as status').order(:name)
+      users.each { |u| u.status = !u.access_locked? }
+      render json: users
     end
 
     def update
@@ -18,6 +19,18 @@ class Api::HomeownersController < ApplicationController
         @homeowner.destroy
     end
 
+    def status
+      if params[:status] == 'false'
+        @homeowner.lock_access!({ send_instructions: false })
+        render json: { status: 'true' }
+      elsif params[:status] == 'true'
+        @homeowner.unlock_access!
+        render json: { status: 'false' }
+      else
+        # render :json => { :errors => @homeowner.errors.full_messages }
+      end
+    end
+
     private
 
         def set_homeowner
@@ -27,6 +40,5 @@ class Api::HomeownersController < ApplicationController
         def homeowner_params
             params.require(:homeowner).permit(:name, :email, :admin, :address, :number)
         end
-
 
 end

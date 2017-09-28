@@ -9,14 +9,14 @@ import ReactPhoneInput from 'react-phone-input'
 
 
 class Homeowners extends React.Component{
-    state = { showForm: false, 
-                email: '', 
-                password: '', 
-                passwordConfirmation: '', 
-                name: '', 
-                address: '', 
-                number: '', 
-                id: 0 
+    state = { showForm: false,
+                email: '',
+                password: '',
+                passwordConfirmation: '',
+                name: '',
+                address: '',
+                number: '',
+                id: 0
             }
 
     componentDidMount(){
@@ -39,7 +39,13 @@ class Homeowners extends React.Component{
     displayHomeowners = () => {
         this.props.homeowners.sort(this.compare)
         return this.props.homeowners.map ( (homeowner, i)  => {
-            return ( <Homeowner key={i} homeowner={homeowner} editHomeowner={this.editHomeowner}/> )
+            return (
+              <Homeowner
+                key={i}
+                homeowner={homeowner}
+                editHomeowner={this.editHomeowner}
+                redisplayHomeowners={this.redisplayHomeowners} />
+            )
         })
     }
 
@@ -52,7 +58,7 @@ class Homeowners extends React.Component{
         e.preventDefault();
         const { email, password, passwordConfirmation, name, id, number, address } = this.state;
         const { dispatch } = this.props;
-    
+
         if(id>0){
             let homeowner = { id, name, email, number, address }
             dispatch(updateHomeowner(homeowner))
@@ -62,19 +68,19 @@ class Homeowners extends React.Component{
                 let user = { name, email, number, address, password, passwordConfirmation }
                 dispatch(registerUser(user));
                 this.addUser();
-                this.setState({ showForm: false, 
-                                email: '', 
-                                password: '', 
-                                passwordConfirmation: '', 
-                                name: '', 
-                                number: '', 
+                this.setState({ showForm: false,
+                                email: '',
+                                password: '',
+                                passwordConfirmation: '',
+                                name: '',
+                                number: '',
                                 address: '' })
             }else{
             alert('Passwords do NOT match!');
             }
         }
       }
-    
+
     handleChange = (e) => {
         // use e to grab the id off the element also the value and set state
         // const { id, value } = e.target;
@@ -84,11 +90,11 @@ class Homeowners extends React.Component{
     }
 
     editHomeowner = (homeowner) => {
-        this.setState({name: homeowner.name, 
-                        email: homeowner.email, 
-                        id: homeowner.id, 
-                        number: homeowner.number, 
-                        address: homeowner.address, 
+        this.setState({name: homeowner.name,
+                        email: homeowner.email,
+                        id: homeowner.id,
+                        number: homeowner.number,
+                        address: homeowner.address,
                         showForm: true,
                     })
     }
@@ -96,14 +102,14 @@ class Homeowners extends React.Component{
     handlePhoneChange = (e) => {
         this.setState({number: e})
     }
-    
+
     viewHomeowners = () => {
         let { homeowners } = this.props
         return(
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='6' textAlign='center' >List of Homeowners</Table.HeaderCell>
+                        <Table.HeaderCell colSpan='7' textAlign='center' >List of Homeowners</Table.HeaderCell>
                     </Table.Row>
                     <Table.Row>
                         <Table.HeaderCell />
@@ -112,19 +118,20 @@ class Homeowners extends React.Component{
                         <Table.HeaderCell>Number</Table.HeaderCell>
                         <Table.HeaderCell>Address</Table.HeaderCell>
                         <Table.HeaderCell>IsAdmin</Table.HeaderCell>
+                        <Table.HeaderCell>Status</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    { homeowners.length > 0 ? 
-                        this.displayHomeowners() : 
+                    { homeowners.length > 0 ?
+                        this.displayHomeowners() :
                         <Table.Row>
                             <Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell>
-                        </Table.Row> 
+                        </Table.Row>
                     }
                 </Table.Body>
                 <Table.Footer fullWidth>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='6'>
+                        <Table.HeaderCell colSpan='7'>
                             <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
                                 <Icon name='user' /> Add User
                             </Button>
@@ -162,10 +169,10 @@ class Homeowners extends React.Component{
                     />
                 </Form.Field>
                 <Header as='h5'>Phone Number</Header>
-                <ReactPhoneInput value={number} 
-                                    style={{marginTop: '-12px'}} 
-                                    defaultCountry={'us'} 
-                                    onChange={this.handlePhoneChange} 
+                <ReactPhoneInput value={number}
+                                    style={{marginTop: '-12px'}}
+                                    defaultCountry={'us'}
+                                    onChange={this.handlePhoneChange}
                 />
                 <Form.Field style={{marginTop: '15px'}}>
                     <label>Address</label>
@@ -176,7 +183,7 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { id ? '' : 
+                { id ? '' :
                 <div >
                     <Form.Field>
                         <label>Password</label>
