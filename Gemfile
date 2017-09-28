@@ -28,8 +28,8 @@ gem 'puma', '~> 3.7'
 gem 'omniauth'
 gem 'devise'
 gem 'devise_token_auth'
-gem 'carrierwave', '~> 1.0'
-gem 'carrierwave-base64'
+gem 'dotenv'
+gem 'delayed_job_active_record'
 
 
 group :development, :test do
@@ -42,6 +42,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'dotenv-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
