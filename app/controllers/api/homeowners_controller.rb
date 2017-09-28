@@ -3,7 +3,7 @@ class Api::HomeownersController < ApplicationController
 
     def index
       users = User.all.select('*, NULL as status').order(:name)
-      users.each { |u| u.status = !u.access_locked? }
+      users.each { |u| u.status = u.access_locked? }
       render json: users
     end
 
