@@ -21,7 +21,7 @@ class Api::HomeownersController < ApplicationController
 
     def status
       if params[:status] == 'false'
-        @homeowner.lock_access!({ send_instructions: false })
+        @homeowner.lock_access!({ send_instructions: true })
         render json: { status: 'true' }
       elsif params[:status] == 'true'
         @homeowner.unlock_access!
