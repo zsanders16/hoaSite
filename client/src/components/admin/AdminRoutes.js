@@ -10,6 +10,7 @@ import Discussion from './DiscussionAdmin'
 import ArchiveDiscussion from './ArchiveDiscussion'
 import { Switch, Route } from 'react-router-dom'
 import NoMatch from '../NoMatch';
+import Emails from '../emails/Emails'
 
 class AdminRoutes extends Component {
   render() {
@@ -23,6 +24,7 @@ class AdminRoutes extends Component {
             <AdminRoute exact path='/admin/minutes' component={Minutes} />
             <AdminRoute exact path='/admin/discussion' component={Discussion} />
             <AdminRoute exact path='/admin/discussion/archive' component={ArchiveDiscussion} />
+            <AdminRoute exact path='/admin/emails' component={Emails} />
             <Route component={NoMatch} />
         </Switch>
     );

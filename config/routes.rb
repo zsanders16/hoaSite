@@ -75,6 +75,14 @@
 #  api_discussion_admin_index GET      /api/discussion_admin(.:format)                  api/discussion_admin#index
 #        api_discussion_admin PATCH    /api/discussion_admin/:id(.:format)              api/discussion_admin#update
 #                             PUT      /api/discussion_admin/:id(.:format)              api/discussion_admin#update
+#        homeowner_api_emails POST     /api/emails/homeowner(.:format)                  api/emails#homeowner
+#         commitee_api_emails POST     /api/emails/commitee(.:format)                   api/emails#commitee
+#                  api_emails GET      /api/emails(.:format)                            api/emails#index
+#                             POST     /api/emails(.:format)                            api/emails#create
+#                   api_email GET      /api/emails/:id(.:format)                        api/emails#show
+#                             PATCH    /api/emails/:id(.:format)                        api/emails#update
+#                             PUT      /api/emails/:id(.:format)                        api/emails#update
+#                             DELETE   /api/emails/:id(.:format)                        api/emails#destroy
 #                             GET      /*other(.:format)                                static#index
 # 
 
@@ -127,6 +135,11 @@ Rails.application.routes.draw do
     #Discussion admin controller routes
     resources :discussion_admin, only: [:index, :update]
 
+    # Routes for Email controller
+    resources :emails, shallow: true do
+      post 'homeowner', on: :collection
+      post 'commitee', on: :collection
+    end
 
   end
 

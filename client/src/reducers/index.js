@@ -12,8 +12,10 @@ import discussion from './discussion'
 import displayPDF from './displayPDF'
 import comments from './comments'
 import archived from './archived'
+import emails from './emails'
 
 const rootReducer = combineReducers({
+    emails,
     user,
     flash,
     homeowners,
