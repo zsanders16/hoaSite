@@ -21,11 +21,19 @@ class Api::HomeownersController < ApplicationController
 
     def status
       if params[:status] == 'false'
-        @homeowner.lock_access!({ send_instructions: true })
-        render json: { status: 'true' }
+        @homeowner.lock_access!({ send_instructions: false })
+        render json: { status: true }
       elsif params[:status] == 'true'
         @homeowner.unlock_access!
-        render json: { status: 'false' }
+
+        # Generate random, long password that the user will never know:
+        new_password = Devise.friendly_token(50)
+        @homeowner.reset_password(new_password, new_password)
+
+        # Send instructions so user can enter a new password:
+        @homeowner.send_reset_password_instructions
+
+        render json: { status: false }
       else
         # render :json => { :errors => @homeowner.errors.full_messages }
       end

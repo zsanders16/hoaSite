@@ -16,13 +16,12 @@ const homeowner = (state = [], action) => {
         return [ action.homeowner, ...updatedHomeowners ]
       case 'STATUS_HOMEOWNERS':
         const index = state.findIndex( ho => ho.id === action.userId )
-        let homeowner = state[index]
-        homeowner.status = action.status
-        return [
-          ...state.slice(0,index),
-          homeowner,
-          ...state.slice(index + 1),
-        ]
+        let homeownerToChange = state[index]
+        homeownerToChange.status = action.status
+        let newHomeownersSet = state.filter( homeowner => {
+          return homeowner.id !== action.userId;
+        })
+        return[homeownerToChange, ...newHomeownersSet]
       default:
         return state;
     }

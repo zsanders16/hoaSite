@@ -11,6 +11,7 @@ import CcrBylaws from './CcrBylaws'
 import Legal from './Legal'
 import Minutes from './Minutes'
 import Discussion from './Discussion'
+import UnlockAccount from './UnlockAccount'
 import ViewDiscussion from './ViewDiscussion'
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute'
@@ -63,6 +64,7 @@ class App extends Component {
               <Route exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
+              <Route exact path='/unlock' component={UnlockAccount} />
               <Route exact path='/viewpdf' component={ViewPDF} />
               <Route exact path='/viewdiscussion/:id' component={ViewDiscussion} />
               { this.createRoutes() }

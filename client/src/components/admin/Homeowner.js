@@ -24,13 +24,12 @@ class Homeowner extends React.Component {
         this.props.dispatch(updateHomeowner(homeowner))
     }
 
-    handleStatusToggle = ( userId, oldStatus ) => {
-      const { dispatch } = this.props
-      dispatch(statusHomeowners(userId,oldStatus,( newStatus )=>{
+    handleStatusToggle = ( ) => {
+        const { dispatch, homeowner } = this.props
+        let newStatus = !homeowner.status
+        dispatch(statusHomeowners(homeowner.id, homeowner.status))
         this.setState({ status: newStatus })
-      }))
     }
-
 
     render(){
         const { homeowner } = this.props
@@ -65,10 +64,10 @@ class Homeowner extends React.Component {
                 </Table.Cell>
                 <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
                 <Table.Cell>
-                  <Button
-                    onClick={()=>this.handleStatusToggle(homeowner.id, homeowner.status)}>
-                    { status === 'false' ? 'Active' : 'Inactive' }
-                  </Button>
+                    { status === false ?
+                        <Button primary onClick={this.handleStatusToggle}>Active</Button> :
+                        <Button color='red' onClick={this.handleStatusToggle}>Inactive</Button>
+                    }
                 </Table.Cell>
             </Table.Row>
         )
