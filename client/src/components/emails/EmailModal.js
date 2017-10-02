@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Modal, Button, Icon } from 'semantic-ui-react'
+import EmailDetails from './EmailDetails'
 
 // Action
 import {
@@ -34,19 +35,19 @@ class EmailModal extends Component {
   closeModal = () => this.setState({ modalOpen: false })
 
   loadEmailInformation = ( emailId ) => {
-    this.props.dispatch(showEmail(emailId))
-    this.setState({ modalOpen: true, emailId: emailId })
+    this.props.dispatch(showEmail(emailId, ()=>
+      this.setState({ modalOpen: true, emailId: emailId })
+    ))
   }
 
   render() {
+    const { email } = this.props
     return (
       <Modal
         open={this.state.modalOpen}
         onClose={this.closeModal}>
         <Modal.Content>
-          <Segment basic>
-            Emails data information
-          </Segment>
+          <EmailDetails email={email} />
         </Modal.Content>
         <Modal.Actions>
           <Button

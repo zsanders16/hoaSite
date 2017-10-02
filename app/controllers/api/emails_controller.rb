@@ -38,6 +38,10 @@ class Api::EmailsController < ApplicationController
     @email.destroy
   end
 
+  def delete
+    render json: Email.where('id IN(?)', params[:ids]).destroy_all
+  end
+
   def homeowners; end
 
   def commitee; end

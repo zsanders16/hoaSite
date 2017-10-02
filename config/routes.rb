@@ -77,6 +77,7 @@
 #                             PUT      /api/discussion_admin/:id(.:format)              api/discussion_admin#update
 #        homeowner_api_emails POST     /api/emails/homeowner(.:format)                  api/emails#homeowner
 #         commitee_api_emails POST     /api/emails/commitee(.:format)                   api/emails#commitee
+#           delete_api_emails POST     /api/emails/delete(.:format)                     api/emails#delete
 #                  api_emails GET      /api/emails(.:format)                            api/emails#index
 #                             POST     /api/emails(.:format)                            api/emails#create
 #                   api_email GET      /api/emails/:id(.:format)                        api/emails#show
@@ -139,6 +140,7 @@ Rails.application.routes.draw do
     resources :emails, shallow: true do
       post 'homeowner', on: :collection
       post 'commitee', on: :collection
+      post 'delete', on: :collection
     end
 
   end

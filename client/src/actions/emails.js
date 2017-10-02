@@ -32,7 +32,7 @@ export const clearEmail = () => {
   }
 }
 
-export const showEmail = ( emailId ) => {
+export const showEmail = ( emailId, callback = {} ) => {
   return (dispatch) => {
     axios.get(`/api/emails/${emailId}`)
     .then( resp => {
@@ -41,10 +41,30 @@ export const showEmail = ( emailId ) => {
         data: resp.data,
         headers: resp.headers,
       })
+      if( callback )
+        callback()
     })
     .catch( resp => {
       dispatch(
         setFlash('Email Information not Found!','error')
+      )
+    })
+  }
+}
+
+export const deleteEmails = ( ids ) => {
+  return (dispatch) => {
+    axios.post(`/api/emails/delete`, { ids })
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_EMAILS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Emails not deleted!','error')
       )
     })
   }
