@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Segment, Form, Button } from 'semantic-ui-react';
+import { Header, Segment, Form, Button, Divider, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../actions/auth';
 
@@ -23,31 +23,39 @@ class Login extends Component {
     const { email, password } = this.state;
 
     return(
-      <Segment basic>
+      <Segment >
         <Header as='h1' textAlign='center'>Login</Header>
+        <Divider />
+        
         <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <label>Email</label>
-            <input
-              autoFocus
-              required
-              id='email'
-              value={email}
-              placeholder='Email'
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              required
-              id='password'
-              value={password}
-              placeholder='Password'
-              type='password'
-              onChange={this.handleChange}
-            />
-          </Form.Field>
+          <Grid>
+            <Grid.Column width={4}>
+            </Grid.Column>
+            <Grid.Column width={8}>
+              <Form.Field>
+                <label>Email</label>
+                <input
+                  autoFocus
+                  required
+                  id='email'
+                  value={email}
+                  placeholder='Email'
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Password</label>
+                <input
+                  required
+                  id='password'
+                  value={password}
+                  placeholder='Password'
+                  type='password'
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Grid.Column>
+          </Grid>
           <Segment textAlign='center' basic>
             <Button primary type='submit'>Submit</Button>
           </Segment>

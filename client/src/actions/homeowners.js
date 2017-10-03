@@ -68,14 +68,24 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
 }
 
 export const unlockPassword = (obj, password, password_confirmation) => {
-    debugger
     return(dispatch) => {
         axios.put('/api/auth/password', {...obj, password: password, password_confirmation: password_confirmation})
             .then( res => {
-                debugger
             })
             .catch( res => {
-                debugger
+                const message = res.response.data.errors.join(',');
+                dispatch(setFlash(message, 'error'));
+            })
+    }
+}
+
+export const changePassword = (password, password_confirmation, history) => {
+    return(dispatch) => {
+        axios.put('/api/auth/password', {password, password_confirmation})
+            .then( 
+                history.push('/')
+            )
+            .catch( res => {
                 const message = res.response.data.errors.join(',');
                 dispatch(setFlash(message, 'error'));
             })

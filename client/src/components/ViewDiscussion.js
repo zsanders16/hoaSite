@@ -73,36 +73,39 @@ class ViewDiscussion extends React.Component{
                 <Grid.Column width={3}/>
                 <Grid.Column width={10}>
                     <Card fluid style={{marginTop: '10px'}}>
-                        {user.admin ?
+                        
                             <Grid>
                                 <Grid.Column width={8} textAlign='center'>
                                     <Card.Content as='h1' style={{marginTop: '5px'}} header={discussion.title} />
                                 </Grid.Column>
-                                <Grid.Column width={4} >
-                                    <Button primary content='Delete Discussion' onClick={this.showDelete} />
-                                    <Confirm
-                                        open={openDelete}
-                                        cancelButton='Never mind'
-                                        confirmButton="Let's do it"
-                                        content='Are you sure you want to delete this Discussion?'
-                                        onCancel={this.handleDeleteCancel}
-                                        onConfirm={this.handleDeleteConfirm}
-                                    /> 
-                                </Grid.Column>
-                                <Grid.Column width={4} >
-                                    <Button primary content='Archive Discussion' onClick={this.showArchive} />
-                                    <Confirm
-                                        open={openArchive}
-                                        cancelButton='Never mind'
-                                        confirmButton="Let's do it"
-                                        content='Are you sure you want to delete this Discussion?'
-                                        onCancel={this.handleArchiveCancel}
-                                        onConfirm={this.handleArchiveConfirm}
-                                    /> 
-                                </Grid.Column>
-                            </Grid> :
-                            undefined
-                        }
+                                {user.admin ?
+                                    <div>
+                                        <Grid.Column width={4} >
+                                            <Button primary content='Delete Discussion' onClick={this.showDelete} />
+                                            <Confirm
+                                                open={openDelete}
+                                                cancelButton='Never mind'
+                                                confirmButton="Let's do it"
+                                                content='Are you sure you want to delete this Discussion?'
+                                                onCancel={this.handleDeleteCancel}
+                                                onConfirm={this.handleDeleteConfirm}
+                                            /> 
+                                        </Grid.Column>
+                                        <Grid.Column width={4} >
+                                            <Button primary content='Archive Discussion' onClick={this.showArchive} />
+                                            <Confirm
+                                                open={openArchive}
+                                                cancelButton='Never mind'
+                                                confirmButton="Let's do it"
+                                                content='Are you sure you want to delete this Discussion?'
+                                                onCancel={this.handleArchiveCancel}
+                                                onConfirm={this.handleArchiveConfirm}
+                                            /> 
+                                        </Grid.Column> 
+                                    </div>
+                                    : undefined
+                                }
+                            </Grid> 
                         <Card.Content description={discussion.description} />
                         <Card.Content extra>
                             <Comment.Group>

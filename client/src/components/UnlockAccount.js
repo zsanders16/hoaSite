@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Form, Button, Header, Divider, Segment, Grid } from 'semantic-ui-react'
 import { unlockPassword } from '../actions/homeowners'
 import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers'
+// import { setHeaders } from '../actions/headers'
 
 class UnlockAccount extends React.Component{
     state = {password: '', passwordConfirmation: ''}
@@ -12,7 +12,7 @@ class UnlockAccount extends React.Component{
         let { dispatch } = this.props
         let obj = this.getParams(string)
         debugger
-        dispatch({type: 'SET_HEADERS', headers: obj })
+        dispatch({ type: 'HEADERS', headers: obj})
     }
 
     handleChange = (e) => {
@@ -47,29 +47,35 @@ class UnlockAccount extends React.Component{
     render(){
         let { password, passwordConfirmation } = this.state
         return(
-            <Form onSubmit={this.handleSubmit} >
-                <Form.Group unstackable widths={1}>
-                <Form.Input 
-                    value={password} 
-                    onChange={this.handleChange} 
-                    id='password' 
-                    type='password'
-                    required
-                    label='New Password' 
-                    placeholder='New Password' />
-                </Form.Group>
-                <Form.Group widths={1}>
-                <Form.Input 
-                    value={passwordConfirmation} 
-                    onChange={this.handleChange} 
-                    id='passwordConfirmation'
-                    type='password'
-                    required
-                    label='New Password Confirmation' 
-                    placeholder='New Password Confirmation' />
-                </Form.Group>
-                <Button type='submit'>Submit</Button>
-            </Form>
+            <Segment>
+                <Header as='h2' textAlign='center' >Change Your Password</Header>
+                <Divider />
+                <Grid>
+                    <Grid.Column width={4}>
+                    </Grid.Column>
+                    <Grid.Column width={8}>
+                        <Form onSubmit={this.handleSubmit} >
+                            <Form.Input 
+                                value={password} 
+                                onChange={this.handleChange} 
+                                id='password' 
+                                type='password'
+                                required
+                                label='New Password' 
+                                placeholder='New Password' />
+                            <Form.Input 
+                                value={passwordConfirmation} 
+                                onChange={this.handleChange} 
+                                id='passwordConfirmation'
+                                type='password'
+                                required
+                                label='New Password Confirmation' 
+                                placeholder='New Password Confirmation' />
+                            <Button primary type='submit'>Submit</Button>
+                        </Form>
+                    </Grid.Column>
+                </Grid>
+            </Segment>
         )
     }
 }

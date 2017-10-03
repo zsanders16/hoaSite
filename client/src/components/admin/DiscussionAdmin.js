@@ -190,15 +190,13 @@ class DiscussionAdmin extends React.Component{
 
     displayDiscussions = () => {
         let { discussions } = this.props
-        let { form, showDiscussion } = this.state
+        let { form } = this.state
         if(form){
             return (
                 <Grid.Column width={10}  >
                     { this.displayForm() }
                 </Grid.Column >
             )
-        }else if(showDiscussion){
-
         }else{
             if(discussions.length > 0){
                 return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Dropdown } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
@@ -69,11 +69,17 @@ class NavBar extends Component {
           { this.showAdmin() }
           <Menu.Menu position='right'> 
             { this.displayLinks() }
-            { user.id ?  <Menu.Item
-                            name='Logout'
-                            style={{color: '#FDFEFE'}}
-                            onClick={() => dispatch(handleLogout(history))}
-                          /> :
+            { user.id ?   <Dropdown text='Settings' style={{color: '#FDFEFE', marginTop: '9px', marginRight: '8px'}}>
+                            <Dropdown.Menu>
+                              <Link to='/changepassword' >
+                                <Dropdown.Item icon='setting' text='Change Password' />
+                              </Link>
+                              
+                              <Dropdown.Divider />
+                              <Dropdown.Item text='Logout' style={{color: '#FDFEFE', float: 'right'}} onClick={() => dispatch(handleLogout(history))}  />
+                            </Dropdown.Menu>
+                          </Dropdown>
+                             :
                           <Link to='/login' >
                             <Menu.Item name='Login' style={{color: '#FDFEFE'}}/>
                           </Link>

@@ -13,13 +13,14 @@ import Minutes from './Minutes'
 import Discussion from './Discussion'
 import UnlockAccount from './UnlockAccount'
 import ViewDiscussion from './ViewDiscussion'
-import ProtectedRoute from './ProtectedRoute';
+import ChangePassword from './ChangePassword'
+import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom'
 import FetchUser from './FetchUser';
 import { Container, Segment } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css'
 
 class App extends Component {
 
@@ -67,6 +68,7 @@ class App extends Component {
               <Route exact path='/unlock' component={UnlockAccount} />
               <Route exact path='/viewpdf' component={ViewPDF} />
               <Route exact path='/viewdiscussion/:id' component={ViewDiscussion} />
+              <ProtectedRoute exect path='/changepassword' component={ChangePassword} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />
               
