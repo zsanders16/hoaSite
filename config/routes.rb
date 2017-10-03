@@ -98,6 +98,7 @@ Rails.application.routes.draw do
     resources :homeowners, only: [:index, :update, :destroy] do
       patch 'status', on: :member
     end
+    get '/homeowners/unlock', to: 'homeowners#unlock'
 
     #NewsletterAdmin controller routes
     resources :newsletters_admin, only: [:index, :update]

@@ -66,3 +66,11 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
     })
   }
 }
+
+export const unlockPassword = (string, password, password_confirmation) => {
+    debugger
+    axios.patch(`/api/auth/password${string}`, {password, password_confirmation})
+        .then( res => {
+            debugger
+        })
+}

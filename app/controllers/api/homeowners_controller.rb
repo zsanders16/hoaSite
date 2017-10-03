@@ -39,6 +39,13 @@ class Api::HomeownersController < ApplicationController
       end
     end
 
+    def unlock
+        binding.pry
+        user = with_reset_password_token(params[:reset_password_token])
+        render json: user
+    end
+
+
     private
 
         def set_homeowner
