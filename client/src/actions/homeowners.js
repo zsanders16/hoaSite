@@ -67,10 +67,17 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
   }
 }
 
-export const unlockPassword = (string, password, password_confirmation) => {
+export const unlockPassword = (obj, password, password_confirmation) => {
     debugger
-    axios.patch(`/api/auth/password${string}`, {password, password_confirmation})
-        .then( res => {
-            debugger
-        })
+    return(dispatch) => {
+        axios.put('/api/auth/password', {...obj, password: password, password_confirmation: password_confirmation})
+            .then( res => {
+                debugger
+            })
+            .catch( res => {
+                debugger
+                const message = res.response.data.errors.join(',');
+                dispatch(setFlash(message, 'error'));
+            })
+    }
 }
