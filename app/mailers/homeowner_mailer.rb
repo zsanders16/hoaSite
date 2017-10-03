@@ -5,10 +5,9 @@ class HomeownerMailer < ApplicationMailer
   #
   #   en.homeowner_mailer.homeowners.subject
   #
-  def homeowners
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def homeowners(email, recipients)
+    @body = email.body
+    mail to: recipients, subject: email.subject
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -16,9 +15,8 @@ class HomeownerMailer < ApplicationMailer
   #
   #   en.homeowner_mailer.commitee.subject
   #
-  def commitee
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def committee(email, recipients)
+    @body = email.body
+    mail to: recipients, subject: email.subject
   end
 end

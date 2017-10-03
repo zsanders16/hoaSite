@@ -28,6 +28,15 @@ export const emails = ( state = defaults, action ) => {
         ...state,
         email: {},
       }
+    case 'CREATE_EMAIL':
+      return {
+        ...state,
+        data: [
+          action.data,
+          ...state.data,
+        ],
+        email: action.data
+      }
     default:
       return state
   }

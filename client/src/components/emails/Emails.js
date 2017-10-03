@@ -62,8 +62,8 @@ class Emails extends Component {
                 View
               </Button>
             </Table.Cell>
-            <Table.Cell>{email.subject}</Table.Cell>
-            <Table.Cell>{email.body}</Table.Cell>
+            <Table.Cell>{email.subject.substr(0,30)}</Table.Cell>
+            <Table.Cell>{email.body.substr(0,50)}</Table.Cell>
             <Table.Cell>{email.recipients}</Table.Cell>
             <Table.Cell>{email.created_at}</Table.Cell>
           </Table.Row>

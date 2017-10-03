@@ -69,3 +69,21 @@ export const deleteEmails = ( ids ) => {
     })
   }
 }
+
+export const createEmail = ( email ) => {
+  return (dispatch) => {
+    axios.post(`/api/emails`, { email })
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_EMAIL',
+        data: resp.data,
+        headers: resp.headers
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Email Not Created!','error')
+      )
+    })
+  }
+}

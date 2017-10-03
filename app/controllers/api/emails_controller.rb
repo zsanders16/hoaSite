@@ -24,6 +24,14 @@ class Api::EmailsController < ApplicationController
     else
       render_errors email
     end
+    # TODO: send the actual emailer through the mailer
+    if params[:email][:recipients] == 'homeowners'
+      recipients = User.where(admin: false).all.map{ |u| u.email }.join(',')
+      HomeownerMailer.homeowners(email,recipients).deliver
+    elsif params[:email][:recipients] == 'committee'
+      recipients = User.where(admin: true).all.map{ |u| u.email }.join(',')
+      HomeownerMailer.committee(email,recipients).deliver
+    end
   end
 
   def update

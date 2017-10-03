@@ -20,7 +20,7 @@ class EmailFormModal extends Component {
           </Header.Content>
         </Header>
         <Modal.Content>
-          <EmailForm />
+          <EmailForm closeModal={this.handleOnClose}/>
         </Modal.Content>
         <Modal.Actions>
           <Button

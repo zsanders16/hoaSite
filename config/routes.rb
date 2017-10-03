@@ -85,7 +85,7 @@
 #                             PUT      /api/emails/:id(.:format)                        api/emails#update
 #                             DELETE   /api/emails/:id(.:format)                        api/emails#destroy
 #                             GET      /*other(.:format)                                static#index
-# 
+#
 
 Rails.application.routes.draw do
 
@@ -140,7 +140,7 @@ Rails.application.routes.draw do
     # Routes for Email controller
     resources :emails, shallow: true do
       post 'homeowner', on: :collection
-      post 'commitee', on: :collection
+      post 'committee', on: :collection
       post 'delete', on: :collection
     end
 
