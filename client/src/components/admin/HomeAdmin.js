@@ -66,7 +66,7 @@ class HomeAdmin extends React.Component{
     }
 
 
-    
+
     events = () => {
         let { events } = this.props
         return(
@@ -83,7 +83,7 @@ class HomeAdmin extends React.Component{
                 </Grid>
             </Segment>
         )
-        
+
     }
 
     displayEvents = () => {
@@ -116,7 +116,7 @@ class HomeAdmin extends React.Component{
     }
 
     showEventForm = () => {
-        let { eventForm } = this.state      
+        let { eventForm } = this.state
         this.setState({ eventForm: !eventForm})
     }
 
@@ -165,7 +165,7 @@ class HomeAdmin extends React.Component{
             </Segment>
         )
     }
-    
+
     render(){
         let { eventForm } = this.state
         return(
@@ -176,7 +176,7 @@ class HomeAdmin extends React.Component{
                 </Segment>
             </Segment>
         )
-         
+
     }
 }
 

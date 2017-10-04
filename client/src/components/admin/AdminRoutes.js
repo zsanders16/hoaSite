@@ -29,6 +29,7 @@ class AdminRoutes extends Component {
             <AdminRoute exact path='/admin/emails' component={Emails} />
             <AdminRoute exact path='/admin/home' component={Home} />
             <AdminRoute exact path='/admin/homepages' component={HomePages} />
+            <AdminRoute exact path='/admin/home' component={Home} />
             <Route component={NoMatch} />
         </Switch>
     );
