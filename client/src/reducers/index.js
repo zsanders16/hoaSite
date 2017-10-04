@@ -17,6 +17,7 @@ import events from './events'
 import homepages from './homepages'
 import events from './events'
 import homepages from './homepages'
+import events from './events'
 
 const rootReducer = combineReducers({
     homepages,
