@@ -30,6 +30,7 @@
 #               api_homeowner PATCH    /api/homeowners/:id(.:format)                    api/homeowners#update
 #                             PUT      /api/homeowners/:id(.:format)                    api/homeowners#update
 #                             DELETE   /api/homeowners/:id(.:format)                    api/homeowners#destroy
+#       api_homeowners_unlock GET      /api/homeowners/unlock(.:format)                 api/homeowners#unlock
 # api_newsletters_admin_index GET      /api/newsletters_admin(.:format)                 api/newsletters_admin#index
 #       api_newsletters_admin PATCH    /api/newsletters_admin/:id(.:format)             api/newsletters_admin#update
 #                             PUT      /api/newsletters_admin/:id(.:format)             api/newsletters_admin#update
@@ -76,7 +77,7 @@
 #        api_discussion_admin PATCH    /api/discussion_admin/:id(.:format)              api/discussion_admin#update
 #                             PUT      /api/discussion_admin/:id(.:format)              api/discussion_admin#update
 #        homeowner_api_emails POST     /api/emails/homeowner(.:format)                  api/emails#homeowner
-#         commitee_api_emails POST     /api/emails/commitee(.:format)                   api/emails#commitee
+#        committee_api_emails POST     /api/emails/committee(.:format)                  api/emails#committee
 #           delete_api_emails POST     /api/emails/delete(.:format)                     api/emails#delete
 #                  api_emails GET      /api/emails(.:format)                            api/emails#index
 #                             POST     /api/emails(.:format)                            api/emails#create
@@ -84,8 +85,19 @@
 #                             PATCH    /api/emails/:id(.:format)                        api/emails#update
 #                             PUT      /api/emails/:id(.:format)                        api/emails#update
 #                             DELETE   /api/emails/:id(.:format)                        api/emails#destroy
+#                  api_events GET      /api/events(.:format)                            api/events#index
+#                             POST     /api/events(.:format)                            api/events#create
+#                   api_event PATCH    /api/events/:id(.:format)                        api/events#update
+#                             PUT      /api/events/:id(.:format)                        api/events#update
+#                             DELETE   /api/events/:id(.:format)                        api/events#destroy
+#              api_home_pages GET      /api/home_pages(.:format)                        api/home_pages#index
+#                             POST     /api/home_pages(.:format)                        api/home_pages#create
+#               api_home_page GET      /api/home_pages/:id(.:format)                    api/home_pages#show
+#                             PATCH    /api/home_pages/:id(.:format)                    api/home_pages#update
+#                             PUT      /api/home_pages/:id(.:format)                    api/home_pages#update
+#                             DELETE   /api/home_pages/:id(.:format)                    api/home_pages#destroy
 #                             GET      /*other(.:format)                                static#index
-#
+# 
 
 Rails.application.routes.draw do
 
@@ -145,6 +157,9 @@ Rails.application.routes.draw do
 
     #Routes for Event controller
     resources :events, only: [:index, :create, :update, :destroy]
+
+    # Routes for Home Page Controller
+    resources :home_pages
 
   end
 

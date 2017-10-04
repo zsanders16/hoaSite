@@ -4,7 +4,7 @@ import { setFlash } from './flash'
 export const indexHomePages = ( page=1, per=5 ) => {
   const query = `?page=${page}&per=${per}`
   return (dispatch) => {
-    axios.get(`/api/homepages`)
+    axios.get(`/api/home_pages${query}`)
     .then( resp => {
       dispatch({
         type: 'INDEX_HOMEPAGES',
@@ -25,3 +25,7 @@ export const resetHomePages = () => {
     type: 'RESET_HOMEPAGES',
   }
 }
+
+export const updateHomePage = () => {}
+export const createHomePage = () => {}
+export const deleteHomePage = () => {}

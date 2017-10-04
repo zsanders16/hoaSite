@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import { Table } from 'semantic-ui-react'
 import moment from 'moment'
 import Paginator from '../Paginator'
+import HomePageFormModal from './HomePageFormModal'
 
 //Actions
 import {
-  indexHomePages
+  indexHomePages,
 } from '../../actions/homepages'
 
 class homepages extends Component {
-  state = { hasMore: false }
+  state = { hasMore: false, homePageId: '' }
 
   componentDidMount = () => {
     const { dispatch, homepages } = this.props
@@ -32,15 +33,19 @@ class homepages extends Component {
     }
   }
 
+  handleRowClick = ( homePageId ) => this.setState({ homePageId })
+
   displayTableBodyRows = () => {
     const { homepages } = this.props
     if( homepages.length > 0 ) {
       return homepages.map( homePage => {
         return (
-          <Table.Row key={homePage.id}>
-            <Table.Cell>{homePage.title}</Table.Cell>
-            <Table.Cell>{homePage.body}</Table.Cell>
-            <Table.Cell>{moment(homePage.updated_at,"MM-DD-YYYY")}</Table.Cell>
+          <Table.Row
+            key={homePage.id}
+            onClick={()=>this.handleRowClick(homePage.id)}>
+            <Table.Cell>{homePage.title.substr(0,30)}</Table.Cell>
+            <Table.Cell>{homePage.body.substr(0,70)}</Table.Cell>
+            <Table.Cell>{moment(homePage.updated_at).format("MM-DD-YYYY")}</Table.Cell>
           </Table.Row>
         )
       })
@@ -48,6 +53,7 @@ class homepages extends Component {
   }
 
   render() {
+    const { homePageId } = this.state
     return (
       <Table celled>
         <Table.Header>
@@ -61,9 +67,16 @@ class homepages extends Component {
           { this.displayTableBodyRows() }
         </Table.Body>
         <Table.Footer>
-          <Paginator
-            loadMore={this.loadMore}
-            pagination={this.props.pagination} />
+          <Table.Row>
+            <Table.HeaderCell colSpan={3}>
+              { homePageId &&
+                <HomePageFormModal homePageId={homePageId} />
+              }
+              <Paginator
+                loadMore={this.loadMore}
+                pagination={this.props.pagination} />
+            </Table.HeaderCell>
+          </Table.Row>
         </Table.Footer>
       </Table>
     )
