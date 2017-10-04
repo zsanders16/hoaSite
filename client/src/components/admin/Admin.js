@@ -163,21 +163,6 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                      <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
-                          <Link to='admin/homepages' >
-                              <Card>
-                                  <Card.Content>
-                                      <Card.Header>
-                                          Home Pages
-                                      </Card.Header>
-                                      <Card.Description>
-                                          View all Home Pages; add, remove, or archive them.
-                                      </Card.Description>
-                                  </Card.Content>
-                              </Card>
-                          </Link>
-                      </Grid.Column>
-
                     </Grid.Row>
                 </Grid>
             </Segment>
