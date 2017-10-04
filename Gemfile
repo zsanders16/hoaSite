@@ -31,6 +31,7 @@ gem 'devise_token_auth'
 gem 'dotenv'
 gem 'delayed_job_active_record'
 gem 'will_paginate'
+gem 'paperclip'
 
 
 group :development, :test do
