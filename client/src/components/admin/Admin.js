@@ -93,20 +93,34 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                      <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
-                          <Link to='admin/emails' >
-                              <Card>
-                                  <Card.Content>
-                                      <Card.Header>
-                                          Emails
-                                      </Card.Header>
-                                      <Card.Description>
-                                          View all Emails; add, remove, or archive them.
-                                      </Card.Description>
-                                  </Card.Content>
-                              </Card>
-                          </Link>
-                      </Grid.Column>
+                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                            <Link to='admin/emails' >
+                                <Card>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Emails
+                                        </Card.Header>
+                                        <Card.Description>
+                                            View all Emails; add, remove, or archive them.
+                                        </Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Link>
+                        </Grid.Column>
+                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                            <Link to='admin/home' >
+                                <Card>
+                                    <Card.Content>
+                                        <Card.Header>
+                                            Home Page
+                                        </Card.Header>
+                                        <Card.Description>
+                                            Modify home page image, main text and side announcements.
+                                        </Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            </Link>
+                        </Grid.Column>
                     </Grid.Row>
                 </Grid>
             </Segment>

@@ -91,3 +91,18 @@ export const changePassword = (password, password_confirmation, history) => {
             })
     }
 }
+
+export const validateToken = (obj, history) => {
+    return(dispatch) => {
+        axios.get('/api/auth/validate_token', {...obj})
+        .then( res => {
+            debugger
+            let { data: { data: user }, headers } = res
+            dispatch({ type: 'LOGIN', user, headers });
+        })
+        .catch( res => {
+            const message = res.response.data.errors.join(',');
+            dispatch(setFlash(message, 'error'));
+        })
+    }
+}
