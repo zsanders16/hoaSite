@@ -135,7 +135,6 @@ class Admin extends React.Component{
                               </Card>
                           </Link>
                       </Grid.Column>
-
                     </Grid.Row>
                 </Grid>
             </Segment>
