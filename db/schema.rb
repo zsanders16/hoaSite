@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 20171004155252) do
     t.datetime "image_updated_at"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "date"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "legal_admins", force: :cascade do |t|
     t.string "name", default: "legal"
     t.string "display_name", default: "Legal"
