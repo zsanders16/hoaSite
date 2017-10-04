@@ -13,6 +13,7 @@ import displayPDF from './displayPDF'
 import comments from './comments'
 import archived from './archived'
 import emails from './emails'
+import events from './events'
 
 const rootReducer = combineReducers({
     emails,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     displayPDF,
     comments,
     archived,
+    events,
 })
 
 export default rootReducer

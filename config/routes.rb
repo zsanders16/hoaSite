@@ -89,7 +89,6 @@
 
 Rails.application.routes.draw do
 
-
   mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do
     #API ROUTES SHOULD GO HERE
@@ -143,6 +142,9 @@ Rails.application.routes.draw do
       post 'committee', on: :collection
       post 'delete', on: :collection
     end
+
+    #Routes for Event controller
+    resources :events, only: [:index, :create, :update, :destroy]
 
   end
 

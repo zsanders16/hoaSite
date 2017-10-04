@@ -34,7 +34,7 @@ class Homeowners extends React.Component{
           comparison = -1;
         }
         return comparison;
-      }
+    }
 
     displayHomeowners = () => {
         this.props.homeowners.sort(this.compare)
