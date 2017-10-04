@@ -97,7 +97,7 @@
 #                             PUT      /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             DELETE   /api/home_pages/:id(.:format)                    api/home_pages#destroy
 #                             GET      /*other(.:format)                                static#index
-# 
+#
 
 Rails.application.routes.draw do
 
