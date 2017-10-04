@@ -135,20 +135,6 @@ class Admin extends React.Component{
                               </Card>
                           </Link>
                       </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
-                            <Link to='admin/home' >
-                                <Card>
-                                    <Card.Content>
-                                        <Card.Header>
-                                            Home Page
-                                        </Card.Header>
-                                        <Card.Description>
-                                            Modify home page image, main text and side announcements.
-                                        </Card.Description>
-                                    </Card.Content>
-                                </Card>
-                            </Link>
-                        </Grid.Column>
                       <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                           <Link to='admin/homepages' >
                               <Card>
@@ -163,7 +149,6 @@ class Admin extends React.Component{
                               </Card>
                           </Link>
                       </Grid.Column>
-
                     </Grid.Row>
                 </Grid>
             </Segment>
