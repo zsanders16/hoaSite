@@ -65,12 +65,6 @@ class HomeAdmin extends React.Component{
         })
     }
 
-
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> add events to homeAdmin component
     events = () => {
         let { events } = this.props
         return(
@@ -87,11 +81,6 @@ class HomeAdmin extends React.Component{
                 </Grid>
             </Segment>
         )
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> add events to homeAdmin component
     }
 
     displayEvents = () => {
@@ -124,11 +113,7 @@ class HomeAdmin extends React.Component{
     }
 
     showEventForm = () => {
-<<<<<<< HEAD
         let { eventForm } = this.state
-=======
-        let { eventForm } = this.state      
->>>>>>> add events to homeAdmin component
         this.setState({ eventForm: !eventForm})
     }
 
@@ -177,11 +162,7 @@ class HomeAdmin extends React.Component{
             </Segment>
         )
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> add events to homeAdmin component
     render(){
         let { eventForm } = this.state
         return(
@@ -192,11 +173,7 @@ class HomeAdmin extends React.Component{
                 </Segment>
             </Segment>
         )
-<<<<<<< HEAD
 
-=======
-         
->>>>>>> add events to homeAdmin component
     }
 }
 
@@ -204,8 +181,4 @@ const mapStateToProps = (state) => {
     return { events: state.events }
 }
 
-<<<<<<< HEAD
 export default connect(mapStateToProps)(HomeAdmin)
-=======
-export default connect(mapStateToProps)(HomeAdmin)
->>>>>>> add events to homeAdmin component
