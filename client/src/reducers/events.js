@@ -1,19 +1,43 @@
-const events = (state = [], action) => {
+const defaults = {
+  data: [],
+  pagination: {
+    total_pages: '',
+    current_page: '',
+    next_page: '',
+  }
+}
+
+const events = (state = defaults, action) => {
     switch(action.type) {
       case 'SET_EVENTS':
-        return action.events;
+        return {
+          ...state,
+          data: action.events.data,
+          pagination: action.events.pagination,
+        };
       case 'ADD_EVENT':
-        return [ action.event, ...state ]
+        return {
+          ...state,
+          data: [ action.event, ...state ]
+        }
       case 'REMOVE_EVENT':
-        let newEvents = state.filter( event => {
+        let newEvents = state.data.filter( event => {
            return event.id !== action.event.id;
         })
-        return newEvents;
+        return {
+          ...state,
+          data: newEvents
+        }
       case 'UPDATE_EVENT':
-        let updatedEvents = state.filter( event => {
-          return event.id !== action.event.id;
-        })
-        return [ action.event, ...updatedEvents ]
+        const index = state.data.findIndex( event => event.id === action.event.id )
+        return {
+          ...state,
+          data: [
+            ...state.data.slice(0,index),
+            action.event,
+            ...state.data.slice(index + 1),
+          ],
+        }
       default:
         return state;
     }

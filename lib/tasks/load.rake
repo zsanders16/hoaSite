@@ -1,4 +1,4 @@
-namespace :load do
+namespace :load do |loader_namespace|
   desc "Load Test Emails"
   task emails: :environment do
     Email.destroy_all
@@ -25,6 +25,28 @@ namespace :load do
         body: Faker::Lorem.paragraph(6),
         image: File.open(@images.first)
       )
+    end
+  end
+
+  desc "Load Test Events for Home Page"
+  task events: :environment do
+    Event.destroy_all
+
+    status = [true,false]
+
+    20.times do
+      Event.create(
+        title: Faker::Lorem.sentence,
+        description: Faker::Lorem.paragraph(5),
+        date: Time.now,
+        active: status.sample
+      )
+    end
+  end
+
+  task :all do
+    loader_namespace.tasks.each do |task|
+      Rake::Task[task].invoke
     end
   end
 

@@ -3,9 +3,10 @@ import { setFlash } from '../actions/flash';
 import { setHeaders } from './headers';
 
 
-export const getEvents = () => {
+export const getEvents = ( page=1, per=5 ) => {
+  const query = `?page=${page}&per=${per}`
     return(dispatch) => {
-        axios.get('/api/events')
+        axios.get(`/api/events${query}`)
             .then( res => {
                 dispatch({ type: 'SET_EVENTS', events: res.data, headers: res.headers });
             })
@@ -54,4 +55,3 @@ export const removeEvent = (event) => {
             })
     }
 }
-

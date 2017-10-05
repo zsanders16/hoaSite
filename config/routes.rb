@@ -156,7 +156,7 @@ Rails.application.routes.draw do
     end
 
     #Routes for Event controller
-    resources :events, only: [:index, :create, :update, :destroy]
+    resources :events, only: [:index, :create, :update, :destroy, :show]
 
     # Routes for Home Page Controller
     resources :home_pages

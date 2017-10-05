@@ -21,6 +21,7 @@ import FetchUser from './FetchUser';
 import { Container, Segment } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
 import 'semantic-ui-css/semantic.min.css'
+import 'react-datepicker/dist/react-datepicker.min.css'
 
 class App extends Component {
 
@@ -35,9 +36,9 @@ class App extends Component {
         'CCRs | ByLaws'   : CcrBylaws,
         'Legal'           : Legal,
         'Meeting Minutes' : Minutes,
-        "Discussion Forum": Discussion,  
+        "Discussion Forum": Discussion,
       }
-      
+
       const Type = all[module.display_name]
       if(module.security === 'admin'){
         return <AdminRoute key={i} exact path={module.route} component={Type} />
@@ -50,7 +51,7 @@ class App extends Component {
     return finishedRoutes
   }
 
-  render() {  
+  render() {
     return (
       <div style={{backgroundColor: '#922B21'}}>
         <Container>
@@ -71,7 +72,7 @@ class App extends Component {
               <ProtectedRoute exect path='/changepassword' component={ChangePassword} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />
-              
+
               <Route component={NoMatch} />
             </Switch>
           </FetchUser>

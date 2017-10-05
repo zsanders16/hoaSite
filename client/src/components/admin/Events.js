@@ -2,13 +2,22 @@ import React from 'react'
 import { Segment, Divider, Header, Table, Grid, Button, Form, Popup, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getEvents, addEvent, updateEvent, removeEvent } from '../../actions/events'
+import moment from 'moment'
+import Paginator from '../Paginator'
+import EventModal from './EventModal'
 
-class HomeAdmin extends React.Component{
-    state = { eventForm: false, edit: false, title: '', date: '', description: '', id: '' }
+class Events extends React.Component{
+    state = {
+      hasMore: false, eventForm: false, edit: false, eventId: '',
+      title: '', date: '', description: '', id: ''
+    }
 
     componentDidMount(){
-        let { dispatch } = this.props
-        dispatch(getEvents())
+        let { dispatch, events } = this.props
+        if( events.length <= 0 ) {
+          dispatch(getEvents())
+          this.setState({ hasMore: true })
+        }
     }
 
     editEvent = (event) => {
@@ -33,32 +42,57 @@ class HomeAdmin extends React.Component{
         return comparison;
     }
 
+    displayEventModal = ( eventId ) => this.setState({ eventId })
+
     displayEachEvent = () => {
         let { events } = this.props
         events.sort(this.compare)
         return events.map( (event, i) => {
             return(
-                <Table.Row key={i}>
+                <Table.Row
+                  key={i}
+                  onClick={()=>this.displayEventModal(event.id)}>
                     <Table.Cell>
-                        <Header as='h4'>{event.title}</Header>
+                        <Header as='h4'>{event.title.substr(0,30) + '...'}</Header>
                     </Table.Cell>
                     <Table.Cell singleLine>
-                        {event.date}
+                        {moment(event.date).format("MMM Do YYYY")}
                     </Table.Cell>
                     <Table.Cell>
-                        {event.description}
+                        {event.description.substr(0,50) + '...'}
                     </Table.Cell>
                     <Table.Cell>
+                      { event.active ? 'Active' : 'Inactive' }
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Segment basic clearing>
                         <Popup
-                                trigger={<Button color='twitter' size='mini' onClick={() => this.editEvent(event)} ><Icon name='sticky note outline' /></Button>}
-                                content='Edit Event'
-                                hideOnScroll
-                            />
-                            <Popup
-                                trigger={<Button color='google plus' size='mini' onClick={ () => this.deleteEvent(event)} ><Icon name='remove' /></Button>}
-                                content='Delete Event'
-                                hideOnScroll
-                            />
+                          trigger={
+                            <Button
+                              color='twitter'
+                              size='mini'
+                              onClick={() => this.editEvent(event)}
+                              floated='right'>
+                                <Icon name='sticky note outline' />
+                            </Button>
+                          }
+                          content='Edit Event'
+                          hideOnScroll
+                          />
+                        <Popup
+                          trigger={
+                            <Button
+                              color='google plus'
+                              size='mini'
+                              onClick={() => this.deleteEvent(event)}
+                              floated='right'>
+                                <Icon name='remove' />
+                              </Button>
+                            }
+                          content='Delete Event'
+                          hideOnScroll
+                          />
+                      </Segment>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -68,7 +102,7 @@ class HomeAdmin extends React.Component{
     events = () => {
         let { events } = this.props
         return(
-            <Segment>
+            <Segment basic>
                 <Header textAlign='center' as='h2'>Upcoming Events</Header>
                 <Divider />
                 { events.length>0 ? this.displayEvents() : this.displayNoEvents()}
@@ -83,7 +117,20 @@ class HomeAdmin extends React.Component{
         )
     }
 
+    loadMore = ( page ) => {
+      const { dispatch, pagination } = this.props
+      const { hasMore } = this.state
+      if( hasMore && pagination.total_pages ) {
+        if( page <= pagination.total_pages ) {
+          dispatch(getEvents(page))
+        } else {
+          this.setState({ hasMore: false })
+        }
+      }
+    }
+
     displayEvents = () => {
+      const { eventId } = this.state
         return(
             <Segment basic>
                 <Table celled padded>
@@ -92,12 +139,25 @@ class HomeAdmin extends React.Component{
                             <Table.HeaderCell singleLine textAlign='center' >Event Title</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center' >Event Date</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center' >Event Description</Table.HeaderCell>
+                            <Table.HeaderCell textAlign='center'>Status</Table.HeaderCell>
                             <Table.HeaderCell textAlign='center' >Actions</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                         { this.displayEachEvent()}
                     </Table.Body>
+                    <Table.Footer>
+                      <Table.Row>
+                        <Table.HeaderCell colSpan={5}>
+                          { eventId &&
+                            <EventModal eventId={eventId} />
+                          }
+                          <Paginator
+                            loadMore={this.loadMore}
+                            pagination={this.props.pagination} />
+                        </Table.HeaderCell>
+                      </Table.Row>
+                    </Table.Footer>
                 </Table>
             </Segment>
         )
@@ -166,9 +226,17 @@ class HomeAdmin extends React.Component{
     render(){
         let { eventForm } = this.state
         return(
-            <Segment raised>
-                <Header textAlign='center' as='h2'>Home Page Administration</Header>
-                <Segment>
+            <Segment>
+                <Header
+                  textAlign='center'
+                  as='h2'
+                  icon>
+                  <Icon name='info circle' circular />
+                  <Header.Content>
+                    Home Page Events Information
+                  </Header.Content>
+                </Header>
+                <Segment basic>
                     { eventForm ? this.displayForm() : this.events() }
                 </Segment>
             </Segment>
@@ -178,7 +246,10 @@ class HomeAdmin extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { events: state.events }
+    return {
+      events: state.events.data,
+      pagination: state.events.pagination,
+    }
 }
 
-export default connect(mapStateToProps)(HomeAdmin)
+export default connect(mapStateToProps)(Events)
