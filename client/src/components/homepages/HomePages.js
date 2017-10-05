@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import Paginator from '../Paginator'
 import HomePageFormModal from './HomePageFormModal'
@@ -34,6 +34,8 @@ class homepages extends Component {
   }
 
   handleRowClick = ( homePageId ) => this.setState({ homePageId })
+  clearHomePageId = () => this.setState({ homePageId: '' })
+  showNewHomePageForm = () => this.setState({ homePageId: true })
 
   displayTableBodyRows = () => {
     const { homepages } = this.props
@@ -70,8 +72,15 @@ class homepages extends Component {
           <Table.Row>
             <Table.HeaderCell colSpan={3}>
               { homePageId &&
-                <HomePageFormModal homePageId={homePageId} />
+                <HomePageFormModal
+                  homePageId={homePageId}
+                  clearHomePageId={this.clearHomePageId} />
               }
+              <Button
+                type='button'
+                onClick={this.showNewHomePageForm} >
+                New Home Page Entry
+              </Button>
               <Paginator
                 loadMore={this.loadMore}
                 pagination={this.props.pagination} />

@@ -6,18 +6,22 @@ class HomePageFormModal extends Component {
   state = { openModal: false, homePageId: '' }
 
   componentDidMount = () => {
-    const { homePageId } = this.props
-    if( homePageId )
-        this.setState({ homePageId: this.props.homePageId, openModal: true })
+    this.openModal( this.props )
   }
-  componentWillReceiveProps = ( nextProps ) => {
+
+  componentWillReceiveProps = ( nextProps ) => this.openModal( nextProps )
+
+  openModal = ( props ) => {
     const { homePageId } = this.state
-    if( homePageId !== nextProps.homePageId ) {
-      this.setState({ homePageId: nextProps.homePageId, openModal: true })
+    if( props.homePageId ) {
+      this.setState({ homePageId: props.homePageId, openModal: true })
     }
   }
 
-  handleCloseModal = () => this.setState({ openModal: false })
+  handleCloseModal = () => {
+    this.setState({ openModal: false })
+    this.props.clearHomePageId()
+  }
 
   render() {
     const { homePageId } = this.state

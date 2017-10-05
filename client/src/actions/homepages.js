@@ -26,6 +26,56 @@ export const resetHomePages = () => {
   }
 }
 
-export const updateHomePage = () => {}
-export const createHomePage = () => {}
-export const deleteHomePage = () => {}
+export const updateHomePage = ( home_page ) => {
+  return (dispatch) => {
+    axios.patch(`/api/home_pages/${home_page.id}`, { home_page })
+    .then( resp => {
+      dispatch({
+        type: 'UPDATE_HOMEPAGE',
+        data: resp.data,
+        headers: resp.headers
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('HomePage not Updated!','error')
+      )
+    })
+  }
+}
+
+export const createHomePage = ( home_page ) => {
+  return (dispatch) => {
+    axios.post(`/api/home_pages`, { home_page })
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_HOMEPAGE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('HomePages not Found!','error')
+      )
+    })
+  }
+}
+
+export const deleteHomePage = ( homepageId ) => {
+  return (dispatch) => {
+    axios.delete(`/api/home_pages/${homepageId}`)
+    .then( resp => {
+      dispatch({
+        type: 'DELETE_HOMEPAGE',
+        data: homepageId,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('HomePages not Found!','error')
+      )
+    })
+  }
+}

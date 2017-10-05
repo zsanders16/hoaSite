@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Form, Button } from 'semantic-ui-react'
+import _ from 'lodash'
 
 import {
   updateHomePage,
@@ -16,31 +17,39 @@ class HomePageForm extends Component {
 
   componentDidMount = () => this.loadForm(this.props)
   componentWillReceiveProps = ( nextProps ) => this.loadForm(nextProps)
+
   loadForm = ( props ) => {
     const { homepages, homePageId } = this.props
     if( homepages && homePageId ) {
-      this.setState({ ...homepages.find( hp => hp.id === homePageId ) })
+      if( _.isNumber(homePageId) ) {
+        this.setState({ ...homepages.find( hp => hp.id === homePageId ) })
+      } else if( _.isBoolean(homePageId) ) {
+        this.setState({ ...this.defaults })
+      }
     }
   }
 
   handleChange = ( {target: {id,value}} ) => this.setState({ [id]: value })
   handleNewForm = () => this.setState({ ...this.defaults })
+
   handleSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch, closeFormModal } = this.props
     const { id } = this.state
     if( id ) {
-      dispatch(updateHomePage(id))
+      dispatch(updateHomePage(this.state))
     } else {
-      dispatch(createHomePage())
+      dispatch(createHomePage(this.state))
     }
     closeFormModal()
   }
+
   handleDelete = () => {
     const { dispatch, closeFormModal } = this.props
-    dispatch(deleteHomePage)
+    dispatch(deleteHomePage(this.state.id))
     closeFormModal()
   }
+
   render() {
     const { id, title, body } = this.state
     return (

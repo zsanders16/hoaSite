@@ -19,6 +19,29 @@ const homepages = ( state = defaults, action ) => {
       return {
         ...defaults
       }
+    case 'UPDATE_HOMEPAGE':
+      const index = state.data.findIndex( hp => hp.id === action.data.id )
+      return {
+        ...state,
+        data: [
+          ...state.data.slice(0,index),
+          action.data,
+          ...state.data.slice(index + 1),
+        ],
+      }
+    case 'CREATE_HOMEPAGE':
+      return {
+        ...state,
+        data: [
+          action.data,
+          ...state.data,
+        ]
+      }
+    case 'DELETE_HOMEPAGE':
+      return {
+        ...state,
+        data: state.data.filter( hp => hp.id !== action.data ),
+      }
     default:
       return state
   }
