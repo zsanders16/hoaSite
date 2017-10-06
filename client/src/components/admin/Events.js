@@ -1,16 +1,23 @@
 import React from 'react'
 import { Segment, Divider, Header, Table, Grid, Button, Form, Popup, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { getEvents, addEvent, updateEvent, removeEvent } from '../../actions/events'
+import {
+  getEvents,
+  addEvent,
+  updateEvent,
+  removeEvent,
+  clearEvents,
+} from '../../actions/events'
 import moment from 'moment'
 import Paginator from '../Paginator'
 import EventModal from './EventModal'
 
 class Events extends React.Component{
-    state = {
+    defaults = {
       hasMore: false, eventForm: false, edit: false, eventId: '',
-      title: '', date: '', description: '', id: ''
+      title: '', date: '', description: '', id: '', active: '',
     }
+    state = { ...this.defaults }
 
     componentDidMount(){
         let { dispatch, events } = this.props
@@ -18,6 +25,10 @@ class Events extends React.Component{
           dispatch(getEvents())
           this.setState({ hasMore: true })
         }
+    }
+    componentWillUnmount = () => {
+      const { dispatch } = this.props
+      dispatch(clearEvents())
     }
 
     editEvent = (event) => {
@@ -28,6 +39,7 @@ class Events extends React.Component{
     deleteEvent = (event) => {
         let { dispatch } = this.props
         dispatch(removeEvent(event))
+        this.closeEventModal()
     }
 
     compare (a, b) {
@@ -43,6 +55,7 @@ class Events extends React.Component{
     }
 
     displayEventModal = ( eventId ) => this.setState({ eventId })
+    closeEventModal = () => this.setState({ eventId: '' })
 
     displayEachEvent = () => {
         let { events } = this.props
@@ -150,7 +163,9 @@ class Events extends React.Component{
                       <Table.Row>
                         <Table.HeaderCell colSpan={5}>
                           { eventId &&
-                            <EventModal eventId={eventId} />
+                            <EventModal
+                              eventId={eventId}
+                              closeEventModal={this.closeEventModal} />
                           }
                           <Paginator
                             loadMore={this.loadMore}
@@ -186,19 +201,22 @@ class Events extends React.Component{
     handleOnSubmit = (e) => {
         e.preventDefault()
         let { dispatch } = this.props
-        let { title, date, description, edit, id } = this.state
-        let newEvent = { title, date, description, id }
+        let { title, date, description, edit, id, active } = this.state
+        let newEvent = { title, date, description, id, active }
         if(edit){
             dispatch(updateEvent(newEvent))
         }else{
             dispatch(addEvent(newEvent))
         }
-        this.setState({ title: '', data: '', description: '', eventForm: false, edit: false })
+        this.setState({ title: '', data: '', description: '', eventForm: false, edit: false, eventId: '' })
     }
 
+    handleStatusChange = ( event, data ) => {
+      this.setState({ [data.id]: data.value })
+    }
 
     displayForm = () => {
-        let { title, date, description, edit } = this.state
+        let { title, date, description, active, edit } = this.state
         return(
             <Segment basic >
                 <Grid.Column width={4}>
@@ -214,6 +232,17 @@ class Events extends React.Component{
                         </Form.Field>
                         <Form.Field>
                             <Form.TextArea label='Description' placeholder='Description of the event...' value={description} id='description' onChange={this.handleOnChange} />
+                        </Form.Field>
+                        <Form.Field>
+                          <label>Status</label>
+                          <Form.Select
+                            options={[
+                              { key: 'active', text: 'Active', value: true },
+                              { key: 'inactive', text: 'Inactive', value: false },
+                            ]}
+                            value={active}
+                            id='active'
+                            onChange={this.handleStatusChange} />
                         </Form.Field>
                         <Button primary onClick={this.showEventForm} >Cancel</Button>
                         <Button primary type='submit'>{ edit ? 'Update' : 'Submit' }</Button>

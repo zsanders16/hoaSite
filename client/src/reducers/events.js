@@ -38,6 +38,8 @@ const events = (state = defaults, action) => {
             ...state.data.slice(index + 1),
           ],
         }
+      case 'CLEAR_EVENTS':
+        return { ...defaults }
       default:
         return state;
     }

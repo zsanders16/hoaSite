@@ -55,3 +55,9 @@ export const removeEvent = (event) => {
             })
     }
 }
+
+export const clearEvents = () => {
+  return {
+    type: 'CLEAR_EVENTS',
+  }
+}

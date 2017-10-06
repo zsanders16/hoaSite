@@ -6,7 +6,10 @@ class EventModal extends Component {
   state = { openModal: true }
 
   componentWillReceiveProps = ( nextProps ) => this.setState({ openModal: true })
-  handleClose = () => this.setState({ openModal: false })
+  handleClose = () => {
+    this.setState({ openModal: false })
+    this.props.closeEventModal()
+  }
 
   render() {
     return (
@@ -15,7 +18,9 @@ class EventModal extends Component {
         onClose={this.handleClose}>
         <Header as='h1' icon='calendar' content='Events Information' />
         <Modal.Content>
-          <EventForm eventId={this.props.eventId} />
+          <EventForm
+            eventId={this.props.eventId}
+            closeFormModal={this.handleClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button

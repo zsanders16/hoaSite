@@ -5,6 +5,13 @@ import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import _ from 'lodash'
 
+// Actions
+import {
+  updateEvent,
+  addEvent,
+  removeEvent,
+} from '../../actions/events'
+
 
 class EventForm extends Component {
   defaults = {
@@ -27,7 +34,22 @@ class EventForm extends Component {
     }
   }
 
-  handleSubmit = ( event ) => {}
+  handleNewForm = () => this.setState({ ...this.defaults })
+  handleDelete = () => {
+    this.props.dispatch(removeEvent(this.state))
+    this.props.closeFormModal()
+  }
+
+  handleSubmit = ( event ) => {
+    event.preventDefault()
+    const { dispatch, closeFormModal } = this.props
+    if( _.isNumber(this.state.id) ) {
+      dispatch(updateEvent(this.state))
+    } else if( _.isBoolean(this.state.id) ){
+      dispatch(addEvent(this.state))
+    }
+    closeFormModal()
+  }
 
   handleChange = ({target:{id,value}}) => this.setState({ [id]: value })
 
@@ -36,7 +58,7 @@ class EventForm extends Component {
   }
 
   handleDateChange = ( moment ) => {
-    this.setState({ date: moment.utc() })
+    this.setState({ date: moment.utc().format() })
   }
 
   render() {
@@ -59,7 +81,7 @@ class EventForm extends Component {
           <Form.Field>
             <label>Date</label>
             <DatePicker
-              selected={date}
+              selected={moment(date).local()}
               onChange={this.handleDateChange}
               showTimeSelect
               timeIntervals={15}
@@ -85,9 +107,10 @@ class EventForm extends Component {
             <Button
               disable={ id ? false : true }
               type='button'
-              onClick={this.handleDelte}>
+              onClick={this.handleDelete}>
               Delete
             </Button>
+            <Button.Or />
             <Button
               type='button'
               onClick={this.handleNewForm}>
