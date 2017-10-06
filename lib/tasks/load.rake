@@ -3,7 +3,7 @@ namespace :load do |loader_namespace|
   task emails: :environment do
     Email.destroy_all
 
-    attachments = %w[pdf excel doc text html]
+    attachments = %w[doc txt pdf excel ppt]
 
     20.times do
       Email.create(
@@ -18,12 +18,14 @@ namespace :load do |loader_namespace|
   desc "Load Test Home Pages"
   task homepages: :environment do
     HomePage.destroy_all
-    @images = Dir[::Rails.root.join('public','favicon.ico')]
+    fileImage = '/Users/biosci/Pictures/Jesus and Javascript.png'
     20.times do
       HomePage.create(
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph(6),
-        image: File.open(@images.first)
+        active: true,
+        attachment: 'data:image/png;base64,' + Base64.encode64(open(fileImage).read),
+        attachment_name: 'txtFileName.txt'
       )
     end
   end

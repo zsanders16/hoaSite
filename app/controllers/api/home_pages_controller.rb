@@ -19,6 +19,7 @@ class Api::HomePagesController < ApplicationController
 
   def create
     home_page = HomePage.new(home_page_params)
+    active_home_page_reset home_page
     if home_page.save
       render json: home_page
     else
@@ -27,6 +28,7 @@ class Api::HomePagesController < ApplicationController
   end
 
   def update
+    active_home_page_reset @home_page
     if @home_page.update(home_page_params)
       render json: @home_page
     else
@@ -47,7 +49,11 @@ class Api::HomePagesController < ApplicationController
   def home_page_params
     params.require(:home_page)
       .permit(
-        :id, :title, :body, :image
+        :id, :title, :body, :active, :attachment, :attachment_name
       )
+  end
+
+  def active_home_page_reset(home_page)
+    HomePage.all.update(active: false) if home_page.active
   end
 end

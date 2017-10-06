@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Form, Button } from 'semantic-ui-react'
 import _ from 'lodash'
+import FileBase64 from 'react-file-base64'
 
 import {
   updateHomePage,
@@ -11,7 +12,8 @@ import {
 
 class HomePageForm extends Component {
   defaults = {
-    id: '', title: '', body: '', image: ''
+    id: '', title: '', body: '', image: '',
+    active: '', attachment: '', attachment_name: '',
   }
   state = { ...this.defaults}
 
@@ -50,8 +52,20 @@ class HomePageForm extends Component {
     closeFormModal()
   }
 
+  handleSelectChange = ( event, data ) => {
+    this.setState({ [data.id]: data.value })
+  }
+
+  handleFileSelect = ( file ) => {
+      this.setState({
+        attachment: file[0].base64,
+        attachment_name: file[0].name
+      })
+  }
+
+
   render() {
-    const { id, title, body } = this.state
+    const { id, title, body, active, attachment_name } = this.state
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
@@ -64,6 +78,21 @@ class HomePageForm extends Component {
           id='body'
           value={body}
           onChange={this.handleChange} />
+        <Form.Select
+          label='Status'
+          id='active'
+          value={active}
+          options={[
+            { key: 'active', text: 'Active', value: true },
+            { key: 'inactive', text: 'Inactive', value: false },
+          ]}
+          onChange={this.handleSelectChange} />
+        <Form.Field>
+          <label>Current File:&nbsp;{attachment_name}</label>
+          <FileBase64
+            multiple={false}
+            onSelect={this.handleFileSelect} />
+        </Form.Field>
         <Segment basic clearing>
           <Button.Group size='mini' floated='right'>
             <Button

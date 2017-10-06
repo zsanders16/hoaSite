@@ -4,6 +4,7 @@ import { Table, Button } from 'semantic-ui-react'
 import moment from 'moment'
 import Paginator from '../Paginator'
 import HomePageFormModal from './HomePageFormModal'
+import ImageModal from './ImageModal'
 
 //Actions
 import {
@@ -11,7 +12,7 @@ import {
 } from '../../actions/homepages'
 
 class homepages extends Component {
-  state = { hasMore: false, homePageId: '' }
+  state = { hasMore: false, homePageId: '', showImage: false }
 
   componentDidMount = () => {
     const { dispatch, homepages } = this.props
@@ -36,6 +37,8 @@ class homepages extends Component {
   handleRowClick = ( homePageId ) => this.setState({ homePageId })
   clearHomePageId = () => this.setState({ homePageId: '' })
   showNewHomePageForm = () => this.setState({ homePageId: true })
+  handleShowImage = ( homePage ) => this.setState({ showImage: homePage })
+  closeImage = () => this.setState({ showImage: false })
 
   displayTableBodyRows = () => {
     const { homepages } = this.props
@@ -43,11 +46,24 @@ class homepages extends Component {
       return homepages.map( homePage => {
         return (
           <Table.Row
-            key={homePage.id}
-            onClick={()=>this.handleRowClick(homePage.id)}>
+            key={homePage.id}>
             <Table.Cell>{homePage.title.substr(0,30)}</Table.Cell>
             <Table.Cell>{homePage.body.substr(0,70)}</Table.Cell>
+            <Table.Cell>
+              <Button
+                type='button'
+                onClick={()=>this.handleShowImage(homePage)}>
+                Show
+              </Button>
+            </Table.Cell>
             <Table.Cell>{moment(homePage.updated_at).format("MM-DD-YYYY")}</Table.Cell>
+            <Table.Cell>
+              <Button
+                typ='button'
+                onClick={()=>this.handleRowClick(homePage.id)}>
+                View
+              </Button>
+            </Table.Cell>
           </Table.Row>
         )
       })
@@ -55,14 +71,16 @@ class homepages extends Component {
   }
 
   render() {
-    const { homePageId } = this.state
+    const { homePageId, showImage } = this.state
     return (
       <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Title</Table.HeaderCell>
             <Table.HeaderCell>Body Text</Table.HeaderCell>
+            <Table.HeaderCell>Image</Table.HeaderCell>
             <Table.HeaderCell>Date Created</Table.HeaderCell>
+            <Table.HeaderCell>&nbsp;</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -70,11 +88,16 @@ class homepages extends Component {
         </Table.Body>
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan={3}>
+            <Table.HeaderCell colSpan={4}>
               { homePageId &&
                 <HomePageFormModal
                   homePageId={homePageId}
                   clearHomePageId={this.clearHomePageId} />
+              }
+              { showImage &&
+                <ImageModal
+                  homePage={showImage}
+                  closeImage={this.closeImage} />
               }
               <Button
                 type='button'

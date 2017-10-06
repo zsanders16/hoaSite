@@ -77,8 +77,11 @@ ActiveRecord::Schema.define(version: 20171004170353) do
   end
 
   create_table "home_pages", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", null: false
+    t.boolean "active", default: false
+    t.text "attachment"
+    t.string "attachment_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
