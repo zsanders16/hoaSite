@@ -3,20 +3,18 @@ import { Form, Button, Header, Divider, Segment, Grid } from 'semantic-ui-react'
 import { unlockPassword } from '../actions/homeowners'
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers'
-import { validateToken } from '../actions/auth'
 
 class UnlockAccount extends React.Component{
     state = {password: '', passwordConfirmation: ''}
 
-    componentDidMount(){
-        let string  = this.props.location.search
-        let { dispatch, history } = this.props
-        let obj = this.getParams(string)
-        debugger
-        dispatch({ type: 'HEADERS', headers: obj })
-        dispatch(validateToken())
-        // dispatch({ type: 'HEADERS', headers: obj})
-    }
+    // componentDidMount(){
+    //     let string  = this.props.location.search
+    //     let { dispatch, history } = this.props
+    //     let headers = this.getParams(string)
+    //     let obj = {headers: headers}
+        // debugger
+        // dispatch({ type: 'HEADERS', headers: obj })
+    // }
 
     handleChange = (e) => {
         const { id , value } = e.target;
@@ -27,8 +25,10 @@ class UnlockAccount extends React.Component{
         e.preventDefault();
         let { dispatch } = this.props
         let string  = this.props.location.search
-        let obj = this.getParams(string)
+        let headers = this.getParams(string)
+        let obj = {headers: headers}
         let { password, passwordConfirmation } = this.state
+        dispatch({ type: 'HEADERS', headers: obj })
         dispatch(unlockPassword(obj, password, passwordConfirmation))
         this.setState({password: '', passwordConfirmation: ''})
     }

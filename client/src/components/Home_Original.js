@@ -7,7 +7,7 @@ class Home extends Component {
   render() {
     return(
       <div>
-        <Container style={{backgroundColor: '#FFFFFF'}} >
+        <Container style={{backgroundColor: '#FFFFFF', borderRadius: '7px 7px 0 0'}} >
           <Image src={logo} spaced fluid style={{padding: '20px', paddingRight: '30px'}}/>
           <Grid celled>
             <Grid.Row>

@@ -61,7 +61,7 @@ class NavBar extends Component {
   render() {
     const { user, dispatch, history } = this.props
     return (
-      <div style={{backgroundColor: '#17202A', marginTop: '-14px'}}>
+      <div style={{backgroundColor: '#17202A', marginTop: '-14px', borderRadius: '0 0 7px 7px'}}>
         <Menu pointing secondary>
           <Link to='/' >
             <Menu.Item name='home' style={{color: '#FDFEFE'}} />
@@ -72,9 +72,8 @@ class NavBar extends Component {
             { user.id ?   <Dropdown text='Settings' style={{color: '#FDFEFE', marginTop: '9px', marginRight: '8px'}}>
                             <Dropdown.Menu>
                               <Link to='/changepassword' >
-                                <Dropdown.Item icon='setting' text='Change Password' />
+                                <Dropdown.Item text='Change Password' />
                               </Link>
-                              
                               <Dropdown.Divider />
                               <Dropdown.Item text='Logout' style={{color: '#FDFEFE', float: 'right'}} onClick={() => dispatch(handleLogout(history))}  />
                             </Dropdown.Menu>

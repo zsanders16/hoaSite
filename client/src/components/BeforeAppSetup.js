@@ -25,6 +25,7 @@ class BeforeAppSetup extends React.Component{
         dispatch(getLegalModule())
         dispatch(getMinutesModule())
         dispatch(getDiscussionModule())
+        this.getDocuments(this.state.modules)
     }
 
     componentWillReceiveProps(nextProps){
@@ -77,7 +78,7 @@ class BeforeAppSetup extends React.Component{
         });
     }
 
-    filterModulesByLogin = (modules, user = this.props) => {
+    filterModulesByLogin = (modules, user = this.props.user) => {
         if(user.admin){
             this.getDocuments(modules)
         }else if(user.id){

@@ -12,7 +12,19 @@
 #
 
 class Email < ApplicationRecord
+  include ActionView::Helpers::DateHelper
   validates_presence_of :subject, :body
   validates :recipients, presence: true, allow_blank: true
   validates :attachments, presence: true, allow_blank: true
+
+
+  def as_json(options={})
+    options[:methods] = [:time]
+    super
+  end
+
+  def time
+    time_ago_in_words(created_at)
+  end
+
 end

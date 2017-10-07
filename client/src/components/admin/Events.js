@@ -68,17 +68,13 @@ class Events extends React.Component{
                     <Table.Cell>
                         <Header as='h4'>{event.title.substr(0,30) + '...'}</Header>
                     </Table.Cell>
-                    <Table.Cell singleLine>
-                        {moment(event.date).format("MMM Do YYYY")}
+                    <Table.Cell singleLine collapsing >
+                        {event.date}
                     </Table.Cell>
                     <Table.Cell>
                         {event.description.substr(0,50) + '...'}
                     </Table.Cell>
-                    <Table.Cell>
-                      { event.active ? 'Active' : 'Inactive' }
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Segment basic clearing>
+                    <Table.Cell collapsing >
                         <Popup
                           trigger={
                             <Button
@@ -105,7 +101,6 @@ class Events extends React.Component{
                           content='Delete Event'
                           hideOnScroll
                           />
-                      </Segment>
                     </Table.Cell>
                 </Table.Row>
             )

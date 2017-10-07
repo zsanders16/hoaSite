@@ -28,7 +28,7 @@ class CcrBylaws extends React.Component{
 
     displayccrTable = () => {
         return(
-            <Table definition>
+            <Table celled>
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -45,7 +45,7 @@ class CcrBylaws extends React.Component{
 
     displaybylawTable = () => {
         return(
-            <Table definition>
+            <Table celled>
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -92,7 +92,7 @@ class CcrBylaws extends React.Component{
 
     render(){
         return(
-            <Segment>
+            <Segment style={{margin: '20px'}}>
                 <Segment raised>
                     <Header as='h1' textAlign='center' >CCRs</Header>
                     { this.displayCcrs() }

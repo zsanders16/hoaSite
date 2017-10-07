@@ -115,7 +115,7 @@ class CcrsAdmin extends React.Component{
 
     displayccrTable = () => {
         return(
-            <Table definition>
+            <Table celled >
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -132,7 +132,7 @@ class CcrsAdmin extends React.Component{
 
     displaybylawTable = () => {
         return(
-            <Table definition>
+            <Table celled >
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -211,7 +211,7 @@ class CcrsAdmin extends React.Component{
 
     notActive = () => {
         return(
-            <Message style={{height: '150px'}}>
+            <Message>
                 <Message.Header>
                     The CCRs | ByLaws Module is Inactive
                 </Message.Header>
@@ -246,7 +246,7 @@ class CcrsAdmin extends React.Component{
                             <Button color='blue' onClick={this.toggleVisibility} >CCRs|ByLaws Settings</Button>
                         </Grid.Column >
                     </Grid>
-                    <Sidebar.Pushable as={Segment}>
+                    <Sidebar.Pushable as={Segment} style={{minHeight: '300px', height: 'auto'}}>
                         <Sidebar
                             as={Menu}
                             animation='scale down'
@@ -321,32 +321,35 @@ class CcrsAdmin extends React.Component{
                             </Menu.Item>
                         </Sidebar>
                         <Sidebar.Pusher>
+                            <Segment basic >
                             { active ? 
-                            <Segment>
-                                <Segment raised>
-                                    <Header as='h1' textAlign='center' >CCRs</Header>
-                                    { active ? this.displayCcrs() : undefined }
-                                    <Grid>
-                                        <Grid.Column width={13} >
-                                        </Grid.Column >
-                                        <Grid.Column width={3} >
-                                            { active ? <Button color='blue' onClick={this.clickShowccrForm}>Add CCR</Button> : undefined }
-                                        </Grid.Column >
-                                    </Grid>
+                                <Segment basic >
+                                    <Segment raised>
+                                        <Header as='h1' textAlign='center' >CCRs</Header>
+                                        { active ? this.displayCcrs() : undefined }
+                                        <Grid>
+                                            <Grid.Column width={13} >
+                                            </Grid.Column >
+                                            <Grid.Column width={3} >
+                                                { active ? <Button color='blue' onClick={this.clickShowccrForm}>Add CCR</Button> : undefined }
+                                            </Grid.Column >
+                                        </Grid>
+                                    </Segment>
+                                    <Segment raised>
+                                        <Header as='h1' textAlign='center' >ByLaws</Header>
+                                        { active ? this.displayByLaws() : undefined }
+                                        <Grid>
+                                            <Grid.Column width={13} >
+                                            </Grid.Column >
+                                            <Grid.Column width={3} >
+                                                { active ? <Button color='blue' onClick={this.clickShowbylawForm}>Add ByLaw</Button> : undefined }
+                                            </Grid.Column >
+                                        </Grid>
+                                    </Segment>
                                 </Segment>
-                                <Segment raised>
-                                    <Header as='h1' textAlign='center' >ByLaws</Header>
-                                    { active ? this.displayByLaws() : undefined }
-                                    <Grid>
-                                        <Grid.Column width={13} >
-                                        </Grid.Column >
-                                        <Grid.Column width={3} >
-                                            { active ? <Button color='blue' onClick={this.clickShowbylawForm}>Add ByLaw</Button> : undefined }
-                                        </Grid.Column >
-                                    </Grid>
-                                </Segment>
-                            </Segment> : this.notActive()
+                            : this.notActive()
                             }
+                            </Segment>
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>
                 </Segment>

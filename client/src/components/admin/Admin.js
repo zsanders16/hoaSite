@@ -7,8 +7,8 @@ class Admin extends React.Component{
     render(){
         return(
             <Segment basic>
-                <Grid style={{marginLeft: '5px'}}>
-                    <Grid.Row columns={3} >
+                <Grid centered columns={3} style={{marginLeft: '3px'}}>
+                    <Grid.Row >
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/homeowners' >
                                 <Card>
@@ -108,14 +108,14 @@ class Admin extends React.Component{
                             </Link>
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
-                            <Link to='admin/events' >
+                            <Link to='admin/home' >
                                 <Card>
                                     <Card.Content>
                                         <Card.Header>
-                                            Events
+                                            Home Page
                                         </Card.Header>
                                         <Card.Description>
-                                            Modify Events image, main text and side announcements.
+                                            Modify home page image, main text and side announcements.
                                         </Card.Description>
                                     </Card.Content>
                                 </Card>

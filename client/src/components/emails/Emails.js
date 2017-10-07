@@ -50,13 +50,14 @@ class Emails extends Component {
         return (
           <Table.Row
             key={email.id}>
-            <Table.Cell>
+            <Table.Cell collapsing>
               <Checkbox
                 checked={ checkedState }
                 onChange={()=>this.handleCheckbox(email.id)} />
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell collapsing>
               <Button
+                primary
                 size='mini'
                 onClick={()=>this.showEmail(email.id)}>
                 View
@@ -64,8 +65,8 @@ class Emails extends Component {
             </Table.Cell>
             <Table.Cell>{email.subject.substr(0,30)}</Table.Cell>
             <Table.Cell>{email.body.substr(0,50)}</Table.Cell>
-            <Table.Cell>{email.recipients}</Table.Cell>
-            <Table.Cell>{email.created_at}</Table.Cell>
+            <Table.Cell collapsing>{email.recipients}</Table.Cell>
+            <Table.Cell collapsing>{email.time}</Table.Cell>
           </Table.Row>
         )
       })
@@ -119,13 +120,15 @@ class Emails extends Component {
           </Table.Body>
           <Table.Footer>
             <Table.Row>
-              <Table.HeaderCell colSpan={5}>
+              <Table.HeaderCell colSpan={6}>
                 <Button
+                  primary
                   type='button'
                   onClick={this.handleNewEmail}>
                   New Email
                 </Button>
                 <Button
+                  primary
                   type='button'
                   onClick={this.handleDeleteEmails}
                   disabled={ checkedEmails.length <= 0 }>

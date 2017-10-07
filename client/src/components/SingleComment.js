@@ -30,11 +30,11 @@ class SingleComment extends React.Component {
                             <div>{comment.time}</div>
                         </Comment.Metadata>
                         <Grid>
-                            <Grid.Column width={14} textAlign='center'>
+                            <Grid.Column width={13} textAlign='left'>
                                 <Comment.Text>{comment.content}</Comment.Text>
                             </Grid.Column>
                         {user.admin || user.name === comment.user_created ?
-                            <Grid.Column width={2} >
+                            <Grid.Column width={3} >
                             <Popup
                                 trigger={<Button primary onClick={this.show}><Icon name='trash outline'/></Button>}
                                 content='Delete Comment'

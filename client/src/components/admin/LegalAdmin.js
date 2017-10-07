@@ -94,7 +94,7 @@ class LegalAdmin extends React.Component{
 
     displayTable = () => {
         return(
-            <Table definition>
+            <Table celled >
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -173,7 +173,7 @@ class LegalAdmin extends React.Component{
                             <Button color='blue' onClick={this.toggleVisibility} >Legal Settings</Button>
                         </Grid.Column >
                     </Grid>
-                    <Sidebar.Pushable as={Segment}>
+                    <Sidebar.Pushable as={Segment} style={{minHeight: '300px', height: 'auto'}}>
                         <Sidebar
                             as={Menu}
                             animation='scale down'
@@ -255,7 +255,7 @@ class LegalAdmin extends React.Component{
                                     <Grid.Column width={13} >
                                     </Grid.Column >
                                     <Grid.Column width={3} >
-                                        { active ? <Button color='blue' onClick={this.clickShowForm}>Add Legal</Button> : undefined }
+                                        { active ? <Button color='blue' onClick={this.clickShowForm}>Add Legal Document</Button> : undefined }
                                     </Grid.Column >
                                 </Grid>
                             </Segment>

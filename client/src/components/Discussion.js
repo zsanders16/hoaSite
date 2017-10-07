@@ -31,9 +31,9 @@ class Discussion extends React.Component{
         }else{
             if(discussions.length > 0){
                 return (
-                    <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}} >
+                    <Grid columns={3}>  
                         { this.displayAllDiscussions() }
-                    </Grid.Column >
+                    </Grid>
                 )
             }else{
                 return (
@@ -52,18 +52,20 @@ class Discussion extends React.Component{
         return discussions.map( (discussion, i) => {
             let url = `/viewdiscussion/${discussion.id}`
             return (
-                <Link to={{ pathname: url, query: { discussion: discussion } }} key={i}>
-                    <Card color='blue'  >
-                        <Card.Content>
-                            <Card.Header>
-                                {discussion.title}
-                            </Card.Header>
-                            <Card.Description>
-                                {discussion.description}
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-                </Link> 
+                <Grid.Column key={i} style={{marginTop: '5px', marginBottom: '5px'}} >
+                    <Link to={{ pathname: url, query: { discussion: discussion } }} >
+                        <Card color='blue'  >
+                            <Card.Content>
+                                <Card.Header>
+                                    {discussion.title}
+                                </Card.Header>
+                                <Card.Description>
+                                    {discussion.description}
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+                    </Link>
+                </Grid.Column >
             ) 
         })
     }
@@ -131,20 +133,18 @@ class Discussion extends React.Component{
 
     render(){
         return(
-            <Segment basic> 
+            <Segment > 
                 <Grid>
                     <Grid.Row>
                         <Grid.Column width={12} >
-                            <Header as='h1' textAlign='center' >Discussion Center</Header>
+                            <Header as='h1' textAlign='center' style={{textDecoration: 'underline'}} >Discussion Center</Header>
                         </Grid.Column >
                         <Grid.Column width={4} >
                             <Button color='blue' onClick={this.clickShowForm}>Start Discussion</Button>
                         </Grid.Column >
                     </Grid.Row>
-                    <Grid.Row columns={3}>
-                        { this.displayDiscussions() }
-                    </Grid.Row>
                 </Grid>
+                { this.displayDiscussions() }
             </Segment>
         )
     }

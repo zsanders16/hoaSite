@@ -128,18 +128,20 @@ class DiscussionAdmin extends React.Component{
         return discussions.map( (discussion, i) => {
             let url = `/viewdiscussion/${discussion.id}`
             return (
-                <Link to={{ pathname: url, query: { discussion: discussion } }} key={i}>
-                    <Card color='blue'  >
-                        <Card.Content>
-                            <Card.Header>
-                                {discussion.title}
-                            </Card.Header>
-                            <Card.Description>
-                                {discussion.description}
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-                </Link> 
+                <Grid.Column key={i} style={{marginTop: '5px', marginBottom: '5px'}}>
+                    <Link to={{ pathname: url, query: { discussion: discussion } }} >
+                        <Card color='blue'  >
+                            <Card.Content>
+                                <Card.Header>
+                                    {discussion.title}
+                                </Card.Header>
+                                <Card.Description>
+                                    {discussion.description}
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+                    </Link>
+                </Grid.Column >
             ) 
         })
     }
@@ -151,7 +153,8 @@ class DiscussionAdmin extends React.Component{
         e.preventDefault()
         let discussion = {title: newTitle, description: newDescription}
         dispatch(addDiscussion(discussion))
-        this.setState({ form: false })
+        this.setState({ form: false, newTitle: '', newDescription: '' })
+
     }
 
     onChangeForm = (e) => {
@@ -179,7 +182,7 @@ class DiscussionAdmin extends React.Component{
                                     label='Discussion Description' 
                                     placeholder='Description'
                                     onChange={this.onChangeForm}
-                                     />
+                                    />
                     </Form.Field>
                     <Button primary onClick={this.clickShowForm} >Cancel</Button>
                     <Button primary type='submit'>Submit</Button>
@@ -200,9 +203,9 @@ class DiscussionAdmin extends React.Component{
         }else{
             if(discussions.length > 0){
                 return (
-                    <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}} >
+                    <Grid columns={3} >
                         { this.displayAllDiscussions() }
-                    </Grid.Column >
+                    </Grid>
                 )
             }else{
                 return (
@@ -241,14 +244,12 @@ class DiscussionAdmin extends React.Component{
                 return undefined
             }else{
                 return (
-                    <Grid columns={2}>
-                        <Grid.Column >
+                    <div>
+                        <Grid.Column width={5} style={{marginTop: '8px'}} >
                             <Button color='blue' onClick={this.clickShowForm}>Start Discussion</Button>
-                        </Grid.Column>
-                        <Grid.Column >
                             <Link to='/admin/discussion/archive'><Button color='blue'>View Archive</Button></Link>
                         </Grid.Column>
-                    </Grid>
+                    </div>
                 )
             }
         }else{
@@ -271,7 +272,7 @@ class DiscussionAdmin extends React.Component{
                             <Button color='blue' onClick={this.toggleVisibility} >Discussion Settings</Button>
                         </Grid.Column >
                     </Grid>
-                    <Sidebar.Pushable as={Segment}>
+                    <Sidebar.Pushable as={Segment} style={{minHeight: '300px', height: 'auto'}}>
                         <Sidebar
                             as={Menu}
                             animation='scale down'
@@ -336,20 +337,14 @@ class DiscussionAdmin extends React.Component{
                             </Menu.Item>
                         </Sidebar>
                         <Sidebar.Pusher>
-                            <Segment basic> 
+                            <Segment basic>
                                 <Grid>
-                                    <Grid.Row>
-                                        <Grid.Column width={12} >
-                                            <Header as='h1' textAlign='center' >Discussion Administration</Header>
-                                        </Grid.Column >
-                                        <Grid.Column width={4} >
-                                            { this.showStartButton() }
-                                        </Grid.Column >
-                                    </Grid.Row>
-                                    <Grid.Row columns={3}>
-                                        { active ? this.displayDiscussions() : this.notActive() }
-                                    </Grid.Row>
+                                    <Grid.Column width={11} >
+                                        <Header as='h1' textAlign='center' >Discussion Administration</Header>
+                                    </Grid.Column>
+                                    { this.showStartButton() }    
                                 </Grid>
+                                { active ? this.displayDiscussions() : this.notActive() }
                             </Segment>
                         </Sidebar.Pusher>
                     </Sidebar.Pushable>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getArchivedDiscussion, updateArchive } from '../../actions/discussion'
+import { getArchivedDiscussion, updateArchive, deleteArchive } from '../../actions/discussion'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {    Segment, 
@@ -25,15 +25,14 @@ class ArchiveDiscussion extends React.Component{
                                 {archive.title}
                             </Card.Header>
                             <Grid>
-                                <Grid.Row>
-                                    <Grid.Column width={8}>
-                                        <Card.Description>
-                                            {archive.description}
-                                        </Card.Description>
-                                    </Grid.Column>
-                                    <Grid.Column width={8}>
-                                        <Button primary onClick={ () => this.updateDiscussion(archive) }>Unarchive</Button>
-                                    </Grid.Column>
+                                <Grid.Row style={{marginLeft: '15px', marginTop: '15px'}}>
+                                    <Card.Description >
+                                        {archive.description}
+                                    </Card.Description>
+                                </Grid.Row>
+                                <Grid.Row style={{marginLeft: '15px'}}>
+                                    <Button primary onClick={ () => this.updateDiscussion(archive) }>Unarchive</Button>
+                                    <Button primary onClick={ () => this.removeDiscussion(archive) }>Delete</Button>
                                 </Grid.Row>
                             </Grid>
                         </Card.Content>
@@ -44,9 +43,14 @@ class ArchiveDiscussion extends React.Component{
     }
 
     updateDiscussion = (discussion) => {
-        let {dispatch, history} = this.props
+        let { dispatch, history } = this.props
         discussion.archive = !discussion.archive
         dispatch(updateArchive(discussion, history))
+    }
+
+    removeDiscussion = (discussion) => {
+        let { dispatch, history } = this.props
+        dispatch(deleteArchive(discussion, history))
     }
 
     displayNoDiscussions = () => {
@@ -71,7 +75,7 @@ class ArchiveDiscussion extends React.Component{
                             <Header as='h1' textAlign='center' >Discussion Archived Discussions</Header>
                         </Grid.Column >
                         <Grid.Column width={4} >
-                            <Link to='/admin/discussion'><Button>View Unarchived</Button></Link>
+                            <Link to='/admin/discussion'><Button primary >View Unarchived</Button></Link>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row columns={3}>

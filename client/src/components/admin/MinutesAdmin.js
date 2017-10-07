@@ -102,7 +102,7 @@ class MinutesAdmin extends React.Component{
 
     displayTable = () => {
         return(
-            <Table definition>
+            <Table celled >
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
@@ -181,7 +181,7 @@ class MinutesAdmin extends React.Component{
                             <Button color='blue' onClick={this.toggleVisibility} >Minutes Settings</Button>
                         </Grid.Column >
                     </Grid>
-                    <Sidebar.Pushable as={Segment}>
+                    <Sidebar.Pushable as={Segment} style={{minHeight: '300px', height: 'auto'}}>
                         <Sidebar
                             as={Menu}
                             animation='scale down'

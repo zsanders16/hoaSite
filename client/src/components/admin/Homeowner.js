@@ -1,11 +1,11 @@
 import React from 'react'
-import { Table, Checkbox, Segment, Button, Icon, Popup } from 'semantic-ui-react'
+import { Table, Checkbox, Segment, Button, Icon, Popup, Confirm } from 'semantic-ui-react'
 import { removeHomeowner } from '../../actions/homeowners';
 import { updateHomeowner, statusHomeowners } from '../../actions/homeowners'
 import { connect } from 'react-redux'
 
 class Homeowner extends React.Component {
-    state = { admin: false, status: '' }
+    state = { admin: false, status: '', openActivate: false, openDeactivate: false }
 
     componentDidMount() {
         let { homeowner } = this.props
@@ -30,6 +30,20 @@ class Homeowner extends React.Component {
         dispatch(statusHomeowners(homeowner.id, homeowner.status))
         this.setState({ status: newStatus })
     }
+
+    showActivate = () => this.setState({ openActivate: true })
+    handleConfirmActivate = () => {
+        this.handleStatusToggle()
+        this.setState({ openActivate: false })
+    }
+    handleCancelActivate = () => this.setState({ openActivate: false })
+
+    showDeactivate = () => this.setState({ openDeactivate: true })
+    handleConfirmDeactivate = () => {
+        this.handleStatusToggle()
+        this.setState({ openDeactivate: false })
+    }
+    handleCancelDeactivate = () => this.setState({ openDeactivate: false })
 
     render(){
         const { homeowner } = this.props
@@ -63,10 +77,28 @@ class Homeowner extends React.Component {
                     {homeowner.address}
                 </Table.Cell>
                 <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
-                <Table.Cell>
+                <Table.Cell collapsing >
                     { status === false ?
-                        <Button primary onClick={this.handleStatusToggle}>Active</Button> :
-                        <Button color='red' onClick={this.handleStatusToggle}>Inactive</Button>
+                        <div>
+                            <Button primary onClick={this.showDeactivate}>Active</Button>
+                            <Confirm
+                                open={this.state.openDeactivate}
+                                content={`Are you sure you want to deactivate ${homeowner.name}'s account.`}
+                                onCancel={this.handleCancelDeactivate}
+                                onConfirm={this.handleConfirmDeactivate}
+                            />
+                        </div>
+                        :
+                        <div>
+                            <Button color='red' onClick={this.showActivate}>Inactive</Button>
+                            <Confirm
+                                open={this.state.openActivate}
+                                header={`Are you sure you want to activate ${homeowner.name}'s account.`}
+                                content={'If so, an message will be sent to their email for them to change their password.'}
+                                onCancel={this.handleCancelActivate}
+                                onConfirm={this.handleConfirmActivate}
+                            />
+                        </div>
                     }
                 </Table.Cell>
             </Table.Row>

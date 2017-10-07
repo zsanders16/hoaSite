@@ -53,11 +53,11 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{backgroundColor: '#922B21'}}>
+      <div style={{background: 'linear-gradient(#0285F1, #ADD1E9)', height: '1300px'}}>
         <Container>
-          <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#A9CCE3' }}>
-            <div style={{marginLeft: '150px', marginTop: '10px', fontSize: '65px', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
-            <div style={{marginLeft: '400px', fontSize: '25px'}}><p>Home Oweners Association | SLC Ut</p></div>
+          <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
+            <div style={{marginLeft: '50px', fontSize: '75px', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
+            <div style={{marginLeft: '300px', fontSize: '25px'}}><p>Home Oweners Association | SLC Ut</p></div>
           </Segment>
           <NavBar />
           <Flash />

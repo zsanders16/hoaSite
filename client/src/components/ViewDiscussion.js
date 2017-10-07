@@ -39,6 +39,7 @@ class ViewDiscussion extends React.Component{
         let { discussionId, text } = this.state
         let comment = {content: text, user_created: user.name}
         dispatch(addComment(discussionId, comment))
+        this.setState({ text: '' })
     }
 
     textChange = (e) => {
@@ -75,13 +76,13 @@ class ViewDiscussion extends React.Component{
                     <Card fluid style={{marginTop: '10px'}}>
                         
                             <Grid>
-                                <Grid.Column width={8} textAlign='center'>
+                                <Grid.Column largeScreen={10} tablet={8} mobile={5} textAlign='center'>
                                     <Card.Content as='h1' style={{marginTop: '5px'}} header={discussion.title} />
                                 </Grid.Column>
                                 {user.admin ?
                                     <div>
-                                        <Grid.Column width={4} >
-                                            <Button primary content='Delete Discussion' onClick={this.showDelete} />
+                                        <Grid.Column largeScreen={6} tablet={8} mobile={11} style={{marginTop: '16px'}}>
+                                            <Button primary content='Delete' onClick={this.showDelete} />
                                             <Confirm
                                                 open={openDelete}
                                                 cancelButton='Never mind'
@@ -90,9 +91,8 @@ class ViewDiscussion extends React.Component{
                                                 onCancel={this.handleDeleteCancel}
                                                 onConfirm={this.handleDeleteConfirm}
                                             /> 
-                                        </Grid.Column>
-                                        <Grid.Column width={4} >
-                                            <Button primary content='Archive Discussion' onClick={this.showArchive} />
+            
+                                            <Button primary content='Archive' onClick={this.showArchive} />
                                             <Confirm
                                                 open={openArchive}
                                                 cancelButton='Never mind'

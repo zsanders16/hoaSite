@@ -7,6 +7,7 @@ export const getHomeowners = () => {
     return(dispatch) => {
         axios.get('/api/homeowners')
             .then( res => {
+                debugger
                 dispatch({ type: 'SET_HOMEOWNERS', homeowners: res.data});
                 dispatch(setHeaders(res.headers))
             })
@@ -68,9 +69,20 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
 }
 
 export const unlockPassword = (obj, password, password_confirmation) => {
+    debugger
     return(dispatch) => {
-        axios.put('/api/auth/password', {...obj, password: password, password_confirmation: password_confirmation})
+        // axios({
+        //     method: 'put',
+        //     url: '/api/auth/password',
+        //     params: {password, password_confirmation},
+        //     headers: obj
+        // }).then( res => {
+        //     debugger
+        // })
+
+        axios.put('/api/auth/password', {password, password_confirmation})
             .then( res => {
+                debugger
             })
             .catch( res => {
                 const message = res.response.data.errors.join(',');

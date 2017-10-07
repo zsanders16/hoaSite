@@ -80,14 +80,28 @@ export const clearDiscussions = (dispatch) => {
     dispatch({ type: 'CLEAR_DISCUSSIONS'})
 }
 
-
 export const deleteDiscussion = (discussion, history) => {
+    return(dispatch) => {
+        axios.delete(`/api/messages/${discussion.id}`)
+            .then( res => {
+                dispatch({ type: 'REMOVE_ARCHIVE', discussion: discussion })
+                dispatch(setHeaders(res.headers))
+                history.push('../admin/discussion')
+            })
+            .catch( res => {
+                const message = res.response.data.errors.join(',');
+                dispatch(setFlash(message, 'error'));
+            })
+    }
+}
+
+export const deleteArchive = (discussion, history) => {
     return(dispatch) => {
         axios.delete(`/api/messages/${discussion.id}`)
             .then( res => {
                 dispatch({ type: 'REMOVE_DISCUSSION', discussion: discussion })
                 dispatch(setHeaders(res.headers))
-                history.push('../admin/discussion')
+                history.push('../admin/discussion/archive')
             })
             .catch( res => {
                 const message = res.response.data.errors.join(',');

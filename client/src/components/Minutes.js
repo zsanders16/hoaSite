@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, Header } from 'semantic-ui-react'
+import { Table, Header, Segment } from 'semantic-ui-react'
 import SingleMinutes from './SingleMinutes'
 
 
@@ -16,18 +16,21 @@ class Minutes extends React.Component{
     render(){
         if(this.props.minutes.length>0){
             return(
-                <Table definition>
-                    <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell />
-                        <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
-                    </Table.Row>
-                    </Table.Header>
-                
-                    <Table.Body>
-                        {this.getMinutesRows()}
-                    </Table.Body>
-                </Table>
+                <Segment style={{margin: '20px'}}>
+                    <Header textAlign='center' as='h1'>Meeting Minutes</Header>
+                    <Table celled >
+                        <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell />
+                            <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
+                        </Table.Row>
+                        </Table.Header>
+                    
+                        <Table.Body>
+                            {this.getMinutesRows()}
+                        </Table.Body>
+                    </Table>
+                </Segment>
             )
         }else{
             return(

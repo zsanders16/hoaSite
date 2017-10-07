@@ -8,7 +8,6 @@ class ViewPDF extends React.Component {
         let { displayPDF } = this.props
         return(
             <Segment>
-
                 <iframe src={displayPDF.attachment}  title={displayPDF.name} style={{width: '100%', height: '1200px'}}  />
             </Segment>
         )
