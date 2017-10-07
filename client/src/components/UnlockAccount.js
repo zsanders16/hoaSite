@@ -25,10 +25,10 @@ class UnlockAccount extends React.Component{
         e.preventDefault();
         let { dispatch } = this.props
         let string  = this.props.location.search
-        let headers = this.getParams(string)
-        let obj = {headers: headers}
+        let obj = this.getParams(string)
+        // let obj = {headers: headers}
         let { password, passwordConfirmation } = this.state
-        dispatch({ type: 'HEADERS', headers: obj })
+        // dispatch({ type: 'HEADERS', headers: obj })
         dispatch(unlockPassword(obj, password, passwordConfirmation))
         this.setState({password: '', passwordConfirmation: ''})
     }

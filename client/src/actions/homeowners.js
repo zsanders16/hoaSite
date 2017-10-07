@@ -80,7 +80,7 @@ export const unlockPassword = (obj, password, password_confirmation) => {
         //     debugger
         // })
 
-        axios.put('/api/auth/password', {password, password_confirmation})
+        axios.put('/api/auth/password', {password, password_confirmation, ...obj})
             .then( res => {
                 debugger
             })
