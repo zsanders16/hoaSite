@@ -108,14 +108,14 @@ class Admin extends React.Component{
                             </Link>
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
-                            <Link to='admin/home' >
+                            <Link to='admin/events' >
                                 <Card>
                                     <Card.Content>
                                         <Card.Header>
-                                            Home Page
+                                            Events
                                         </Card.Header>
                                         <Card.Description>
-                                            Modify home page image, main text and side announcements.
+                                            Modify event announcements.
                                         </Card.Description>
                                     </Card.Content>
                                 </Card>

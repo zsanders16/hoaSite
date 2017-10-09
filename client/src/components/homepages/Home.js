@@ -22,13 +22,20 @@ class Home extends Component {
     const { dispatch, homepage } = this.props
     if( !homepage || !homepage.title ) {
       dispatch(activeHomepage())
+      this.loadHomepage(this.props)
     }
+  }
+  compoentWillReceiveProps = (nextProps) => this.loadHomepage(nextProps)
+
+  loadHomepage = ( props ) => {
+    if( props.homepage && props.homepage.title )
+      this.setState({ ...props.homepage })
   }
 
   render() {
     const {
       title, body, attachment
-    } = this.props.homepage
+    } = this.state
     return(
       <div>
         <Container style={{backgroundColor: '#FFFFFF'}} >
