@@ -22,14 +22,16 @@ class Home extends Component {
     const { dispatch, homepage } = this.props
     if( !homepage || !homepage.title ) {
       dispatch(activeHomepage())
-      this.loadHomepage(this.props)
+      this.setState({ ...homepage })
     }
   }
-  compoentWillReceiveProps = (nextProps) => this.loadHomepage(nextProps)
+  componentWillReceiveProps = (nextProps) => this.loadHomepage(nextProps)
 
   loadHomepage = ( props ) => {
-    if( props.homepage && props.homepage.title )
-      this.setState({ ...props.homepage })
+    const { homepage } = props
+    if( homepage && homepage.title ) {
+      this.setState({ ...homepage })
+    }
   }
 
   render() {

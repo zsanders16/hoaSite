@@ -74,6 +74,9 @@ class Events extends React.Component{
                     <Table.Cell>
                         {event.description.substr(0,50) + '...'}
                     </Table.Cell>
+                    <Table.Cell>
+                      { event.active ? 'Active' : 'Inactive' }
+                    </Table.Cell>
                     <Table.Cell collapsing >
                         <Popup
                           trigger={
