@@ -61,3 +61,21 @@ export const clearEvents = () => {
     type: 'CLEAR_EVENTS',
   }
 }
+
+export const activeEvents = () => {
+  return (dispatch) => {
+    axios.get(`/api/events/active`)
+    .then( resp => {
+      dispatch({
+        type: 'ACTIVE_EVENTS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Active Events Not Found!','error')
+      )
+    })
+  }
+}

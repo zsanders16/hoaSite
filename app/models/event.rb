@@ -4,8 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  title       :string           not null
-#  date        :string
-#  description :text
+#  date        :string           not null
+#  description :text             not null
+#  active      :boolean          default(TRUE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

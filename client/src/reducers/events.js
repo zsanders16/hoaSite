@@ -4,7 +4,8 @@ const defaults = {
     total_pages: '',
     current_page: '',
     next_page: '',
-  }
+  },
+  active: [],
 }
 
 const events = (state = defaults, action) => {
@@ -40,6 +41,11 @@ const events = (state = defaults, action) => {
         }
       case 'CLEAR_EVENTS':
         return { ...defaults }
+      case 'ACTIVE_EVENTS':
+        return {
+          ...state,
+          active: action.data,
+        }
       default:
         return state;
     }

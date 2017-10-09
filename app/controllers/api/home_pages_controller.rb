@@ -40,6 +40,10 @@ class Api::HomePagesController < ApplicationController
     @home_page.destroy
   end
 
+  def active
+    render json: HomePage.where(active: true).limit(1)
+  end
+
   private
 
   def set_home_page

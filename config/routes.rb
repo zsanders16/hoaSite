@@ -85,11 +85,14 @@
 #                             PATCH    /api/emails/:id(.:format)                        api/emails#update
 #                             PUT      /api/emails/:id(.:format)                        api/emails#update
 #                             DELETE   /api/emails/:id(.:format)                        api/emails#destroy
+#           active_api_events GET      /api/events/active(.:format)                     api/events#active
 #                  api_events GET      /api/events(.:format)                            api/events#index
 #                             POST     /api/events(.:format)                            api/events#create
-#                   api_event PATCH    /api/events/:id(.:format)                        api/events#update
+#                   api_event GET      /api/events/:id(.:format)                        api/events#show
+#                             PATCH    /api/events/:id(.:format)                        api/events#update
 #                             PUT      /api/events/:id(.:format)                        api/events#update
 #                             DELETE   /api/events/:id(.:format)                        api/events#destroy
+#       active_api_home_pages GET      /api/home_pages/active(.:format)                 api/home_pages#active
 #              api_home_pages GET      /api/home_pages(.:format)                        api/home_pages#index
 #                             POST     /api/home_pages(.:format)                        api/home_pages#create
 #               api_home_page GET      /api/home_pages/:id(.:format)                    api/home_pages#show
@@ -97,7 +100,7 @@
 #                             PUT      /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             DELETE   /api/home_pages/:id(.:format)                    api/home_pages#destroy
 #                             GET      /*other(.:format)                                static#index
-#
+# 
 
 Rails.application.routes.draw do
 
@@ -156,10 +159,14 @@ Rails.application.routes.draw do
     end
 
     #Routes for Event controller
-    resources :events, only: [:index, :create, :update, :destroy, :show]
+    resources :events, shallow: true do
+      get 'active', on: :collection
+    end
 
     # Routes for Home Page Controller
-    resources :home_pages
+    resources :home_pages, shallow: true do
+      get 'active', on: :collection
+    end
 
   end
 

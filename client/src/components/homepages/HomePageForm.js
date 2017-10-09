@@ -58,8 +58,8 @@ class HomePageForm extends Component {
 
   handleFileSelect = ( file ) => {
       this.setState({
-        attachment: file[0].base64,
-        attachment_name: file[0].name
+        attachment: file.base64,
+        attachment_name: file.name
       })
   }
 
@@ -91,7 +91,7 @@ class HomePageForm extends Component {
           <label>Current File:&nbsp;{attachment_name}</label>
           <FileBase64
             multiple={false}
-            onSelect={this.handleFileSelect} />
+            onDone={this.handleFileSelect} />
         </Form.Field>
         <Segment basic clearing>
           <Button.Group size='mini' floated='right'>

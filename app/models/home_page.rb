@@ -3,8 +3,11 @@
 # Table name: home_pages
 #
 #  id                 :integer          not null, primary key
-#  title              :string
-#  body               :text
+#  title              :string           not null
+#  body               :text             not null
+#  active             :boolean          default(FALSE)
+#  attachment         :text
+#  attachment_name    :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  image_file_name    :string

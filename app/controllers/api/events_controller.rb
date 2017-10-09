@@ -38,6 +38,10 @@ class Api::EventsController < ApplicationController
     @event.destroy
   end
 
+  def active
+    render json: Event.where(active: true).limit(5)
+  end
+
   private
 
     def event_params

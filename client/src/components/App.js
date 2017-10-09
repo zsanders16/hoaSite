@@ -3,7 +3,7 @@ import NoMatch from './NoMatch';
 import Login from './Login';
 import Register from './Register';
 import Flash from './Flash';
-import Home from './Home';
+import Home from './homepages/Home';
 import NavBar from './NavBar';
 import AdminRoutes from './admin/AdminRoutes'
 import Newsletters from './Newsletters'
