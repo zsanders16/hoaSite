@@ -7,7 +7,6 @@ export const getHomeowners = () => {
     return(dispatch) => {
         axios.get('/api/homeowners')
             .then( res => {
-                debugger
                 dispatch({ type: 'SET_HOMEOWNERS', homeowners: res.data});
                 dispatch(setHeaders(res.headers))
             })

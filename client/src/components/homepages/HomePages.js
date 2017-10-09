@@ -59,7 +59,7 @@ class homepages extends Component {
             <Table.Cell>{moment(homePage.updated_at).format("MM-DD-YYYY")}</Table.Cell>
             <Table.Cell>
               <Button
-                typ='button'
+                type='button'
                 onClick={()=>this.handleRowClick(homePage.id)}>
                 View
               </Button>
