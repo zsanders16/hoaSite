@@ -24,9 +24,10 @@ class EventModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button
+            primary
             type='button'
             onClick={this.handleClose}>
-            Back
+            Cancel
           </Button>
         </Modal.Actions>
       </Modal>

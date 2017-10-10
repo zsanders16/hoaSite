@@ -77,18 +77,18 @@ class EventForm extends Component {
           value={description}
           placeholder='Short text...'
           onChange={this.handleChange} />
-        <Form.Group widths='equal'>
-          <Form.Field>
+        <Form.Group >
+          <Form.Field width={12}>
             <label>Date</label>
             <DatePicker
               selected={moment(date).local()}
               onChange={this.handleDateChange}
-              showTimeSelect
               timeIntervals={15}
               dateFormat="LLL"
               />
           </Form.Field>
           <Form.Select
+            width={4}
             label='Status'
             id='active'
             value={active}
@@ -100,21 +100,15 @@ class EventForm extends Component {
         </Form.Group>
         <Segment basic clearing>
           <Button.Group size='mini' floated='right'>
-            <Button type='submit'>
+            <Button primary type='submit'>
               { id ? 'Update' : 'Create' }
             </Button>
             <Button.Or />
             <Button
-              disable={ id ? false : true }
-              type='button'
-              onClick={this.handleDelete}>
-              Delete
-            </Button>
-            <Button.Or />
-            <Button
+              primary
               type='button'
               onClick={this.handleNewForm}>
-              New Form
+              Clear Form
             </Button>
           </Button.Group>
         </Segment>

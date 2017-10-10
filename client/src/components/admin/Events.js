@@ -36,11 +36,6 @@ class Events extends React.Component{
       dispatch(clearEvents())
     }
 
-    editEvent = (event) => {
-        let { eventForm } = this.state
-        this.setState({ id: event.id, title: event.title, date: event.date, description: event.description, eventForm: !eventForm, edit: true })
-    }
-
     deleteEvent = (event) => {
         let { dispatch } = this.props
         dispatch(removeEvent(event))
@@ -69,7 +64,7 @@ class Events extends React.Component{
             return(
                 <Table.Row
                   key={i}
-                  onClick={()=>this.displayEventModal(event.id)}>
+                  >
                     <Table.Cell>
                         <Header as='h4'>{event.title.substr(0,30) + '...'}</Header>
                     </Table.Cell>
@@ -88,7 +83,7 @@ class Events extends React.Component{
                             <Button
                               color='twitter'
                               size='mini'
-                              onClick={() => this.editEvent(event)}
+                              onClick={() => this.displayEventModal(event.id)}
                               floated='right'>
                                 <Icon name='sticky note outline' />
                             </Button>
