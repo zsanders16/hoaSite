@@ -67,21 +67,13 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
   }
 }
 
-export const unlockPassword = (obj, password, password_confirmation) => {
+export const unlockPassword = (password, password_confirmation, history) => {
     debugger
     return(dispatch) => {
-        // axios({
-        //     method: 'put',
-        //     url: '/api/auth/password',
-        //     params: {password, password_confirmation},
-        //     headers: obj
-        // }).then( res => {
-        //     debugger
-        // })
-
-        axios.put('/api/auth/password', {password, password_confirmation, ...obj})
+        axios.put(`/api/auth/password`, { password, password_confirmation })
             .then( res => {
-                debugger
+                history.push('/login')
+                dispatch(setFlash('Your password has been changed, Please log in now.', 'success'))
             })
             .catch( res => {
                 const message = res.response.data.errors.join(',');
@@ -93,9 +85,10 @@ export const unlockPassword = (obj, password, password_confirmation) => {
 export const changePassword = (password, password_confirmation, history) => {
     return(dispatch) => {
         axios.put('/api/auth/password', {password, password_confirmation})
-            .then( 
+            .then( res => {
                 history.push('/')
-            )
+                dispatch(setFlash('Your password has been changed.', 'success'))
+            })
             .catch( res => {
                 const message = res.response.data.errors.join(',');
                 dispatch(setFlash(message, 'error'));

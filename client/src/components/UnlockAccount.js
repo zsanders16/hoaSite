@@ -3,18 +3,10 @@ import { Form, Button, Header, Divider, Segment, Grid } from 'semantic-ui-react'
 import { unlockPassword } from '../actions/homeowners'
 import { connect } from 'react-redux';
 import { setHeaders } from '../actions/headers'
+import { setFlash } from '../actions/flash';
 
 class UnlockAccount extends React.Component{
     state = {password: '', passwordConfirmation: ''}
-
-    // componentDidMount(){
-    //     let string  = this.props.location.search
-    //     let { dispatch, history } = this.props
-    //     let headers = this.getParams(string)
-    //     let obj = {headers: headers}
-        // debugger
-        // dispatch({ type: 'HEADERS', headers: obj })
-    // }
 
     handleChange = (e) => {
         const { id , value } = e.target;
@@ -23,14 +15,28 @@ class UnlockAccount extends React.Component{
     
     handleSubmit = (e) => {
         e.preventDefault();
-        let { dispatch } = this.props
-        let string  = this.props.location.search
-        let obj = this.getParams(string)
-        // let obj = {headers: headers}
+        let { dispatch, history } = this.props
         let { password, passwordConfirmation } = this.state
-        // dispatch({ type: 'HEADERS', headers: obj })
-        dispatch(unlockPassword(obj, password, passwordConfirmation))
-        this.setState({password: '', passwordConfirmation: ''})
+
+        if(password === passwordConfirmation){
+            let string  = this.props.location.search
+            let obj = this.getParams(string)
+    
+            let newObj = {
+                'access-token': obj.token,
+                client: obj.client_id,
+                expiry: obj.expiry,
+                uid: obj.uid,
+            }
+            dispatch({ type: 'HEADERS', headers: newObj })
+            dispatch(unlockPassword(password, passwordConfirmation, history))
+            this.setState({password: '', passwordConfirmation: ''})
+        }else{
+            dispatch(setFlash("Passwords don't match, try again", 'error'))
+            this.setState({passwordConfirmation: ''})
+        }
+
+        
     }
 
     getParams = (query) => {
