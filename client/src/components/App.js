@@ -53,7 +53,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{background: 'linear-gradient(#0285F1, #ADD1E9)', height: '1300px'}}>
+      <div style={{background: 'linear-gradient(#1C599C, #ADD1E9)', height: '1300px'}}>
         <Container>
           <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
             <div style={{marginLeft: '50px', fontSize: '75px', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
