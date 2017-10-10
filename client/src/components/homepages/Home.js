@@ -10,6 +10,7 @@ import { activeHomepage } from '../../actions/homepage'
 import HomeMainBody from './HomeMainBody'
 import HomeHeaderImage from './HomeHeaderImage'
 import Events from './Events'
+import Access from '../requests/Access'
 
 class Home extends Component {
   defaults = {
@@ -48,6 +49,8 @@ class Home extends Component {
                 <HomeMainBody title={title} body={body} />
               </Grid.Column>
               <Grid.Column width={4}>
+                <Access />
+                <Divider />
                 <Events />
               </Grid.Column>
             </Grid.Row>
