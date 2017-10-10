@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Segment, Form, Button } from 'semantic-ui-react'
+
+// Actions
+import {
+  indexToAddresses,
+} from '../../actions/requests'
 
 class RequestAccessForm extends Component {
   defaults = {
@@ -7,8 +13,24 @@ class RequestAccessForm extends Component {
   }
   state = { ...this.defaults }
 
+  componentDidMount = () => this.load(this.props)
+  componentWillReceiveProps = (nextProps) => this.load(nextProps)
+
+  load = ( props ) => {
+    const { dispatch, toList } = props
+    if( !toList || toList.length <= 0 ) {
+      dispatch(indexToAddresses())
+    }
+  }
+
   handleOnChange = ({ target: {id,value} }) => this.setState({ [id]: value })
+
+  handleSelectOnChange = ( event, data ) => {
+    this.setState({ [data.id]: data.value })
+  }
+
   handleNewForm = () => this.setState({ ...this.defaults })
+
   handleOnSubmit = ( event ) => {
     event.preventDefault()
     debugger
@@ -16,6 +38,7 @@ class RequestAccessForm extends Component {
 
   render = () => {
     const { id, subject, from, to, message } = this.state
+    const { toList } = this.props
     return (
       <Form onSubmit={this.handleOnSubmit}>
         <Form.Input
@@ -28,11 +51,12 @@ class RequestAccessForm extends Component {
           id='from'
           value={from}
           onChange={this.handleOnChange} />
-        <Form.Input
+        <Form.Select
           label='To'
           id='to'
+          options={toList}
           value={to}
-          onChange={this.handleOnChange} />
+          onChange={this.handleSelectOnChange} />
         <Form.TextArea
           label='Message'
           id='message'
@@ -58,4 +82,10 @@ class RequestAccessForm extends Component {
   }
 }
 
-export default RequestAccessForm
+const mapStateToProps = ( state, props ) => {
+  return {
+    toList: state.requests.to,
+  }
+}
+
+export default connect(mapStateToProps)(RequestAccessForm)

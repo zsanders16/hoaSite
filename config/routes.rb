@@ -99,6 +99,8 @@
 #                             PATCH    /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             PUT      /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             DELETE   /api/home_pages/:id(.:format)                    api/home_pages#destroy
+#           send_api_requests POST     /api/requests/send(.:format)                     api/requests#send
+#                api_requests GET      /api/requests(.:format)                          api/requests#index
 #                             GET      /*other(.:format)                                static#index
 # 
 
@@ -166,6 +168,11 @@ Rails.application.routes.draw do
     # Routes for Home Page Controller
     resources :home_pages, shallow: true do
       get 'active', on: :collection
+    end
+
+    # Routes for access requests
+    resources :requests, only: [:index], shallow: true do
+      post 'send', on: :collection
     end
 
   end

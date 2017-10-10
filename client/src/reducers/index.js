@@ -16,8 +16,10 @@ import emails from './emails'
 import events from './events'
 import homepages from './homepages'
 import homepage from './homepage'
+import requests from './requests'
 
 const rootReducer = combineReducers({
+    requests,
     homepage,
     homepages,
     emails,
