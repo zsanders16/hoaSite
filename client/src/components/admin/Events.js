@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Divider, Header, Table, Grid, Button, Form, Popup, Icon } from 'semantic-ui-react'
+import { Segment, Divider, Header, Table, Grid, Button, Form, Popup, Icon, Select } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {
   getEvents,
@@ -12,10 +12,15 @@ import moment from 'moment'
 import Paginator from '../Paginator'
 import EventModal from './EventModal'
 
+const options = [
+    { key: 'active', text: 'Active', value: true },
+    { key: 'inactive', text: 'Inactive', value: false },
+]
+
 class Events extends React.Component{
     defaults = {
       hasMore: false, eventForm: false, edit: false, eventId: '',
-      title: '', date: '', description: '', id: '', active: '',
+      title: '', date: '', description: '', id: '', active: true,
     }
     state = { ...this.defaults }
 
@@ -187,7 +192,10 @@ class Events extends React.Component{
 
     showEventForm = () => {
         let { eventForm } = this.state
-        this.setState({ eventForm: !eventForm})
+        if(eventForm){
+            this.setState({...this.defaults})
+        }
+        this.setState({ eventForm: !eventForm })
     }
 
     handleOnChange = (e) => {
@@ -206,7 +214,7 @@ class Events extends React.Component{
         }else{
             dispatch(addEvent(newEvent))
         }
-        this.setState({ title: '', data: '', description: '', eventForm: false, edit: false, eventId: '' })
+        this.setState({ title: '', data: '', description: '', eventForm: false, edit: false, eventId: '', active: true })
     }
 
     handleStatusChange = ( event, data ) => {
@@ -226,21 +234,19 @@ class Events extends React.Component{
                             <input placeholder='Title' value={title} id='title' onChange={this.handleOnChange} />
                         </Form.Field>
                         <Form.Field>
-                            <label >Meeting Date : </label><input value={date} type="date" id='date' onChange={this.handleOnChange} />
+                            <label >Meeting Date : </label><input type="date" id='date' onChange={this.handleOnChange} />
                         </Form.Field>
                         <Form.Field>
                             <Form.TextArea label='Description' placeholder='Description of the event...' value={description} id='description' onChange={this.handleOnChange} />
                         </Form.Field>
-                        <Form.Field>
-                          <label>Status</label>
-                          <Form.Select
-                            options={[
-                              { key: 'active', text: 'Active', value: true },
-                              { key: 'inactive', text: 'Inactive', value: false },
-                            ]}
-                            value={active}
+                        <Form.Field
+                            options={options}
+                            label='Status'
+                            placeholder='Status'
+                            control={Select}
                             id='active'
-                            onChange={this.handleStatusChange} />
+                            onChange={this.handleStatusChange} 
+                        >
                         </Form.Field>
                         <Button primary onClick={this.showEventForm} >Cancel</Button>
                         <Button primary type='submit'>{ edit ? 'Update' : 'Submit' }</Button>

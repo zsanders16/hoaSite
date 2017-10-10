@@ -115,7 +115,7 @@ class Admin extends React.Component{
                                             Events
                                         </Card.Header>
                                         <Card.Description>
-                                            Modify event announcements.
+                                            View, Add or Modify all upcoming events.
                                         </Card.Description>
                                     </Card.Content>
                                 </Card>

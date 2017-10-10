@@ -14,10 +14,14 @@ class Access extends Component {
       <Segment basic>
         <Header as='h3' textAlign='center'>Site Access Requests</Header>
         <p style={{ textAlign: 'justify' }}>
-          To reach the Board of Directors, please click the icon below
+          Login access restricted to homeowners of Woodstock Village.  
+          <br />
+          <br />
+          To contact or request access click the icon below.
         </p>
         <Segment basic textAlign='center'>
           <Button
+            primary
             circular
             icon='mail'
             type='button'

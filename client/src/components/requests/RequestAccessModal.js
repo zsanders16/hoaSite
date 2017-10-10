@@ -19,7 +19,7 @@ class RequestAccessModal extends Component {
         <Header>
           <Icon name='mail' size='large' />
           <Header.Content>
-            Request Site Access from Board of Directors
+            Contact Board of Directors
           </Header.Content>
         </Header>
         <Modal.Content>
@@ -27,9 +27,10 @@ class RequestAccessModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button
+            primary
             type='button'
             onClick={this.handleOnClose}>
-            Close Form
+            Cancel
           </Button>
         </Modal.Actions>
       </Modal>

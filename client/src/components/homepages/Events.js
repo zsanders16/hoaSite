@@ -19,7 +19,7 @@ class Events extends Component {
     if( events.length > 0 ) {
       return events.map( event => {
         return (
-          <Segment basic key={event.id}>
+          <Segment raised key={event.id}>
             <Header as='h4'>{ event.title }</Header>
             <span>{ event.date }</span>
             <Divider />
@@ -32,7 +32,8 @@ class Events extends Component {
 
   render() {
     return (
-      <Segment basic>
+      <Segment basic style={{maxHeight: '500px', overflowY: 'scroll'}}>
+        <Header as='h3'>Upcoming Events</Header>
         { this.displayEvents() }
       </Segment>
     )

@@ -50,7 +50,7 @@ class Home extends Component {
               </Grid.Column>
               <Grid.Column width={4}>
                 <Access />
-                <Divider />
+                <Divider style={{marginTop: '-30px'}}/>
                 <Events />
               </Grid.Column>
             </Grid.Row>

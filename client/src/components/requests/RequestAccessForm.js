@@ -63,17 +63,19 @@ class RequestAccessForm extends Component {
           value={message}
           onChange={this.handleOnChange} />
         <Segment basic clearing>
-          <Button.Group size='mini' floated='right'>
+          <Button.Group size='tiny' floated='right'>
             <Button
+              primary
               type='submit'
               onClick={this.handleOnSubmit}>
               Send
             </Button>
             <Button.Or />
             <Button
+              primary
               type='button'
               onClick={this.handleNewForm}>
-              New Form
+              Clear Form
             </Button>
           </Button.Group>
         </Segment>
