@@ -23,7 +23,7 @@ namespace :load do |loader_namespace|
       HomePage.create(
         title: Faker::Lorem.sentence,
         body: Faker::Lorem.paragraph(6),
-        active: true,
+        active: [1,0].sample,
         attachment: 'data:image/png;base64,' + Base64.encode64(open(fileImage).read),
         attachment_name: 'txtFileName.txt'
       )

@@ -57,6 +57,7 @@ class homepages extends Component {
               </Button>
             </Table.Cell>
             <Table.Cell>{moment(homePage.updated_at).format("MM-DD-YYYY")}</Table.Cell>
+            <Table.Cell>{ homePage.active === 1 ? 'Active' : 'Inactive' }</Table.Cell>
             <Table.Cell>
               <Button
                 type='button'
@@ -80,6 +81,7 @@ class homepages extends Component {
             <Table.HeaderCell>Body Text</Table.HeaderCell>
             <Table.HeaderCell>Image</Table.HeaderCell>
             <Table.HeaderCell>Date Created</Table.HeaderCell>
+            <Table.HeaderCell>Status</Table.HeaderCell>
             <Table.HeaderCell>&nbsp;</Table.HeaderCell>
           </Table.Row>
         </Table.Header>

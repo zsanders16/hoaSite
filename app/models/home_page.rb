@@ -20,6 +20,5 @@ class HomePage < ApplicationRecord
   validates_presence_of :title, :body
   validates :attachment, presence: true, allow_blank: true
   validates :attachment_name, presence: true, allow_blank: true
-  validates :active, presence: true, inclusion: { in: [true,false] }
-
+  validates :active, presence: true, inclusion: { in: [1, 0] }
 end

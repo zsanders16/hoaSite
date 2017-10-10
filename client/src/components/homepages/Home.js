@@ -19,11 +19,11 @@ class Home extends Component {
   state = { ...this.defaults }
 
   componentDidMount = () => {
-    const { dispatch, homepage } = this.props
-    if( !homepage || !homepage.title ) {
+    const { dispatch, homepage, reload } = this.props
+    if( reload || !homepage || !homepage.title ) {
       dispatch(activeHomepage())
-      this.setState({ ...homepage })
     }
+    this.setState({ ...homepage })
   }
   componentWillReceiveProps = (nextProps) => this.loadHomepage(nextProps)
 
@@ -68,7 +68,8 @@ class Home extends Component {
 
 const mapStateToProps = ( state, props ) => {
   return {
-    homepage: state.homepage,
+    homepage: state.homepage.data,
+    reload: state.homepage.reload,
   }
 }
 

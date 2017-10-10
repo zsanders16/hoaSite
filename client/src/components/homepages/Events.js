@@ -19,7 +19,7 @@ class Events extends Component {
     if( events.length > 0 ) {
       return events.map( event => {
         return (
-          <Segment basic>
+          <Segment basic key={event.id}>
             <Header as='h4'>{ event.title }</Header>
             <span>{ event.date }</span>
             <Divider />

@@ -41,7 +41,7 @@ class Api::HomePagesController < ApplicationController
   end
 
   def active
-    render json: HomePage.where(active: true).limit(1)
+    render json: HomePage.where(active: 1).limit(1)
   end
 
   private
@@ -53,11 +53,12 @@ class Api::HomePagesController < ApplicationController
   def home_page_params
     params.require(:home_page)
       .permit(
-        :id, :title, :body, :active, :attachment, :attachment_name
+        :id, :title, :body, :active, :attachment, :attachment_name,
+        :created_at, :updated_at
       )
   end
 
   def active_home_page_reset(home_page)
-    HomePage.all.update(active: false) if home_page.active
+    HomePage.all.update(active: 0) if home_page.active
   end
 end

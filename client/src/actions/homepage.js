@@ -18,3 +18,9 @@ export const activeHomepage = () => {
       })
   }
 }
+
+export const reloadHomepage = () => {
+  return {
+    type: 'RELOAD_HOMEPAGE',
+  }
+}

@@ -10,9 +10,13 @@ import {
   deleteHomePage,
 } from '../../actions/homepages'
 
+import {
+  reloadHomepage,
+} from '../../actions/homepage'
+
 class HomePageForm extends Component {
   defaults = {
-    id: '', title: '', body: '', image: '',
+    id: '', title: '', body: '',
     active: '', attachment: '', attachment_name: '',
   }
   state = { ...this.defaults}
@@ -37,11 +41,14 @@ class HomePageForm extends Component {
   handleSubmit = ( event ) => {
     event.preventDefault()
     const { dispatch, closeFormModal } = this.props
-    const { id } = this.state
+    const { id, active } = this.state
     if( id ) {
       dispatch(updateHomePage(this.state))
     } else {
       dispatch(createHomePage(this.state))
+    }
+    if( active ) {
+      dispatch(reloadHomepage())
     }
     closeFormModal()
   }
@@ -83,8 +90,8 @@ class HomePageForm extends Component {
           id='active'
           value={active}
           options={[
-            { key: 'active', text: 'Active', value: true },
-            { key: 'inactive', text: 'Inactive', value: false },
+            { key: 'active', text: 'Active', value: 1 },
+            { key: 'inactive', text: 'Inactive', value: 0 },
           ]}
           onChange={this.handleSelectChange} />
         <Form.Field>

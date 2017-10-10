@@ -31,8 +31,6 @@ gem 'devise_token_auth'
 gem 'dotenv'
 gem 'delayed_job_active_record'
 gem 'will_paginate'
-gem 'paperclip'
-
 
 group :development, :test do
   # Call 'pry' anywhere in the code to stop execution and get a debugger console

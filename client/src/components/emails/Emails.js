@@ -25,11 +25,16 @@ class Emails extends Component {
 
   handleCheckbox = ( emailId ) => {
     const { checkedEmails } = this.state
+    let newEmailSet = []
+    if( checkedEmails.includes(emailId) ){
+      const index = checkedEmails.findIndex( id => id === emailId )
+      newEmailSet.push(...checkedEmails.slice( 0, index ))
+      newEmailSet.push(...checkedEmails.slice( index + 1 ))
+    } else {
+      newEmailSet.push(...checkedEmails, emailId)
+    }
     this.setState({
-      checkedEmails: [
-        ...checkedEmails,
-        emailId,
-      ]
+      checkedEmails: newEmailSet
     })
   }
 
@@ -99,6 +104,7 @@ class Emails extends Component {
 
   render() {
     const { emailId, emailForm, checkedEmails } = this.state
+    const numEmails = this.props.emails.length
     return (
       <Segment basic>
         <Table celled>
@@ -106,6 +112,7 @@ class Emails extends Component {
             <Table.Row>
               <Table.HeaderCell>
                 <Checkbox
+                  checked={ checkedEmails.length === numEmails ? true : false }
                   onChange={this.handleSelectAll} />
               </Table.HeaderCell>
               <Table.HeaderCell>View</Table.HeaderCell>
