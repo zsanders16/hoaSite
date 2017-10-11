@@ -66,8 +66,11 @@ class NavBar extends Component {
           <Link to='/' >
             <Menu.Item name='home' style={{color: '#FDFEFE'}} />
           </Link>
+          <Link to='/board_members'>
+            <Menu.Item name='HOA Board' style={{ color: '#FDFEFE' }} />
+          </Link>
           { this.showAdmin() }
-          <Menu.Menu position='right'> 
+          <Menu.Menu position='right'>
             { this.displayLinks() }
             { user.id ?   <Dropdown text='Settings' style={{color: '#FDFEFE', marginTop: '9px', marginRight: '8px'}}>
                             <Dropdown.Menu>

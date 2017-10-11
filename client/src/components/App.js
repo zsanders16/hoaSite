@@ -20,6 +20,7 @@ import { Switch, Route } from 'react-router-dom'
 import FetchUser from './FetchUser';
 import { Container, Segment } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
+import Members from './board/Members'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-datepicker/dist/react-datepicker.min.css'
 
@@ -69,6 +70,7 @@ class App extends Component {
               <Route exact path='/unlock' component={UnlockAccount} />
               <Route exact path='/viewpdf' component={ViewPDF} />
               <Route exact path='/viewdiscussion/:id' component={ViewDiscussion} />
+              <Route exact path='/board_members' component={Members} />
               <ProtectedRoute exect path='/changepassword' component={ChangePassword} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />

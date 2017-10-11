@@ -17,8 +17,10 @@ import events from './events'
 import homepages from './homepages'
 import homepage from './homepage'
 import requests from './requests'
+import members from './members'
 
 const rootReducer = combineReducers({
+    members,
     requests,
     homepage,
     homepages,

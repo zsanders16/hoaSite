@@ -104,7 +104,7 @@
 #         denied_api_requests POST     /api/requests/denied(.:format)                   api/requests#denied
 #                api_requests GET      /api/requests(.:format)                          api/requests#index
 #                             GET      /*other(.:format)                                static#index
-# 
+#
 
 Rails.application.routes.draw do
 
@@ -178,6 +178,8 @@ Rails.application.routes.draw do
       post 'granted', on: :collection
       post 'denied', on: :collection
     end
+
+    resources :board_members, only: [ :index ]
 
   end
 
