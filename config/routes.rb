@@ -99,7 +99,9 @@
 #                             PATCH    /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             PUT      /api/home_pages/:id(.:format)                    api/home_pages#update
 #                             DELETE   /api/home_pages/:id(.:format)                    api/home_pages#destroy
-#           send_api_requests POST     /api/requests/send(.:format)                     api/requests#send
+#         access_api_requests POST     /api/requests/access(.:format)                   api/requests#access
+#        granted_api_requests POST     /api/requests/granted(.:format)                  api/requests#granted
+#         denied_api_requests POST     /api/requests/denied(.:format)                   api/requests#denied
 #                api_requests GET      /api/requests(.:format)                          api/requests#index
 #                             GET      /*other(.:format)                                static#index
 # 
@@ -172,7 +174,9 @@ Rails.application.routes.draw do
 
     # Routes for access requests
     resources :requests, only: [:index], shallow: true do
-      post 'send', on: :collection
+      post 'access', on: :collection
+      post 'granted', on: :collection
+      post 'denied', on: :collection
     end
 
   end

@@ -24,3 +24,21 @@ export const clearToAddresses = () => {
     type: 'CLEAR_TO_ADDRESSES',
   }
 }
+
+export const createRequestAccess = ( request ) => {
+  return (dispatch) => {
+    axios.post(`/api/requests/access`, { request } )
+    .then( resp => {
+      dispatch({
+        type: 'CREATE_REQUEST_ACCESS',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Access Request not created!','error')
+      )
+    })
+  }
+}

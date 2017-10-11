@@ -59,6 +59,6 @@ class Api::HomePagesController < ApplicationController
   end
 
   def active_home_page_reset(home_page)
-    HomePage.all.update(active: 0) if home_page.active
+    HomePage.all.update(active: 0) if home_page.active == 1
   end
 end

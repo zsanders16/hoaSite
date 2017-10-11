@@ -5,6 +5,7 @@ import { Segment, Form, Button } from 'semantic-ui-react'
 // Actions
 import {
   indexToAddresses,
+  createRequestAccess,
 } from '../../actions/requests'
 
 class RequestAccessForm extends Component {
@@ -33,7 +34,9 @@ class RequestAccessForm extends Component {
 
   handleOnSubmit = ( event ) => {
     event.preventDefault()
-    debugger
+    const { dispatch } = this.props
+    dispatch(createRequestAccess(this.state))
+    this.props.handleOnClose()
   }
 
   render = () => {

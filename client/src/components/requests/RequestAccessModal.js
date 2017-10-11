@@ -23,7 +23,7 @@ class RequestAccessModal extends Component {
           </Header.Content>
         </Header>
         <Modal.Content>
-          <RequestAccessForm />
+          <RequestAccessForm handleOnClose={this.handleOnClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button

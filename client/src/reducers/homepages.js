@@ -30,11 +30,21 @@ const homepages = ( state = defaults, action ) => {
         ],
       }
     case 'CREATE_HOMEPAGE':
+      // TODO: reset the active status of the homepages to 'inactive'
+      let newState = []
+      if( action.data.active === 1 ) {
+        newState = state.data.map( hp => {
+          hp.active = 0
+          return hp
+        })
+      } else {
+        newState = state
+      }
       return {
         ...state,
         data: [
           action.data,
-          ...state.data,
+          ...newState,
         ]
       }
     case 'DELETE_HOMEPAGE':

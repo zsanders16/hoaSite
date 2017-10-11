@@ -32,7 +32,6 @@ class HomePageFormModal extends Component {
         <Header
           icon='wpforms'
           size='large'
-          circular
           content='Home Page Information Form' />
         <Modal.Content>
           <HomePageForm
