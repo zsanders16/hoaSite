@@ -19,7 +19,7 @@ const events = (state = defaults, action) => {
       case 'ADD_EVENT':
         return {
           ...state,
-          data: [ action.event, ...state ]
+          data: [ action.event, ...state.data ]
         }
       case 'REMOVE_EVENT':
         let newEvents = state.data.filter( event => {

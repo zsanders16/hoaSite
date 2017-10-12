@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Table, Button } from 'semantic-ui-react'
+import { Segment, Table, Button, Header, Icon } from 'semantic-ui-react'
 
 // Actions
 import {
@@ -37,6 +37,17 @@ class Members extends Component {
   render = () => {
     return (
       <Segment>
+        <Header as='h1' icon textAlign='center'  size='massive'>
+          <Icon name='group' circular/>
+          <Header.Content>
+            Woodstock Village Home Owners Association
+          </Header.Content>
+          <Header.Subheader
+            as='h3'
+            style={{ fontSize: '2rem', fontWeight: 'bold'}}>
+             Board Members
+          </Header.Subheader>
+        </Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
