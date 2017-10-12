@@ -245,7 +245,7 @@ class DiscussionAdmin extends React.Component{
             }else{
                 return (
                     <div>
-                        <Grid.Column width={5} style={{marginTop: '8px'}} >
+                        <Grid.Column largeScreen={6} tablet={8} mobile={9} style={{marginTop: '8px'}} >
                             <Button color='blue' onClick={this.clickShowForm}>Start Discussion</Button>
                             <Link to='/admin/discussion/archive'><Button color='blue'>View Archive</Button></Link>
                         </Grid.Column>
@@ -339,7 +339,7 @@ class DiscussionAdmin extends React.Component{
                         <Sidebar.Pusher>
                             <Segment basic>
                                 <Grid>
-                                    <Grid.Column width={11} >
+                                    <Grid.Column largeScreen={10} tablet={8} mobile={5} >
                                         <Header as='h1' textAlign='center' >Discussion Administration</Header>
                                     </Grid.Column>
                                     { this.showStartButton() }    

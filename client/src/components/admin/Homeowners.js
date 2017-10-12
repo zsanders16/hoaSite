@@ -111,7 +111,14 @@ class Homeowners extends React.Component{
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='7' textAlign='center' ><Header as='h2'>Homeowners</Header></Table.HeaderCell>
+                        <Table.HeaderCell colSpan='7' textAlign='center' >
+                            <Header as='h2' icon textAlign='center'>
+                                <Icon name='users' circular />
+                                <Header.Content>
+                                    Homeowners
+                                </Header.Content>
+                            </Header>
+                        </Table.HeaderCell>
                     </Table.Row>
                     <Table.Row>
                         <Table.HeaderCell />

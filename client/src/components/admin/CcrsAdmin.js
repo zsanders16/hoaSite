@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
+import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message, Icon} from 'semantic-ui-react'
 import { updateCcrModule } from '../../actions/admin/adminModules'
 import { addCcr } from '../../actions/ccrs'
 import { addBylaw } from '../../actions/bylaws'
@@ -223,15 +223,17 @@ class CcrsAdmin extends React.Component{
     }
 
     clickShowccrForm = () => {
-        this.setState({ formccr: true })
+        let { formccr } = this.state
+        this.setState({ formccr: !formccr })
     }
 
     clickShowbylawForm = () => {
-        this.setState({ formbylaw: true })
+        let { formbylaw } = this.state
+        this.setState({ formbylaw: !formbylaw })
     }
 
     render(){
-        const { active, visible } = this.state
+        const { active, visible, formccr, formbylaw } = this.state
         let correctWords = active ? 'Click to Deactivate' : 'Click to Activate'
         let correctWord = active ? 'Active' : 'Inactive'
         let correctPhrase = `Are you sure you want to ${correctWords} the CCRs|ByLaws Module?`
@@ -325,24 +327,34 @@ class CcrsAdmin extends React.Component{
                             { active ? 
                                 <Segment basic >
                                     <Segment raised>
-                                        <Header as='h1' textAlign='center' >CCRs</Header>
+                                        <Header as='h2' icon textAlign='center'>
+                                            <Icon name='file text' circular />
+                                            <Header.Content>
+                                                CCRs Administration
+                                            </Header.Content>
+                                        </Header>
                                         { active ? this.displayCcrs() : undefined }
                                         <Grid>
                                             <Grid.Column width={13} >
                                             </Grid.Column >
                                             <Grid.Column width={3} >
-                                                { active ? <Button color='blue' onClick={this.clickShowccrForm}>Add CCR</Button> : undefined }
+                                                { active ? <Button color='blue' onClick={this.clickShowccrForm}>{ formccr ? 'Cancel' : 'Add CCR'}</Button> : undefined }
                                             </Grid.Column >
                                         </Grid>
                                     </Segment>
                                     <Segment raised>
-                                        <Header as='h1' textAlign='center' >ByLaws</Header>
+                                        <Header as='h2' icon textAlign='center'>
+                                            <Icon name='file text' circular />
+                                            <Header.Content>
+                                                ByLaws Administration
+                                            </Header.Content>
+                                        </Header>
                                         { active ? this.displayByLaws() : undefined }
                                         <Grid>
                                             <Grid.Column width={13} >
                                             </Grid.Column >
                                             <Grid.Column width={3} >
-                                                { active ? <Button color='blue' onClick={this.clickShowbylawForm}>Add ByLaw</Button> : undefined }
+                                                { active ? <Button color='blue' onClick={this.clickShowbylawForm}>{ formbylaw ? 'Cancel' : 'Add ByLaw'}</Button> : undefined }
                                             </Grid.Column >
                                         </Grid>
                                     </Segment>

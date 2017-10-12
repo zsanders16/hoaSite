@@ -26,6 +26,7 @@ class ImageModal extends Component {
         <Modal.Content>
           <Segment>
             <img
+              alt='Related to WoodStock Village'
               src={homePage.attachment}
               title={homePage.attachment_name}></img>
           </Segment>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message } from 'semantic-ui-react'
+import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message, Icon } from 'semantic-ui-react'
 import { updateNewslettersModule } from '../../actions/admin/adminModules'
 import { addNewsletter } from '../../actions/newsletters'
 import FileBase64 from 'react-file-base64'
@@ -155,11 +155,12 @@ class NewslettersAdmin extends React.Component{
     }
 
     clickShowForm = () => {
-        this.setState({ form: true })
+        let { form } = this.state
+        this.setState({ form: !form })
     }
 
     render(){
-        const { active, visible } = this.state
+        const { active, visible, form } = this.state
         let correctWords = active ? 'Click to Deactivate' : 'Click to Activate'
         let correctWord = active ? 'Active' : 'Inactive'
         let correctPhrase = `Are you sure you want to ${correctWords} the Newsletter Module?`
@@ -249,13 +250,18 @@ class NewslettersAdmin extends React.Component{
                         </Sidebar>
                         <Sidebar.Pusher>
                             <Segment basic>
-                                <Header as='h1' textAlign='center' >Newsletter Administration</Header>
+                                <Header as='h2' icon textAlign='center'>
+                                    <Icon name='file text' circular />
+                                    <Header.Content>
+                                        Newsletter Administration
+                                    </Header.Content>
+                                </Header>
                                 { active ? this.displayNewsletters() : this.notActive() }
                                 <Grid>
                                     <Grid.Column width={13} >
                                     </Grid.Column >
                                     <Grid.Column width={3} >
-                                        { active ? <Button color='blue' onClick={this.clickShowForm}>Add Newsletter</Button> : undefined }
+                                        { active && <Button color='blue' onClick={this.clickShowForm}>{form ? 'Cancel' : 'Add Newsletter'}</Button> }
                                     </Grid.Column >
                                 </Grid>
                             </Segment>

@@ -102,6 +102,7 @@ class homepages extends Component {
                   closeImage={this.closeImage} />
               }
               <Button
+                primary
                 type='button'
                 onClick={this.showNewHomePageForm} >
                 New Home Page Entry

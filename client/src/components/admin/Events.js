@@ -8,7 +8,6 @@ import {
   removeEvent,
   clearEvents,
 } from '../../actions/events'
-import moment from 'moment'
 import Paginator from '../Paginator'
 import EventModal from './EventModal'
 
@@ -217,7 +216,7 @@ class Events extends React.Component{
     }
 
     displayForm = () => {
-        let { title, date, description, active, edit } = this.state
+        let { title, description, edit } = this.state
         return(
             <Segment basic >
                 <Grid.Column width={4}>

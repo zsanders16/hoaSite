@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Container, Segment, Image, Grid, Divider } from 'semantic-ui-react';
+import { Container, Segment, Grid, Divider } from 'semantic-ui-react';
 // import logo from '../assets/logo.jpg'
 
 // Actions
@@ -59,8 +59,6 @@ class Home extends Component {
             <Segment basic textAlign='center'>
               <p>WoodStock Village Property Owners Association</p>
               <p>Mailing Address</p>
-              <Divider hidden />
-              <a href='#'>Contact Site Adminstrator</a>
             </Segment>
           </footer>
         </Container>

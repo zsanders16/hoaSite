@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Table, Button, Header, Icon } from 'semantic-ui-react'
+import { Segment, Table, Header, Icon } from 'semantic-ui-react'
 
 // Actions
 import {
   indexMembers,
-  resetMembers,
 } from '../../actions/members'
 
 class Members extends Component {

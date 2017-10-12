@@ -105,20 +105,23 @@ class HomePageForm extends Component {
         <Segment basic clearing>
           <Button.Group size='mini' floated='right'>
             <Button
+              primary
               type='submit'>
               { id ? 'Update' : 'Create' }
             </Button>
             <Button.Or />
             <Button
+              primary
               type='button'
               onClick={this.handleDelete}>
               Delete
             </Button>
             <Button.Or />
             <Button
+              primary
               type='button'
               onClick={this.handleNewForm}>
-              New Form
+              Clear Form
             </Button>
           </Button.Group>
         </Segment>

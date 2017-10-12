@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Modal, Button, Icon } from 'semantic-ui-react'
+import { Modal, Button } from 'semantic-ui-react'
 import EmailDetails from './EmailDetails'
 
 // Action
@@ -13,7 +13,7 @@ class EmailModal extends Component {
   state = { modalOpen: false }
 
   componentDidMount = () => {
-    const { dispatch, email, emailId } = this.props
+    const { email, emailId } = this.props
     if( Object.keys(email).length === 0 ) {
       this.loadEmailInformation( emailId )
     }

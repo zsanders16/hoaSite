@@ -8,7 +8,6 @@ import EmailFormModal from './EmailFormModal'
 // Actions
 import {
   indexEmails,
-  resetEmails,
   deleteEmails,
 } from '../../actions/emails'
 
@@ -82,7 +81,7 @@ class Emails extends Component {
 
   loadMore = ( page ) => {
     const { pagination, dispatch } = this.props
-    const { hasMore, query } = this.state
+    const { hasMore } = this.state
     if( hasMore && pagination.total_pages ) {
       if( page <= pagination.total_pages ) {
         dispatch(indexEmails(page))

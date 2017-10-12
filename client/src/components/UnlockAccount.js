@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Button, Header, Divider, Segment, Grid } from 'semantic-ui-react'
 import { unlockPassword } from '../actions/homeowners'
 import { connect } from 'react-redux';
-import { setHeaders } from '../actions/headers'
 import { setFlash } from '../actions/flash';
 
 class UnlockAccount extends React.Component{

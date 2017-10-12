@@ -40,7 +40,7 @@ class RequestAccessForm extends Component {
   }
 
   render = () => {
-    const { id, subject, from, to, message } = this.state
+    const { subject, from, to, message } = this.state
     const { toList } = this.props
     return (
       <Form onSubmit={this.handleOnSubmit}>

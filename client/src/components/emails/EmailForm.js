@@ -35,7 +35,7 @@ class EmailForm extends Component {
 
   // TODO: use FileBase64 for storing the files in the database
   render() {
-    const { subject, body, recipients, attachments } = this.state
+    const { subject, body, recipients } = this.state
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Select

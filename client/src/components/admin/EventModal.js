@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Header, Icon } from 'semantic-ui-react'
+import { Modal, Button, Header } from 'semantic-ui-react'
 import EventForm from './EventForm'
 
 class EventModal extends Component {

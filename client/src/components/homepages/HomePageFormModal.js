@@ -12,7 +12,6 @@ class HomePageFormModal extends Component {
   componentWillReceiveProps = ( nextProps ) => this.openModal( nextProps )
 
   openModal = ( props ) => {
-    const { homePageId } = this.state
     if( props.homePageId ) {
       this.setState({ homePageId: props.homePageId, openModal: true })
     }
@@ -39,8 +38,8 @@ class HomePageFormModal extends Component {
             closeFormModal={this.handleCloseModal} />
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleCloseModal}>
-            Close Form
+          <Button onClick={this.handleCloseModal} primary>
+            Cancel
           </Button>
         </Modal.Actions>
       </Modal>

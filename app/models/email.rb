@@ -24,7 +24,7 @@ class Email < ApplicationRecord
   end
 
   def time
-    time_ago_in_words(created_at)
+    "#{time_ago_in_words(created_at)} ago"
   end
 
 end

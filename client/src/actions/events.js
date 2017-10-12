@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { setFlash } from '../actions/flash';
-import { setHeaders } from './headers';
 
 
 export const getEvents = ( page=1, per=5 ) => {

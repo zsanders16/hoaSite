@@ -7,7 +7,7 @@ class EmailFormModal extends Component {
 
   componentDidMount = () => this.setState({ openModal: true })
   handleOnClose = () => {
-    this.props.handleNewEmail
+    this.props.handleNewEmail()
     this.setState({ openModal: false })
   }
 
