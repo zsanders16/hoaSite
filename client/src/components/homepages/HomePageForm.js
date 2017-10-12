@@ -76,16 +76,19 @@ class HomePageForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
+          required
           label='Title'
           id='title'
           value={title}
           onChange={this.handleChange} />
         <Form.TextArea
+          required
           label='Main Content'
           id='body'
           value={body}
           onChange={this.handleChange} />
         <Form.Select
+          required
           label='Status'
           id='active'
           value={active}
@@ -97,6 +100,7 @@ class HomePageForm extends Component {
         <Form.Field>
           <label>Current File:&nbsp;{attachment_name}</label>
           <FileBase64
+            required
             multiple={false}
             onDone={this.handleFileSelect} />
         </Form.Field>

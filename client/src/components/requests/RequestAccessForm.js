@@ -45,22 +45,26 @@ class RequestAccessForm extends Component {
     return (
       <Form onSubmit={this.handleOnSubmit}>
         <Form.Input
+          required
           label='Subject'
           id='subject'
           value={subject}
           onChange={this.handleOnChange} />
         <Form.Input
+          required
           label='From'
           id='from'
           value={from}
           onChange={this.handleOnChange} />
         <Form.Select
+          required
           label='To'
           id='to'
           options={toList}
           value={to}
           onChange={this.handleSelectOnChange} />
         <Form.TextArea
+          required
           label='Message'
           id='message'
           value={message}

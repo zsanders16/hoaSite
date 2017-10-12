@@ -39,6 +39,7 @@ class EmailForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Select
+          required
           label='To:'
           inline
           id='recipients'
@@ -49,6 +50,7 @@ class EmailForm extends Component {
           value={recipients}
           onChange={this.handleRecipients} />
         <Form.Input
+          required
           inline
           width={16}
           label='Subject'
@@ -57,6 +59,7 @@ class EmailForm extends Component {
           value={subject}
           onChange={this.handleChange} />
         <Form.TextArea
+          required
           label='Message'
           placeholder='Your message ...'
           id='body'

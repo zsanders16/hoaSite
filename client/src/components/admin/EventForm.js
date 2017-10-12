@@ -66,12 +66,14 @@ class EventForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
+          required
           label='Title'
           id='title'
           value={title}
           placeholder='...'
           onChange={this.handleChange} />
         <Form.Input
+          required
           label='Description'
           id='description'
           value={description}
@@ -81,6 +83,7 @@ class EventForm extends Component {
           <Form.Field width={12}>
             <label>Date</label>
             <DatePicker
+              required
               selected={moment(date).local()}
               onChange={this.handleDateChange}
               timeIntervals={15}
@@ -88,6 +91,7 @@ class EventForm extends Component {
               />
           </Form.Field>
           <Form.Select
+            required
             width={4}
             label='Status'
             id='active'
