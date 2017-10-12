@@ -37,13 +37,12 @@ class Members extends Component {
   render = () => {
     return (
       <Segment>
-        <Header as='h1' icon textAlign='center'  size='massive'>
+        <Header as='h1' icon textAlign='center'  size='huge'>
           <Icon name='group' circular/>
           <Header.Content>
             Woodstock Village Home Owners Association
           </Header.Content>
           <Header.Subheader
-            as='h3'
             style={{ fontSize: '2rem', fontWeight: 'bold'}}>
              Board Members
           </Header.Subheader>
