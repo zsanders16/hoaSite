@@ -16,7 +16,7 @@ class EventModal extends Component {
       <Modal
         open={this.state.openModal}
         onClose={this.handleClose}>
-        <Header as='h1' icon='calendar' content='Events Information' />
+        <Header as='h1' icon='calendar' content='Event Information' />
         <Modal.Content>
           <EventForm
             eventId={this.props.eventId}
