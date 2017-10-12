@@ -38,7 +38,7 @@ const homepages = ( state = defaults, action ) => {
           return hp
         })
       } else {
-        newState = state
+        newState = [...state.data]
       }
       return {
         ...state,

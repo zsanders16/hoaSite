@@ -17,7 +17,7 @@ import {
 class HomePageForm extends Component {
   defaults = {
     id: '', title: '', body: '',
-    active: '', attachment: '', attachment_name: '',
+    active: 0, attachment: '', attachment_name: '',
   }
   state = { ...this.defaults}
 
@@ -88,19 +88,17 @@ class HomePageForm extends Component {
           value={body}
           onChange={this.handleChange} />
         <Form.Select
-          required
           label='Status'
           id='active'
-          value={active}
+          value={ active ? active : 0 }
           options={[
             { key: 'active', text: 'Active', value: 1 },
             { key: 'inactive', text: 'Inactive', value: 0 },
           ]}
           onChange={this.handleSelectChange} />
-        <Form.Field>
+        <Form.Field required>
           <label>Current File:&nbsp;{attachment_name}</label>
           <FileBase64
-            required
             multiple={false}
             onDone={this.handleFileSelect} />
         </Form.Field>

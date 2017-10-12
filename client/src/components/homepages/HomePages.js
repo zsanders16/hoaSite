@@ -90,7 +90,7 @@ class homepages extends Component {
         </Table.Body>
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan={4}>
+            <Table.HeaderCell colSpan={6}>
               { homePageId &&
                 <HomePageFormModal
                   homePageId={homePageId}
