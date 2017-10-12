@@ -17,9 +17,9 @@ class Access extends Component {
           Login access restricted to homeowners of Woodstock Village.  
           <br />
           <br />
-          To contact or request access click the icon below.
+          To contact the board for any reason or request access click the icon below.
         </p>
-        <Segment basic textAlign='center'>
+        <Segment basic textAlign='center' style={{marginTop: '-20px'}}>
           <Button
             primary
             circular
