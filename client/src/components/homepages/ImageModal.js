@@ -24,7 +24,7 @@ class ImageModal extends Component {
           </Header.Content>
         </Header>
         <Modal.Content>
-          <Segment>
+          <Segment> 
             <img
               alt='Related to WoodStock Village'
               src={homePage.attachment}
@@ -33,6 +33,7 @@ class ImageModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button
+            primary
             type='button'
             onClick={this.handleCloseModal}>
             Close

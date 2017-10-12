@@ -11,9 +11,9 @@ class Admin extends React.Component{
                     <Grid.Row >
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/homeowners' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
-                                        <Card.Header>
+                                        <Card.Header >
                                             Homeowners
                                         </Card.Header>
                                         <Card.Description>
@@ -25,7 +25,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/newslettersadmin' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Newsletters
@@ -39,7 +39,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/ccrsadmin' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             CCRs and ByLaws
@@ -53,7 +53,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/legal' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Legal
@@ -67,7 +67,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/minutes' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Minutes
@@ -81,7 +81,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/discussion' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Discussions
@@ -95,7 +95,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/emails' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Emails
@@ -109,7 +109,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                         <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/events' >
-                                <Card>
+                                <Card style={{height: '100px'}}>
                                     <Card.Content>
                                         <Card.Header>
                                             Events
@@ -123,7 +123,7 @@ class Admin extends React.Component{
                         </Grid.Column>
                       <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
                           <Link to='admin/homepages' >
-                              <Card>
+                              <Card style={{height: '100px'}}>
                                   <Card.Content>
                                       <Card.Header>
                                           Home Pages
