@@ -6,7 +6,10 @@ class EmailFormModal extends Component {
   state = { openModal: false }
 
   componentDidMount = () => this.setState({ openModal: true })
-  handleOnClose = () => this.setState({ openModal: false })
+  handleOnClose = () => {
+    this.props.handleNewEmail
+    this.setState({ openModal: false })
+  }
 
   render() {
     return (
@@ -24,9 +27,10 @@ class EmailFormModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button
+            primary
             type='button'
             onClick={this.handleOnClose}>
-            Close
+            Cancel
           </Button>
         </Modal.Actions>
       </Modal>

@@ -51,9 +51,8 @@ class EmailModal extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button
-            color='green'
+            primary
             onClick={this.closeModal}>
-              <Icon name='close' />
               Close
           </Button>
         </Modal.Actions>

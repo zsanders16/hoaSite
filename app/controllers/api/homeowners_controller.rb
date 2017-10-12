@@ -53,7 +53,7 @@ class Api::HomeownersController < ApplicationController
         end
 
         def homeowner_params
-            params.require(:homeowner).permit(:name, :email, :admin, :address, :number)
+            params.require(:homeowner).permit(:name, :email, :admin, :address, :number, :title)
         end
 
 end

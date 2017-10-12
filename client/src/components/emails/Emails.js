@@ -92,7 +92,10 @@ class Emails extends Component {
     }
   }
 
-  handleNewEmail = () => this.setState({ emailForm: true })
+  handleNewEmail = () => {
+    let { emailForm } = this.state
+    this.setState({ emailForm: !emailForm })
+  }
 
   handleDeleteEmails = () => {
     const { checkedEmails } = this.state
@@ -149,7 +152,7 @@ class Emails extends Component {
           </Table.Footer>
         </Table>
         { emailForm &&
-          <EmailFormModal />
+          <EmailFormModal handleNewEmail={this.handleNewEmail}/>
         }
         { emailId &&
           <EmailModal emailId={emailId} />

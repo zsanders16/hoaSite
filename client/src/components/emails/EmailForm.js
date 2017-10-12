@@ -67,6 +67,7 @@ class EmailForm extends Component {
           onChange={this.handleChange} />
         <br />
         <Button
+          primary
           type='submit'>
           Send!
         </Button>

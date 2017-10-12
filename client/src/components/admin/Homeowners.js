@@ -16,7 +16,9 @@ class Homeowners extends React.Component{
                 name: '',
                 address: '',
                 number: '',
-                id: 0
+                id: 0,
+                isAdmin: false,
+                title: '',
             }
 
     componentDidMount(){
@@ -56,13 +58,13 @@ class Homeowners extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { email, password, passwordConfirmation, name, id, number, address } = this.state;
+        const { email, password, passwordConfirmation, name, id, number, address, title } = this.state;
         const { dispatch } = this.props;
 
         if(id>0){
-            let homeowner = { id, name, email, number, address }
+            let homeowner = { id, name, email, number, address, title}
             dispatch(updateHomeowner(homeowner))
-            this.setState({ showForm: false, email: '', name: '', number: '', address: '', id: 0 })
+            this.setState({ showForm: false, email: '', name: '', number: '', address: '', id: 0, title: ''})
         }else{
             if(password === passwordConfirmation){
                 let user = { name, email, number, address, password, passwordConfirmation }
@@ -82,8 +84,6 @@ class Homeowners extends React.Component{
       }
 
     handleChange = (e) => {
-        // use e to grab the id off the element also the value and set state
-        // const { id, value } = e.target;
         const id = e.target.id;
         const value = e.target.value;
         this.setState({ [id]: value });
@@ -96,6 +96,8 @@ class Homeowners extends React.Component{
                         number: homeowner.number,
                         address: homeowner.address,
                         showForm: true,
+                        title: homeowner.title,
+                        isAdmin: homeowner.admin
                     })
     }
 
@@ -143,7 +145,7 @@ class Homeowners extends React.Component{
     }
 
     displayForm = () => {
-        const { email, password, passwordConfirmation, name, address, number, id } = this.state;
+        const { email, password, passwordConfirmation, name, address, number, id, isAdmin, title } = this.state;
         return(
             <Segment >
                 <Header as='h1' textAlign='center'>{ id>0 ? 'Edit User' : 'Add User' }</Header>
@@ -168,6 +170,17 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
+                { isAdmin && 
+                    <Form.Field>
+                        <label>Title</label>
+                        <input
+                        id='title'
+                        placeholder='Title'
+                        value={title}
+                        onChange={this.handleChange}
+                        />
+                    </Form.Field>
+                }
                 <Header as='h5'>Phone Number</Header>
                 <ReactPhoneInput value={number}
                                     style={{marginTop: '-12px'}}

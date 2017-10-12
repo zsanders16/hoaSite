@@ -27,7 +27,7 @@ class Members extends Component {
         return (
           <Table.Row key={member.id}>
             <Table.Cell>{member.name}</Table.Cell>
-            <Table.Cell>{member.email}</Table.Cell>
+            <Table.Cell>{member.title}</Table.Cell>
           </Table.Row>
         )
       })
@@ -51,7 +51,7 @@ class Members extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Member</Table.HeaderCell>
-              <Table.HeaderCell>E-mail</Table.HeaderCell>
+              <Table.HeaderCell>Title</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>
