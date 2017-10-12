@@ -27,6 +27,14 @@ class Events extends Component {
           </Segment>
         )
       })
+    }else{
+      return (
+        <Segment raised>
+          <Header as='h4'>
+            There are no Upcoming Events
+          </Header> 
+        </Segment>
+      )
     }
   }
 

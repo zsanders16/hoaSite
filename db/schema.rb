@@ -79,15 +79,11 @@ ActiveRecord::Schema.define(version: 20171012170042) do
   create_table "home_pages", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.boolean "active", default: false
+    t.integer "active", default: 0
     t.text "attachment"
     t.string "attachment_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
   end
 
   create_table "legal_admins", force: :cascade do |t|

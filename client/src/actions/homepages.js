@@ -45,7 +45,6 @@ export const updateHomePage = ( home_page ) => {
 }
 
 export const createHomePage = ( home_page ) => {
-  debugger
   return (dispatch) => {
     axios.post(`/api/home_pages`, { home_page })
     .then( resp => {

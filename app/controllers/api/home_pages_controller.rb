@@ -19,11 +19,8 @@ class Api::HomePagesController < ApplicationController
 
   def create
     home_page = HomePage.new(home_page_params)
-    binding.pry
     active_home_page_reset home_page
-    binding.pry
     if home_page.save
-      binding.pry
       render json: home_page
     else
       render_errors home_page
@@ -62,7 +59,6 @@ class Api::HomePagesController < ApplicationController
   end
 
   def active_home_page_reset(home_page)
-    binding.pry
     HomePage.all.update(active: 0) if home_page.active == 1
   end
 end

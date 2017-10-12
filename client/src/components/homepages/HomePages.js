@@ -51,6 +51,7 @@ class homepages extends Component {
             <Table.Cell>{homePage.body.substr(0,70)}</Table.Cell>
             <Table.Cell>
               <Button
+                primary
                 type='button'
                 onClick={()=>this.handleShowImage(homePage)}>
                 Show
@@ -60,6 +61,7 @@ class homepages extends Component {
             <Table.Cell>{ homePage.active === 1 ? 'Active' : 'Inactive' }</Table.Cell>
             <Table.Cell>
               <Button
+                primary
                 type='button'
                 onClick={()=>this.handleRowClick(homePage.id)}>
                 View
