@@ -43,7 +43,7 @@ class Home extends Component {
       <div>
         <Container style={{backgroundColor: '#FFFFFF'}} >
           <HomeHeaderImage attachment={attachment} />
-          <Grid celled>
+          <Grid celled style={{ margin: '0' }}>
             <Grid.Row>
               <Grid.Column width={12}>
                 <HomeMainBody title={title} body={body} />
