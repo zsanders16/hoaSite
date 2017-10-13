@@ -1,0 +1,4 @@
+en:
+  devise_token_auth:
+    sessions:
+      not_confirmed: "Your account is disabled.  To have your account enabled pleasse contact the HOA board"
