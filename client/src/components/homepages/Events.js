@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Divider } from 'semantic-ui-react'
+import moment from 'moment'
 
 // Actions
 import { activeEvents } from '../../actions/events'
@@ -21,7 +22,7 @@ class Events extends Component {
         return (
           <Segment raised key={event.id}>
             <Header as='h4'>{ event.title }</Header>
-            <span>{ event.date }</span>
+            <span>{ moment(event.date).format('MMMM Do YYYY') }</span>
             <Divider />
             <p>{ event.description }</p>
           </Segment>
@@ -32,7 +33,7 @@ class Events extends Component {
         <Segment raised>
           <Header as='h4'>
             There are no Upcoming Events
-          </Header> 
+          </Header>
         </Segment>
       )
     }
