@@ -10,19 +10,19 @@ import {
 
 class RequestAccessForm extends Component {
   defaults = {
-    id: '', subject: '', from: '', to: '', message: ''
+    id: '', subject: '', from: '', to: 'devmountaintest@gmail.com', message: ''
   }
   state = { ...this.defaults }
 
-  componentDidMount = () => this.load(this.props)
-  componentWillReceiveProps = (nextProps) => this.load(nextProps)
-
-  load = ( props ) => {
-    const { dispatch, toList } = props
-    if( !toList || toList.length <= 0 ) {
-      dispatch(indexToAddresses())
-    }
-  }
+  // componentDidMount = () => this.load(this.props)
+  // componentWillReceiveProps = (nextProps) => this.load(nextProps)
+  //
+  // load = ( props ) => {
+  //   const { dispatch, toList } = props
+  //   if( !toList || toList.length <= 0 ) {
+  //     dispatch(indexToAddresses())
+  //   }
+  // }
 
   handleOnChange = ({ target: {id,value} }) => this.setState({ [id]: value })
 
@@ -60,7 +60,9 @@ class RequestAccessForm extends Component {
           required
           label='To'
           id='to'
-          options={toList}
+          options={[
+            { key: 'hoa', text: 'HOA Board Members', value: 'devmountaintest@gmail.com'}
+          ]}
           value={to}
           onChange={this.handleSelectOnChange} />
         <Form.TextArea
