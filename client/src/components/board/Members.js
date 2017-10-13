@@ -5,12 +5,17 @@ import { Segment, Table, Header, Icon } from 'semantic-ui-react'
 // Actions
 import {
   indexMembers,
+  resetMembers,
 } from '../../actions/members'
 
 class Members extends Component {
 
   componentDidMount = () => this.load(this.props)
   componentWillReceiveProps = (nextProps) => this.load(nextProps)
+  componentWillUnmount = () => {
+    const { dispatch } = this.props
+    dispatch(resetMembers())
+  }
 
   load = ( props ) => {
     const { dispatch, members } = props
