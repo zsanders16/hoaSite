@@ -68,7 +68,6 @@ export const statusHomeowners = ( userId, status, callback = '' ) => {
 }
 
 export const unlockPassword = (password, password_confirmation, history) => {
-    debugger
     return(dispatch) => {
         axios.put(`/api/auth/password`, { password, password_confirmation })
             .then( res => {
@@ -99,7 +98,6 @@ export const changePassword = (password, password_confirmation, history) => {
 export const resetPassword = (email, dispatch, history) => {
     axios.post('/api/auth/password', {email, redirect_url: '/unlock'})
         .then( res => {
-            debugger
             history.push('/')
         })
         .catch( res => {
@@ -112,7 +110,6 @@ export const validateToken = (obj, history) => {
     return(dispatch) => {
         axios.get('/api/auth/validate_token', {...obj})
         .then( res => {
-            debugger
             let { data: { data: user }, headers } = res
             dispatch({ type: 'LOGIN', user, headers });
         })

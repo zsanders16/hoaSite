@@ -61,7 +61,7 @@ class RequestAccessForm extends Component {
           label='To'
           id='to'
           options={[
-            { key: 'hoa', text: 'HOA Board Members', value: 'devmountaintest@gmail.com'}
+            { key: 'hoa', text: 'HOA Board Members', value: 'hoatestemail@gmail.com'}
           ]}
           value={to}
           onChange={this.handleSelectOnChange} />
