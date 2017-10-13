@@ -96,6 +96,18 @@ export const changePassword = (password, password_confirmation, history) => {
     }
 }
 
+export const resetPassword = (email, dispatch, history) => {
+    axios.post('/api/auth/password', {email, redirect_url: '/unlock'})
+        .then( res => {
+            debugger
+            history.push('/')
+        })
+        .catch( res => {
+            const message = res.response.data.errors.join(',');
+            dispatch(setFlash(message, 'error'));
+        })
+}
+
 export const validateToken = (obj, history) => {
     return(dispatch) => {
         axios.get('/api/auth/validate_token', {...obj})
