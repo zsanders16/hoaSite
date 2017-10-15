@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, Icon, Header, Form, Segment } from 'semantic-ui-react'
+import { Table, Button, Icon, Header, Form, Segment, Grid } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { getHomeowners, updateHomeowner } from '../../actions/homeowners'
 import Homeowner from './Homeowner'
@@ -19,6 +19,7 @@ class Homeowners extends React.Component{
                 id: 0,
                 isAdmin: false,
                 title: '',
+                search: '',
             }
 
     componentDidMount(){
@@ -38,9 +39,9 @@ class Homeowners extends React.Component{
         return comparison;
     }
 
-    displayHomeowners = () => {
-        this.props.homeowners.sort(this.compare)
-        return this.props.homeowners.map ( (homeowner, i)  => {
+    displayHomeowners = (homeowners) => {
+        homeowners.sort(this.compare)
+        return homeowners.map ( (homeowner, i)  => {
             return (
               <Homeowner
                 key={i}
@@ -105,19 +106,46 @@ class Homeowners extends React.Component{
         this.setState({number: e})
     }
 
-    viewHomeowners = () => {
+    modifyHomeowners = () => {
+        let { search } = this.state
         let { homeowners } = this.props
+        if(search.length > 0){
+            let newHomeownerList = homeowners.filter( h => {
+                return (new RegExp(`${search}`, 'i')).test(h.name)
+            })
+            return this.viewHomeowners(newHomeownerList)
+        }else{
+            return this.viewHomeowners(homeowners)
+        }
+    }
+    
+
+    viewHomeowners = (homeowners) => {
+        let { search } = this.state
         return(
             <Table celled striped>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell colSpan='7' textAlign='center' >
-                            <Header as='h2' icon textAlign='center'>
-                                <Icon name='users' circular />
-                                <Header.Content>
-                                    Homeowners
-                                </Header.Content>
-                            </Header>
+                            <Grid columns={3}>
+                                <Grid.Row>
+                                    <Grid.Column verticalAlign='bottom'>
+                                        <Form>
+                                            <Form.Field>
+                                            <input id='search' value={search} onChange={this.handleChange} placeholder='Search by Name' />
+                                            </Form.Field>
+                                        </Form>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        <Header as='h2' icon textAlign='center'>
+                                            <Icon name='users' circular />
+                                            <Header.Content>
+                                                Homeowners
+                                            </Header.Content>
+                                        </Header>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
                         </Table.HeaderCell>
                     </Table.Row>
                     <Table.Row>
@@ -132,7 +160,7 @@ class Homeowners extends React.Component{
                 </Table.Header>
                 <Table.Body>
                     { homeowners.length > 0 ?
-                        this.displayHomeowners() :
+                        this.displayHomeowners(homeowners) :
                         <Table.Row>
                             <Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell>
                         </Table.Row>
@@ -241,7 +269,7 @@ class Homeowners extends React.Component{
     render(){
         let { showForm } = this.state
         return(
-            showForm ? this.displayForm() : this.viewHomeowners()
+            showForm ? this.displayForm() : this.modifyHomeowners()
         )
     }
 }
