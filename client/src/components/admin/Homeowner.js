@@ -5,7 +5,7 @@ import { updateHomeowner, statusHomeowners } from '../../actions/homeowners'
 import { connect } from 'react-redux'
 
 class Homeowner extends React.Component {
-    state = { admin: false, status: '', openActivate: false, openDeactivate: false }
+    state = { admin: false, status: '', openActivate: false, openDeactivate: false, openDelete: false}
 
     componentDidMount() {
         let { homeowner } = this.props
@@ -31,6 +31,7 @@ class Homeowner extends React.Component {
         this.setState({ status: newStatus })
     }
 
+    //confirm for Activating account
     showActivate = () => this.setState({ openActivate: true })
     handleConfirmActivate = () => {
         this.handleStatusToggle()
@@ -38,12 +39,22 @@ class Homeowner extends React.Component {
     }
     handleCancelActivate = () => this.setState({ openActivate: false })
 
+    //confirm for Deactivate account
     showDeactivate = () => this.setState({ openDeactivate: true })
     handleConfirmDeactivate = () => {
         this.handleStatusToggle()
         this.setState({ openDeactivate: false })
     }
     handleCancelDeactivate = () => this.setState({ openDeactivate: false })
+
+    //confirm for Delete account
+    showDelete = () => this.setState({ openDelete: true })
+    handleConfirmDeactivate = () => {
+        this.deleteUser
+        this.setState({ openDelete: false })
+    }
+    handleCancelDelete = () => this.setState({ openDelete: false })
+
 
     render(){
         const { homeowner } = this.props
@@ -58,9 +69,16 @@ class Homeowner extends React.Component {
                             hideOnScroll
                         />
                         <Popup
-                            trigger={<Button color='google plus' size='mini' onClick={this.deleteUser} ><Icon name='remove' /></Button>}
+                            trigger={<Button color='google plus' size='mini' onClick={this.showDelete} ><Icon name='remove' /></Button>}
                             content='Delete Homeowner'
                             hideOnScroll
+                        />
+                        <Confirm
+                            open={this.state.openDelete}
+                            header={`Are you sure you want to delete ${homeowner.name}'s account.`}
+                            content={'This cannot be undone. You will have to recreate the account if you delete it.'}
+                            onCancel={this.handleCancelDelete}
+                            onConfirm={this.handleConfirmDelete}
                         />
                     </Segment>
                 </Table.Cell>

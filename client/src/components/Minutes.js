@@ -34,9 +34,11 @@ class Minutes extends React.Component{
             )
         }else{
             return(
-                <Header as='h2'>
-                    There are no Minutes to display.
-                </Header>
+                <Segment style={{marginLeft: '50px', marginRight: '50px'}}>
+                    <Header as='h2' textAlign='center' style={{margin: '50px'}}>
+                        The HOA has no Metting Minutes to display.
+                    </Header>
+                </Segment>
             )
         }
     }

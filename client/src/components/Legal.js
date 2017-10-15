@@ -34,9 +34,11 @@ class Legal extends React.Component{
             )
         }else{
             return(
-                <Header as='h2'>
-                    There are no Legal Documents to display.
-                </Header>
+                <Segment style={{marginLeft: '50px', marginRight: '50px'}}>
+                    <Header as='h2' textAlign='center' style={{margin: '50px'}}>
+                        The HOA has no Legal Documents to display.
+                    </Header>
+                </Segment>
             )
         }
     }
