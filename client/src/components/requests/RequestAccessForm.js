@@ -4,7 +4,6 @@ import { Segment, Form, Button } from 'semantic-ui-react'
 
 // Actions
 import {
-  indexToAddresses,
   createRequestAccess,
 } from '../../actions/requests'
 
@@ -41,7 +40,6 @@ class RequestAccessForm extends Component {
 
   render = () => {
     const { subject, from, to, message } = this.state
-    const { toList } = this.props
     return (
       <Form onSubmit={this.handleOnSubmit}>
         <Form.Input

@@ -4,9 +4,9 @@ import { Segment, Header } from 'semantic-ui-react'
 const HomeMainBody = ({ title, body }) => (
   <Segment basic>
     <Header as='h1' textAlign='center'>{title}</Header>
-    { body.split('\n').map( paragraph => {
+    { body.split('\n').map( (paragraph, i) => {
       return (
-        <p style={{ fontSize: '1.5rem' }}>{paragraph}</p>
+        <p key={i} style={{ fontSize: '1.5rem' }}>{paragraph}</p>
       )})
     }
   </Segment>

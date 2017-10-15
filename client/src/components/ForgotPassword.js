@@ -14,7 +14,7 @@ class ForgotPassword extends React.Component{
       handleSubmit = (e) => {
         e.preventDefault();
         const { dispatch, history } = this.props;
-        const { email, password } = this.state;
+        const { email } = this.state;
     
         dispatch(resetPassword(email, dispatch, history));
       }
