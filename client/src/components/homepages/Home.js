@@ -57,10 +57,10 @@ class Home extends Component {
           </Grid>
           <footer>
             <Segment basic textAlign='center'>
-              <h3 style={{marginBottom: '10px'}}>WoodStock Village Property Owners Association</h3>
+              <h3 style={{marginBottom: '10px'}}>Woodstock Village Homeowners Association</h3>
               <h5 style={{marginTop: '-10px'}}>Mailing Address:</h5>
-              <p style={{marginBottom: '10px'}}>PO Box XXX </p>
-              <p style={{marginTop: '-10px'}}>SLC UT XXXXX </p>
+              <p style={{marginBottom: '10px'}}>P.O. Box 71963 </p>
+              <p style={{marginTop: '-10px'}}>SLC UT, 84171-0963 </p>
             </Segment>
           </footer>
         </Container>
