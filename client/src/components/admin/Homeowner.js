@@ -49,7 +49,7 @@ class Homeowner extends React.Component {
 
     //confirm for Delete account
     showDelete = () => this.setState({ openDelete: true })
-    handleConfirmDeactivate = () => {
+    handleConfirmDelete = () => {
         this.deleteUser()
         this.setState({ openDelete: false })
     }
