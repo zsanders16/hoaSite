@@ -96,7 +96,7 @@ class Homeowner extends React.Component {
                 </Table.Cell>
                 <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
                 <Table.Cell collapsing >
-                    { status === false ?
+                    { status === 0 ?
                         <div>
                             <Button primary onClick={this.showDeactivate}>Active</Button>
                             <Confirm

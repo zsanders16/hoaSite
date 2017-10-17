@@ -1,9 +1,12 @@
 class Api::HomeownersController < ApplicationController
     before_action :set_homeowner, only: [:destroy, :update, :change_admin_status, :status]
 
+    # NOTE: access_locked?
+    #  > true = 1 (status = inactive)
+    #  > false = 0 (status = active)
     def index
       users = User.all.select('*, NULL as status').order(:name)
-      users.each { |u| u.status = u.access_locked? }
+      users.each { |u| u.status = u.access_locked? ? 1 : 0}
       render json: users
     end
 
@@ -20,10 +23,10 @@ class Api::HomeownersController < ApplicationController
     end
 
     def status
-      if params[:status] == 'false'
+      if params[:status] == 0
         @homeowner.lock_access!({ send_instructions: false })
-        render json: { status: true }
-      elsif params[:status] == 'true'
+        render json: { status: 1 }
+      elsif params[:status] == 1
         @homeowner.unlock_access!
 
         # Generate random, long password that the user will never know:
@@ -33,7 +36,7 @@ class Api::HomeownersController < ApplicationController
         # Send instructions so user can enter a new password:
         @homeowner.send_reset_password_instructions
 
-        render json: { status: false }
+        render json: { status: 0 }
       else
         # render :json => { :errors => @homeowner.errors.full_messages }
       end

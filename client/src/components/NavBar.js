@@ -25,7 +25,7 @@ class NavBar extends Component {
 
     let { activeLinks } = this.state
     let { user } = this.props
-    if(user.admin === true){
+    if(user.admin === 1){
       return activeLinks.map( (module, i) => {
         return <NavbarLink key={i} linkItem={module} />
       })
@@ -49,7 +49,7 @@ class NavBar extends Component {
 
   showAdmin = () => {
     const { user } = this.props
-    if(user.admin){
+    if(user.admin == 1){
       return(
         <Link to='/admin' >
           <Menu.Item name='Admin' style={{color: '#FDFEFE'}} />

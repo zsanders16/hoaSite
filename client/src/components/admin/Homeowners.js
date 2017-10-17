@@ -17,7 +17,7 @@ class Homeowners extends React.Component{
                 address: '',
                 number: '',
                 id: 0,
-                isAdmin: false,
+                isAdmin: 0,
                 title: '',
                 search: '',
             }
@@ -118,7 +118,7 @@ class Homeowners extends React.Component{
             return this.viewHomeowners(homeowners)
         }
     }
-    
+
 
     viewHomeowners = (homeowners) => {
         let { search } = this.state
@@ -205,7 +205,7 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { isAdmin && 
+                { isAdmin &&
                     <Form.Field>
                         <label>Title</label>
                         <input
