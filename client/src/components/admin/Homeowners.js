@@ -11,8 +11,6 @@ import ReactPhoneInput from 'react-phone-input'
 class Homeowners extends React.Component{
     state = { showForm: false,
                 email: '',
-                password: '',
-                passwordConfirmation: '',
                 name: '',
                 address: '',
                 number: '',
@@ -123,59 +121,64 @@ class Homeowners extends React.Component{
     viewHomeowners = (homeowners) => {
         let { search } = this.state
         return(
-            <Table celled striped>
-                <Table.Header>
+          <Segment>
+            <Segment basic>
+              <Grid columns={3}>
+                <Grid.Row>
+                  <Grid.Column verticalAlign='bottom'>
+                    <Form>
+                      <Form.Field>
+                        <input id='search' value={search} onChange={this.handleChange} placeholder='Search by Name' />
+                      </Form.Field>
+                    </Form>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Header as='h2' icon textAlign='center'>
+                      <Icon name='users' circular />
+                      <Header.Content>
+                        Homeowners
+                      </Header.Content>
+                    </Header>
+                  </Grid.Column>
+                  <Grid.Column textAlign='right' verticalAlign='bottom'>
+                    <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
+                      <Icon name='user' /> Add User
+                      </Button>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Segment>
+              <Segment basic style={{maxHeight: '750px', overflowY: 'scroll'}}>
+                <Table celled striped>
+                  <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='7' textAlign='center' >
-                            <Grid columns={3}>
-                                <Grid.Row>
-                                    <Grid.Column verticalAlign='bottom'>
-                                        <Form>
-                                            <Form.Field>
-                                            <input id='search' value={search} onChange={this.handleChange} placeholder='Search by Name' />
-                                            </Form.Field>
-                                        </Form>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <Header as='h2' icon textAlign='center'>
-                                            <Icon name='users' circular />
-                                            <Header.Content>
-                                                Homeowners
-                                            </Header.Content>
-                                        </Header>
-                                    </Grid.Column>
-                                </Grid.Row>
-                            </Grid>
-                        </Table.HeaderCell>
+                      <Table.HeaderCell />
+                      <Table.HeaderCell>Homeowner</Table.HeaderCell>
+                      <Table.HeaderCell>Email Address</Table.HeaderCell>
+                      <Table.HeaderCell>Number</Table.HeaderCell>
+                      <Table.HeaderCell>Address</Table.HeaderCell>
+                      <Table.HeaderCell>IsAdmin</Table.HeaderCell>
+                      <Table.HeaderCell>Status</Table.HeaderCell>
                     </Table.Row>
-                    <Table.Row>
-                        <Table.HeaderCell />
-                        <Table.HeaderCell>Homeowner</Table.HeaderCell>
-                        <Table.HeaderCell>Email Address</Table.HeaderCell>
-                        <Table.HeaderCell>Number</Table.HeaderCell>
-                        <Table.HeaderCell>Address</Table.HeaderCell>
-                        <Table.HeaderCell>IsAdmin</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
+                  </Table.Header>
+                  <Table.Body>
                     { homeowners.length > 0 ?
-                        this.displayHomeowners(homeowners) :
-                        <Table.Row>
-                            <Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell>
-                        </Table.Row>
+                      this.displayHomeowners(homeowners) :
+                      <Table.Row>
+                        <Table.Cell colSpan='4' textAlign='center' >No Homeowners to Display</Table.Cell>
+                      </Table.Row>
                     }
-                </Table.Body>
-                <Table.Footer fullWidth>
+                  </Table.Body>
+                  <Table.Footer fullWidth>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='7'>
-                            <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
-                                <Icon name='user' /> Add User
-                            </Button>
-                        </Table.HeaderCell>
+                      <Table.HeaderCell colSpan={7}>
+                        &nbsp;
+                      </Table.HeaderCell>
                     </Table.Row>
-                </Table.Footer>
-            </Table>
+                  </Table.Footer>
+                </Table>
+              </Segment>
+          </Segment>
         )
     }
 
@@ -205,7 +208,7 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { isAdmin &&
+                { isAdmin === 1 &&
                     <Form.Field>
                         <label>Title</label>
                         <input
@@ -231,32 +234,6 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { id ? '' :
-                <div >
-                    <Form.Field>
-                        <label>Password</label>
-                        <input
-                        id='password'
-                        placeholder='Password'
-                        type='password'
-                        required
-                        value={password}
-                        onChange={this.handleChange}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Password Confirmation</label>
-                        <input
-                        id='passwordConfirmation'
-                        placeholder='Password Confirmation'
-                        type='password'
-                        required
-                        value={passwordConfirmation}
-                        onChange={this.handleChange}
-                        />
-                    </Form.Field>
-                    </div>
-                }
                 <Segment basic textAlign='right'>
                     <Button primary onClick={ this.addUser }>Cancel</Button>
                     <Button primary type='submit'>{ id ? 'Update' : 'Submit'}</Button>

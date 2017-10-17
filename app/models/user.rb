@@ -41,4 +41,21 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   attr_accessor :status
+
+  after_create :set_status_locked!
+  after_update :set_status_attribute
+  after_save :set_status_attribute
+  after_initialize :set_status_attribute
+  after_find :set_status_attribute
+
+  private
+
+  def set_status_attribute
+    self.status = self.access_locked? ? 1 : 0
+  end
+
+  def set_status_locked!
+    self.lock_access!({ send_instructions: false })
+    self.status = self.access_locked? ? 1 : 0
+  end
 end

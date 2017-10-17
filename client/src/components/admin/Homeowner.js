@@ -26,7 +26,7 @@ class Homeowner extends React.Component {
 
     handleStatusToggle = ( ) => {
         const { dispatch, homeowner } = this.props
-        let newStatus = !homeowner.status
+        let newStatus = homeowner.status ? 0 : 1
         dispatch(statusHomeowners(homeowner.id, homeowner.status))
         this.setState({ status: newStatus })
     }

@@ -3,23 +3,18 @@ import { setFlash } from '../actions/flash';
 
 export const registerUser = (user) => {
   return(dispatch) => {
-    axios.post('/api/auth', { name: user.name, 
-                              email: user.email, 
-                              password: user.password, 
-                              password_confirmation: user.password_confirmation,
+    axios.post('/api/auth', { name: user.name,
+                              email: user.email,
+                              password: 'password',
+                              password_confirmation: 'password',
                               number: user.number,
                               address: user.address,
                              })
-      // .then( res => {
-      //   let { data: { data: user }, headers } = res;
-        // dispatch({ type: 'LOGIN', user, headers });
-        // history.push('/');
-      // })
-      .then(
-        dispatch({ type: 'ADD_HOMEOWNER', homeowner: user})
-      )
+      .then( resp => {
+        dispatch({ type: 'ADD_HOMEOWNER', homeowner: resp.data.data })
+      })
       .catch( res => {
-        const message = res.response.data.errors.join(',');
+        const message = res.response.data.errors.full_messages[0];
         dispatch(setFlash(message, 'error'));
     });
   }
