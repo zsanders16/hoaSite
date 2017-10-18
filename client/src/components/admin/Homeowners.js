@@ -142,7 +142,7 @@ class Homeowners extends React.Component{
                   </Grid.Column>
                   <Grid.Column textAlign='right' verticalAlign='bottom'>
                     <Button floated='right' icon labelPosition='left' primary size='small' onClick={this.addUser}>
-                      <Icon name='user' /> Add User
+                      <Icon name='user' /> Add Homeowner
                       </Button>
                     </Grid.Column>
                   </Grid.Row>
@@ -186,7 +186,7 @@ class Homeowners extends React.Component{
         const { email, password, passwordConfirmation, name, address, number, id, isAdmin, title } = this.state;
         return(
             <Segment >
-                <Header as='h1' textAlign='center'>{ id>0 ? 'Edit User' : 'Add User' }</Header>
+                <Header as='h1' textAlign='center'>{ id>0 ? 'Edit Homeowner' : 'Add Homeowner' }</Header>
                 <Form onSubmit={this.handleSubmit}>
                 <Form.Field>
                     <label>Email</label>
