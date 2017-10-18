@@ -61,8 +61,8 @@ class App extends Component {
             <Grid.Row only='mobile'>
               <Grid.Column>
                 <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
-                    <div style={{marginLeft: '10px', fontSize: '200%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
-                    <div style={{marginLeft: '25px', marginTop: '10px' , fontSize: '100%'}}><p>Home Owners Association | SLC Ut</p></div>
+                    <div style={{marginLeft: '10px', fontSize: '250%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
+                    <div style={{marginLeft: '25px', marginTop: '20px' , fontSize: '150%'}}><p>Home Owners Association | SLC Ut</p></div>
                   </Segment>
               </Grid.Column>
             </Grid.Row>
