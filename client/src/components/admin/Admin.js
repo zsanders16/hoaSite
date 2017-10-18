@@ -7,9 +7,9 @@ class Admin extends React.Component{
     render(){
         return(
             <Segment basic>
-                <Grid centered columns={3} style={{marginLeft: '3px'}}>
+                <Grid centered  style={{marginLeft: '3px'}}>
                     <Grid.Row >
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/homeowners' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -23,7 +23,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/newslettersadmin' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -37,7 +37,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/ccrsadmin' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -51,7 +51,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/legal' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -65,7 +65,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/minutes' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -79,7 +79,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/discussion' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -93,7 +93,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/emails' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -107,7 +107,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                        <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                        <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                             <Link to='admin/events' >
                                 <Card style={{height: '100px'}}>
                                     <Card.Content>
@@ -121,7 +121,7 @@ class Admin extends React.Component{
                                 </Card>
                             </Link>
                         </Grid.Column>
-                      <Grid.Column style={{marginTop: '5px', marginBottom: '5px'}}>
+                      <Grid.Column computer={5} tablet={8} mobile={16} style={{marginTop: '5px', marginBottom: '5px'}}>
                           <Link to='admin/homepages' >
                               <Card style={{height: '100px'}}>
                                   <Card.Content>

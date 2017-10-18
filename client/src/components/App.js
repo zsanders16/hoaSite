@@ -18,7 +18,7 @@ import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
 import { Switch, Route } from 'react-router-dom'
 import FetchUser from './FetchUser';
-import { Container, Segment } from 'semantic-ui-react'
+import { Container, Segment, Grid } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
 import Members from './board/Members'
 import ForgotPassword from './ForgotPassword'
@@ -57,10 +57,24 @@ class App extends Component {
     return (
       <div style={{background: 'linear-gradient(#1C599C, #ADD1E9)', minHeight: '1300px'}}>
         <Container>
-          <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
-            <div style={{marginLeft: '50px', fontSize: '75px', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
-            <div style={{marginLeft: '300px', fontSize: '25px'}}><p>Home Owners Association | SLC Ut</p></div>
-          </Segment>
+          <Grid columns={1} >
+            <Grid.Row only='mobile'>
+              <Grid.Column>
+                <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
+                    <div style={{marginLeft: '50px', fontSize: '300%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
+                    <div style={{marginLeft: '75px', marginTop: '10px' , fontSize: '150%'}}><p>Home Owners Association | SLC Ut</p></div>
+                  </Segment>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row  only='tablet computer'>
+              <Grid.Column>
+                <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
+                  <div style={{marginLeft: '50px', fontSize: '500%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
+                  <div style={{marginLeft: '300px', fontSize: '175%'}}><p>Home Owners Association | SLC Ut</p></div>
+                </Segment>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           <NavBar />
           <Flash />
           <FetchUser>

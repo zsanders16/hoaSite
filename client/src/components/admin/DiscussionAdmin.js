@@ -128,7 +128,7 @@ class DiscussionAdmin extends React.Component{
         return discussions.map( (discussion, i) => {
             let url = `/viewdiscussion/${discussion.id}`
             return (
-                <Grid.Column key={i} style={{marginTop: '5px', marginBottom: '5px'}}>
+                <Grid.Column computer={5} tablet={8} mobile={16} key={i} style={{marginTop: '5px', marginBottom: '5px'}}>
                     <Link to={{ pathname: url, query: { discussion: discussion } }} >
                         <Card color='blue'  >
                             <Card.Content>

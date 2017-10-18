@@ -62,7 +62,7 @@ class NavBar extends Component {
     const { user, dispatch, history } = this.props
     return (
       <div style={{backgroundColor: '#17202A', marginTop: '-14px', borderRadius: '0 0 7px 7px'}}>
-        <Menu pointing secondary reversed='mobile'>
+        <Menu pointing secondary stackable>
           <Link to='/' >
             <Menu.Item name='home' style={{color: '#FDFEFE'}} />
           </Link>
