@@ -89,13 +89,13 @@ class Homeowners extends React.Component{
     }
 
     editHomeowner = (homeowner) => {
-        this.setState({name: homeowner.name,
+        this.setState({ name: homeowner.name,
                         email: homeowner.email,
                         id: homeowner.id,
-                        number: homeowner.number,
-                        address: homeowner.address,
+                        number: homeowner.number || '',
+                        address: homeowner.address || '',
                         showForm: true,
-                        title: homeowner.title,
+                        title: homeowner.title || '',
                         isAdmin: homeowner.admin
                     })
     }
@@ -208,7 +208,7 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { isAdmin === 1 &&
+                { isAdmin === true &&
                     <Form.Field>
                         <label>Title</label>
                         <input
