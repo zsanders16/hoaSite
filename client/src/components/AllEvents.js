@@ -1,130 +1,41 @@
 import React from 'react'
 import { getEvents, clearEvents } from '../actions/events'
 import { connect } from 'react-redux'
-import { Header, Segment, Table } from 'semantic-ui-react'
-
-const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-]
+import { Header, Segment, Table, Icon } from 'semantic-ui-react'
+import moment from 'moment'
 
 class AllEvents extends React.Component{
-    state = {   jan: [],
-                feb: [],
-                mar: [],
-                apr: [],
-                may: [],
-                jun: [],
-                jul: [],
-                aug: [],
-                sep: [],
-                oct: [],
-                nov: [],
-                dec: [],
-            }
-
+    state = { eventList: {}}
+    
     componentDidMount(){
         this.props.dispatch(getEvents())
-    }
-
-    getFunction = (num) => {
-        let { jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec } = this.state
-        let all = {
-            '1': jan,
-            '2': feb,
-            '3': mar,
-            '4': apr,
-            '5': may,
-            '6': jun,
-            '7': jul,
-            '8': aug,
-            '9': sep,
-            '10': oct,
-            '11': nov,
-            '12': dec,
-        }
-
-        let month = {
-            '1': 'jan',
-            '2': 'feb',
-            '3': 'mar',
-            '4': 'apr',
-            '5': 'may',
-            '6': 'jun',
-            '7': 'jul',
-            '8': 'aug',
-            '9': 'sep',
-            '10': 'oct',
-            '11': 'nov',
-            '12': 'dec',
-        }
-
-        let type = all[num]
-        let stateMonth = month[num] 
-        debugger
-        return (createdEvent) => {
-            this.setState({ [`${stateMonth}`]: [...type, createdEvent] }, function(){
-                debugger
-            })
-        }
     }
 
     componentWillReceiveProps(nextProps){
 
         if(nextProps.events !== this.props.events){
-            
+
+            const eventList = {
+                "January": [],
+                "February": [],
+                "March": [],
+                "April": [],
+                "May": [],
+                "June": [],
+                "July": [],
+                "August": [],
+                "September": [],
+                "October": [],
+                "November": [],
+                "December": [],
+            }
 
             nextProps.events.forEach( (createdEvent) => {
-                let month = createdEvent.date.substring(5,7)
-                let { jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec } = this.state
-                debugger
-                let call = this.getFunction(month)
-                debugger
-                call(createdEvent)
-
-                // switch(month){
-                //     case '1':
-                //         this.setState({ jan: [...jan, event]})
-                //         break
-                //     case '2':
-                //         this.setState({ feb: [...feb, event]})
-                //         break
-                //     case '3':
-                //         this.setState({ mar: [...mar, event]})
-                //         break
-                //     case '4':
-                //         this.setState({ apr: [...apr, event]})
-                //         break
-                //     case '5':
-                //         this.setState({ may: [...may, event]})
-                //         break
-                //     case '6':
-                //         this.setState({ jun: [...jun, event]})
-                //         break
-                //     case '7':
-                //         this.setState({ jul: [...jul, event]})
-                //         break
-                //     case '8':
-                //         this.setState({ aug: [...aug, event]})
-                //         break
-                //     case '9':
-                //         this.setState({ sep: [...sep, event]})
-                //         break
-                //     case '10':
-                //         let existArray = oct
-                //         let newArray = [...oct, event]
-                //         this.setState({ oct: newArray})
-                        
-                //         break
-                //     case '11':
-                //         this.setState({ nov: [...nov, event]})
-                //         break
-                //     case '12':
-                //         this.setState({ dec: [...dec, event]})
-                //         break
-                //     default:
-                //         break
-                // }
+                let d = moment(createdEvent.date)
+                let month = d.add(1,'year').format('LL').split(' ')[0]
+                eventList[month] = [...eventList[month], createdEvent]
             })
+            this.setState({ eventList: eventList })
         }
     }
 
@@ -142,61 +53,40 @@ class AllEvents extends React.Component{
         )
     }
 
-    eachMonth = (month) => {
-        if(month.length > 0){
-            return month.map( (event, i) => {
-                return(
-                    <Table.Row key={i}>
-                        <Table.Cell collapsing verticalAlign='top' >{event.date}</Table.Cell>
-                        <Table.Cell collapsing verticalAlign='top' >{event.title}</Table.Cell>
-                        <Table.Cell verticalAlign='top' >{event.description}</Table.Cell>
-                    </Table.Row>
-                )
-            })
-        }else{
-            return (
-                <Table.Row >
-                    <Table.Cell >No Events for this Month</Table.Cell>
+    eventsByMonth = (events) => {
+        return events.map( (event, i) => {
+            return(
+                <Table.Row key={i}>
+                    <Table.Cell width='3' verticalAlign='top' >{event.date}</Table.Cell>
+                    <Table.Cell width='5' verticalAlign='top' >{event.title}</Table.Cell>
+                    <Table.Cell width='8' verticalAlign='top' >{event.description}</Table.Cell>
                 </Table.Row>
             )
-        }
+        })   
     }
 
     displayEvents = () => {
-        let { jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec } = this.state
-        
-        return (months.map( (month, i) => {
+        let { eventList } = this.state
 
-            const all = {
-                'January'   : jan,
-                'February'  : feb,
-                'March'     : mar,
-                'April'     : apr,
-                "May"       : may,
-                "June"      : jun,
-                "July"      : jul,
-                "August"    : aug,
-                "September" : sep,
-                "October"   : oct,
-                "November"  : nov,
-                "December"  : dec,
-              }
-            const Type = all[month]
+        return (Object.keys(eventList).map( (month, i) => {
             return (
                 <Segment key={i} >
-                    <Header textAlign='center'>{month}</Header>
+                    <Header as='h2' textAlign='center' style={{textDecoration: 'underline'}}>{month}</Header>
+                    { eventList[month].length > 0 ? 
                     <Table>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Date</Table.HeaderCell>
-                            <Table.HeaderCell>Title</Table.HeaderCell>
-                            <Table.HeaderCell>Description</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        { this.eachMonth(Type)}
-                    </Table.Body>
-                    </Table>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell width='3'>Date</Table.HeaderCell>
+                                <Table.HeaderCell width='5'>Title</Table.HeaderCell>
+                                <Table.HeaderCell width='8'>Description</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>          
+                            {this.eventsByMonth(eventList[month]) } 
+                        </Table.Body>
+                    </Table> :
+                        <Header textAlign='center'>No Events for this Month</Header>
+                    }
                 </Segment>
             )
         })
@@ -207,15 +97,22 @@ class AllEvents extends React.Component{
         let { events } = this.props
         if(events.length > 0){
             return (
-                <Segment>
-                    {this.displayEvents()}
+                <Segment style={{margin: '15px 10px 0 10px'}}>
+                    <Header as='h2' icon textAlign='center'>
+                        <Icon name='calendar' circular />
+                        <Header.Content style={{textDecoration: 'underline'}}>
+                            All Events
+                        </Header.Content>
+                    </Header>
+                    <Segment style={{maxHeight: '950px', overflowY: 'scroll'}}>
+                        {this.displayEvents()}
+                    </Segment>
                 </Segment>
             )
         }else{
             return this.displayNoEvents()
         }  
     }
-
 }
 
 const mapStateToProps = (state) => {

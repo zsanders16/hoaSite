@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Container, Segment, Grid, Divider } from 'semantic-ui-react';
+import { Container, Segment, Grid, Divider, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
 // import logo from '../assets/logo.jpg'
 
 // Actions
@@ -50,6 +51,8 @@ class Home extends Component {
               <Grid.Column computer={4} tablet={4} mobile={16} >
                 <Access />
                 <Divider style={{marginTop: '-30px'}}/>
+                <Link to='/allEvents'><Header textAlign='center'>All Events</Header></Link>
+                <Divider />
                 <Events />
               </Grid.Column>
             </Grid.Row>
