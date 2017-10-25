@@ -44,6 +44,11 @@ class Api::HomePagesController < ApplicationController
     render json: HomePage.where(active: 1).limit(1)
   end
 
+  def header_image
+    render json: HomePage.select(:attachment)
+      .where(active: 1).limit(1)[0].attachment
+  end
+
   private
 
   def set_home_page

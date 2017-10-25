@@ -22,7 +22,7 @@
 #  nickname               :string
 #  image                  :string
 #  email                  :string
-#  admin                  :boolean          default(FALSE)
+#  admin                  :integer          default(0)
 #  tokens                 :json
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -31,6 +31,8 @@
 #  failed_attempts        :integer          default(0), not null
 #  unlock_token           :string
 #  locked_at              :datetime
+#  title                  :string
+#  status                 :integer          default(1)
 #
 
 class User < ActiveRecord::Base

@@ -49,7 +49,7 @@ class NavBar extends Component {
 
   showAdmin = () => {
     const { user } = this.props
-    if(user.admin == 1){
+    if(user.admin === 1){
       return(
         <Link to='/admin' >
           <Menu.Item name='Admin' style={{color: '#FDFEFE'}} />

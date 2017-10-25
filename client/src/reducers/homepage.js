@@ -1,6 +1,7 @@
 const defaults = {
   data: {},
   reload: false,
+  headerImage: '',
 }
 const homepage = ( state = defaults, action ) => {
   switch( action.type ) {
@@ -13,6 +14,11 @@ const homepage = ( state = defaults, action ) => {
       return {
         ...state,
         reload: true,
+      }
+    case 'HEADER_IMAGE':
+      return {
+        ...state,
+        headerImage: action.data,
       }
     default:
       return state

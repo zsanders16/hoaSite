@@ -44,11 +44,6 @@ class Home extends Component {
         <Container style={{backgroundColor: '#FFFFFF'}} >
           <Grid celled style={{ margin: '0' }}>
             <Grid.Row>
-              <Grid.Column mobile={16} >
-                <HomeHeaderImage attachment={attachment} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
               <Grid.Column computer={12} tablet={12} mobile={16} >
                 <HomeMainBody title={title} body={body} />
               </Grid.Column>
@@ -81,3 +76,8 @@ const mapStateToProps = ( state, props ) => {
 }
 
 export default connect(mapStateToProps)(Home);
+// <Grid.Row>
+//   <Grid.Column mobile={16} >
+//     <HomeHeaderImage attachment={attachment} />
+//   </Grid.Column>
+// </Grid.Row>

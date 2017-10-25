@@ -24,3 +24,21 @@ export const reloadHomepage = () => {
     type: 'RELOAD_HOMEPAGE',
   }
 }
+
+export const loadHeaderImage = () => {
+  return (dispatch) => {
+    axios.get('/api/home_pages/header_image')
+    .then( resp => {
+      dispatch({
+        type: 'HEADER_IMAGE',
+        data: resp.data,
+        headers: resp.headers,
+      })
+    })
+    .catch( resp => {
+      dispatch(
+        setFlash('Header Image Not Loaded!','error')
+      )
+    })
+  }
+}

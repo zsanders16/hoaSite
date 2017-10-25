@@ -93,6 +93,7 @@
 #                             PUT      /api/events/:id(.:format)                        api/events#update
 #                             DELETE   /api/events/:id(.:format)                        api/events#destroy
 #       active_api_home_pages GET      /api/home_pages/active(.:format)                 api/home_pages#active
+# header_image_api_home_pages GET      /api/home_pages/header_image(.:format)           api/home_pages#header_image
 #              api_home_pages GET      /api/home_pages(.:format)                        api/home_pages#index
 #                             POST     /api/home_pages(.:format)                        api/home_pages#create
 #               api_home_page GET      /api/home_pages/:id(.:format)                    api/home_pages#show
@@ -103,8 +104,9 @@
 #        granted_api_requests POST     /api/requests/granted(.:format)                  api/requests#granted
 #         denied_api_requests POST     /api/requests/denied(.:format)                   api/requests#denied
 #                api_requests GET      /api/requests(.:format)                          api/requests#index
+#           api_board_members GET      /api/board_members(.:format)                     api/board_members#index
 #                             GET      /*other(.:format)                                static#index
-#
+# 
 
 Rails.application.routes.draw do
 
@@ -170,6 +172,7 @@ Rails.application.routes.draw do
     # Routes for Home Page Controller
     resources :home_pages, shallow: true do
       get 'active', on: :collection
+      get 'header_image', on: :collection
     end
 
     # Routes for access requests

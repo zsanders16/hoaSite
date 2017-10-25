@@ -22,6 +22,7 @@ import { Container, Segment, Grid } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
 import Members from './board/Members'
 import ForgotPassword from './ForgotPassword'
+import HomeHeaderImage from './homepages/HomeHeaderImage'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-datepicker/dist/react-datepicker.min.css'
 
@@ -60,18 +61,12 @@ class App extends Component {
           <Grid columns={1} >
             <Grid.Row only='mobile'>
               <Grid.Column>
-                <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
-                    <div style={{marginLeft: '10px', fontSize: '250%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
-                    <div style={{marginLeft: '25px', marginTop: '20px' , fontSize: '150%'}}><p>Home Owners Association | SLC Ut</p></div>
-                  </Segment>
+                <HomeHeaderImage />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row  only='tablet computer'>
               <Grid.Column>
-                <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
-                  <div style={{marginLeft: '50px', fontSize: '500%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
-                  <div style={{marginLeft: '300px', fontSize: '175%'}}><p>Home Owners Association | SLC Ut</p></div>
-                </Segment>
+                <HomeHeaderImage />
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -101,3 +96,7 @@ class App extends Component {
 }
 
 export default App;
+// <Segment basic textAlign='left' style={{height: '150px', fontFamily: 'cursive', backgroundColor: '#C2CFDA' }}>
+//     <div style={{marginLeft: '10px', fontSize: '250%', fontWeight: 'bold'}} ><p>Woodstock Village</p></div>
+//     <div style={{marginLeft: '25px', marginTop: '20px' , fontSize: '150%'}}><p>Home Owners Association | SLC Ut</p></div>
+//   </Segment>
