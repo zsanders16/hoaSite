@@ -145,7 +145,8 @@ Rails.application.routes.draw do
     resources :minutes_admin, only: [:index, :update]
 
     #Minutes controller routes
-    resources :minutes, only: [:index, :show, :create, :destroy]
+    resources :minutes, only: [:index, :show, :create, :update, :destroy]
+    get '/minutes_non_admin', to: 'minutes#index_non_admin'
 
     #Messages controller routes
     resources :messages, only: [:index, :show, :create, :update, :destroy] do

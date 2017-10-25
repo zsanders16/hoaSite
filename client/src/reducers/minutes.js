@@ -9,6 +9,12 @@ const minutes = (state = [], action) => {
                 return minutes.id !== action.minutes.id
             })
             return [ ...minuteList ]
+        case 'UPDATE_MINUTE':
+            let updateMinList = state.filter( minutes => {
+                return minutes.id !== action.minutes.id
+            })
+            updateMinList.push(action.minutes)
+            return [ ...updateMinList ]
         case 'CLEAR_MINUTES':
             return []
         default:

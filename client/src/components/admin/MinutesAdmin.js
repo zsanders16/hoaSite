@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Button, Sidebar, Menu, Divider, Form, Confirm, Grid, Table, Message, Icon } from 'semantic-ui-react'
 import { updateMinutesModule } from '../../actions/admin/adminModules'
-import { addMinute } from '../../actions/minutes'
+import { addMinute, getMinutes, clearMinutes, getNonAdminMinutes } from '../../actions/minutes'
 import FileBase64 from 'react-file-base64'
 import SingleMinutes from '../SingleMinutes'
 
@@ -25,6 +25,13 @@ class MinutesAdmin extends React.Component{
             }
         })
 
+        this.props.dispatch(getMinutes())
+    }
+
+    componentWillUnmount() {
+        let { dispatch } = this.props
+        clearMinutes(dispatch)
+        dispatch(getNonAdminMinutes())
     }
 
     changeActiveStatus = () => {
@@ -96,7 +103,7 @@ class MinutesAdmin extends React.Component{
 
     getMinutesRows = () => {
         return this.props.minutes.map( (minute, i) => {
-            return <SingleMinutes key={i} minutes={minute} />
+            return <SingleMinutes key={i} minutes={minute} fromAdmin={true}/>
         })
     }
 
@@ -106,6 +113,7 @@ class MinutesAdmin extends React.Component{
                 <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell />
+                    <Table.HeaderCell textAlign='center'>Is Admin Minutes</Table.HeaderCell>
                     <Table.HeaderCell textAlign='center'>Actions</Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
@@ -284,7 +292,7 @@ class MinutesAdmin extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { adminModules: state.adminModules, minutes: state.minutes }
+    return { adminModules: state.adminModules, minutes: state.minutes, user: state.admin }
 }
 
 

@@ -11,7 +11,7 @@ import { getNewsletters, clearNewsletters } from '../actions/newsletters'
 import { getCcrs, clearCcrs } from '../actions/ccrs'
 import { getBylaws, clearBylaws } from '../actions/bylaws'
 import { getLegals, clearLegals } from '../actions/legal'
-import { getMinutes, clearMinutes } from '../actions/minutes'
+import { getNonAdminMinutes, clearMinutes } from '../actions/minutes'
 import { getDiscussions, clearDiscussions } from '../actions/discussion'
 
 
@@ -64,7 +64,7 @@ class BeforeAppSetup extends React.Component{
             }
             else if(element.name ==='minutes'){
                 if(element.active === true){
-                    dispatch(getMinutes())
+                    dispatch(getNonAdminMinutes())
                 }else{
                     clearMinutes(dispatch)
                 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017192540) do
+ActiveRecord::Schema.define(version: 20171025164542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20171017192540) do
     t.text "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isAdmin", default: false
   end
 
   create_table "minutes_admins", force: :cascade do |t|
@@ -166,7 +167,7 @@ ActiveRecord::Schema.define(version: 20171017192540) do
     t.string "nickname"
     t.string "image"
     t.string "email"
-    t.boolean "admin", default: false
+    t.integer "admin", default: 0
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

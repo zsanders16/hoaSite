@@ -7,6 +7,8 @@ namespace :setup do
     LegalAdmin.create
     DiscussionAdmin.create
     User.create(email: 'admin@test.com', name: 'Admin User', password: 'password', password_confirmation: 'password', admin: true)
+    u = User.first
+    u.unlock_access!
   end
 
 end

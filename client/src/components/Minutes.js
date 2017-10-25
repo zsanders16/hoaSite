@@ -8,7 +8,7 @@ class Minutes extends React.Component{
 
     getMinutesRows = () => {
         return this.props.minutes.map( (minute, i) => {
-            return <SingleMinutes key={i} minutes={minute} />
+            return <SingleMinutes key={i} minutes={minute} fromAdmin={false}/>
         })
     }
 
@@ -45,7 +45,7 @@ class Minutes extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return { minutes: state.minutes }
+    return { minutes: state.minutes, user: state.user }
 }
 
 export default connect(mapStateToProps)(Minutes)
