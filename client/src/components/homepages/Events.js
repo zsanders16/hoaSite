@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Segment, Header, Divider } from 'semantic-ui-react'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 // Actions
 import { activeEvents } from '../../actions/events'
@@ -42,7 +43,7 @@ class Events extends Component {
   render() {
     return (
       <Segment basic style={{maxHeight: '500px', overflowY: 'scroll'}}>
-        <Header as='h3'>Upcoming Events</Header>
+        <Link to='/allEvents'><Header as='h3'>Upcoming Events</Header></Link>
         { this.displayEvents() }
       </Segment>
     )

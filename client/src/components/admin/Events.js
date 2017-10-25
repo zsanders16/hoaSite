@@ -8,7 +8,6 @@ import {
   removeEvent,
   clearEvents,
 } from '../../actions/events'
-import Paginator from '../Paginator'
 import EventModal from './EventModal'
 
 const options = [
@@ -18,8 +17,8 @@ const options = [
 
 class Events extends React.Component{
     defaults = {
-      hasMore: false, eventForm: false, edit: false, eventId: '',
-      title: '', date: '', description: '', id: '', active: true,
+        eventForm: false, edit: false, eventId: '',
+        title: '', date: '', description: '', id: '', active: true,
     }
     state = { ...this.defaults }
 
@@ -27,10 +26,9 @@ class Events extends React.Component{
         let { dispatch, events } = this.props
         if( events.length <= 0 ) {
           dispatch(getEvents())
-          this.setState({ hasMore: true })
         }
     }
-    componentWillUnmount = () => {
+    componentWillUnmount(){
       const { dispatch } = this.props
       dispatch(clearEvents())
     }
@@ -164,9 +162,6 @@ class Events extends React.Component{
                               eventId={eventId}
                               closeEventModal={this.closeEventModal} />
                           }
-                          <Paginator
-                            loadMore={this.loadMore}
-                            pagination={this.props.pagination} />
                         </Table.HeaderCell>
                       </Table.Row>
                     </Table.Footer>
@@ -275,7 +270,6 @@ class Events extends React.Component{
 const mapStateToProps = (state) => {
     return {
       events: state.events.data,
-      pagination: state.events.pagination,
     }
 }
 

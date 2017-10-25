@@ -16,6 +16,7 @@ import ViewDiscussion from './ViewDiscussion'
 import ChangePassword from './ChangePassword'
 import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
+import AllEvents from './AllEvents'
 import { Switch, Route } from 'react-router-dom'
 import FetchUser from './FetchUser';
 import { Container, Segment, Grid } from 'semantic-ui-react'
@@ -82,6 +83,7 @@ class App extends Component {
               <Route exact path='/viewdiscussion/:id' component={ViewDiscussion} />
               <Route exact path='/board_members' component={Members} />
               <Route exact path='/forgotPassword' component={ForgotPassword} />
+              <Route exact path='/allEvents' component={AllEvents} />
               <ProtectedRoute exect path='/changepassword' component={ChangePassword} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />

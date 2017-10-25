@@ -1,10 +1,5 @@
 const defaults = {
   data: [],
-  pagination: {
-    total_pages: '',
-    current_page: '',
-    next_page: '',
-  },
   active: [],
 }
 
@@ -13,8 +8,7 @@ const events = (state = defaults, action) => {
       case 'SET_EVENTS':
         return {
           ...state,
-          data: action.events.data,
-          pagination: action.events.pagination,
+          data: action.events,
         };
       case 'ADD_EVENT':
         return {

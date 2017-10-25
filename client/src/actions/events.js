@@ -2,10 +2,9 @@ import axios from 'axios';
 import { setFlash } from '../actions/flash';
 
 
-export const getEvents = ( page=1, per=5 ) => {
-  const query = `?page=${page}&per=${per}`
+export const getEvents = () => {
     return(dispatch) => {
-        axios.get(`/api/events${query}`)
+        axios.get(`/api/events`)
             .then( res => {
                 dispatch({ type: 'SET_EVENTS', events: res.data, headers: res.headers });
             })

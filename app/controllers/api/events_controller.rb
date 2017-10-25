@@ -2,15 +2,8 @@ class Api::EventsController < ApplicationController
   before_action :set_event, only: [:show, :update, :destroy]
 
   def index
-    events = Event.all.page(params[:page]).per_page(params[:per])
-    render json: {
-      data: events,
-      pagination: {
-        total_pages: events.total_pages,
-        current_page: events.current_page,
-        next_page: events.next_page
-      }
-    }
+    events = Event.all
+    render json: events
   end
 
   def show

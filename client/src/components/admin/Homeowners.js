@@ -183,7 +183,7 @@ class Homeowners extends React.Component{
     }
 
     displayForm = () => {
-        const { email, password, passwordConfirmation, name, address, number, id, isAdmin, title } = this.state;
+        const { email, name, address, number, id, isAdmin, title } = this.state;
         return(
             <Segment >
                 <Header as='h1' textAlign='center'>{ id>0 ? 'Edit Homeowner' : 'Add Homeowner' }</Header>
