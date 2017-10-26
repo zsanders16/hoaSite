@@ -209,7 +209,7 @@ class Homeowners extends React.Component{
                     onChange={this.handleChange}
                     />
                 </Form.Field>
-                { isAdmin === true &&
+                { isAdmin === 1 &&
                     <Form.Field>
                         <label>Title</label>
                         <input
