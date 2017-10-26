@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026180504) do
+ActiveRecord::Schema.define(version: 20171025193505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20171026180504) do
   create_table "bylaws", force: :cascade do |t|
     t.string "name", null: false
     t.text "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "carousels", force: :cascade do |t|
+    t.string "filename", null: false
+    t.text "image", null: false
+    t.integer "active", default: 1, null: false
+    t.string "category", default: "general", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

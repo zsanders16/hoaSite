@@ -104,6 +104,14 @@
 #        granted_api_requests POST     /api/requests/granted(.:format)                  api/requests#granted
 #         denied_api_requests POST     /api/requests/denied(.:format)                   api/requests#denied
 #                api_requests GET      /api/requests(.:format)                          api/requests#index
+#        active_api_carousels GET      /api/carousels/active(.:format)                  api/carousels#active
+#      inactive_api_carousels GET      /api/carousels/inactive(.:format)                api/carousels#inactive
+#               api_carousels GET      /api/carousels(.:format)                         api/carousels#index
+#                             POST     /api/carousels(.:format)                         api/carousels#create
+#                api_carousel GET      /api/carousels/:id(.:format)                     api/carousels#show
+#                             PATCH    /api/carousels/:id(.:format)                     api/carousels#update
+#                             PUT      /api/carousels/:id(.:format)                     api/carousels#update
+#                             DELETE   /api/carousels/:id(.:format)                     api/carousels#destroy
 #           api_board_members GET      /api/board_members(.:format)                     api/board_members#index
 #                             GET      /*other(.:format)                                static#index
 # 
@@ -182,6 +190,12 @@ Rails.application.routes.draw do
       post 'access', on: :collection
       post 'granted', on: :collection
       post 'denied', on: :collection
+    end
+
+    # Routes for image Carousel Controller
+    resources :carousels, shallow: true do
+      get 'active', on: :collection
+      get 'inactive', on: :collection
     end
 
     resources :board_members, only: [ :index ]

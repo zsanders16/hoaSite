@@ -41,7 +41,7 @@ class Api::HomePagesController < ApplicationController
   end
 
   def active
-    render json: HomePage.where(active: 1).limit(1)
+    render json: HomePage.select(:title, :body).where(active: 1).limit(1)
   end
 
   def header_image

@@ -9,9 +9,10 @@ import { activeHomepage } from '../../actions/homepage'
 
 // Custom Components
 import HomeMainBody from './HomeMainBody'
-import HomeHeaderImage from './HomeHeaderImage'
 import Events from './Events'
 import Access from '../requests/Access'
+import Carousel from '../carousel/Carousel'
+
 
 class Home extends Component {
   defaults = {
@@ -38,17 +39,23 @@ class Home extends Component {
 
   render() {
     const {
-      title, body, attachment
+      title, body,
     } = this.state
+    //  computer={12} tablet={12} mobile={16}
     return(
       <div>
         <Container style={{backgroundColor: '#FFFFFF'}} >
           <Grid celled style={{ margin: '0' }}>
-            <Grid.Row>
-              <Grid.Column computer={12} tablet={12} mobile={16} >
+            <Grid.Row columns={1}>
+              <Grid.Column width={16}>
+                <Carousel />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={2}>
+              <Grid.Column width={12}>
                 <HomeMainBody title={title} body={body} />
               </Grid.Column>
-              <Grid.Column computer={4} tablet={4} mobile={16} >
+              <Grid.Column width={4}>
                 <Access />
                 <Divider style={{marginTop: '-30px'}}/>
                 <Link to='/allEvents'><Header textAlign='center'>All Events</Header></Link>

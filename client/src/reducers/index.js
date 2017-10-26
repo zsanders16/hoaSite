@@ -19,8 +19,11 @@ import homepage from './homepage'
 import requests from './requests'
 import members from './members'
 import watch from './watch'
+import carousel from './carousel'
+
 
 const rootReducer = combineReducers({
+    carousel,
     members,
     requests,
     homepage,

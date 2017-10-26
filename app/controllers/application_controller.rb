@@ -7,6 +7,17 @@ class ApplicationController < ActionController::API
     render json: { errors: model.errors.full_messages.join(',\n')}, status: 422
   end
 
+  def render_paginated_model_to_json(model)
+    render json: {
+      data: model,
+      pagination: {
+        total_pages: model.total_pages,
+        current_page: model.current_page,
+        next_page: model.next_page
+      }
+    }
+  end
+
   protected
 
   def configure_permitted_parameters

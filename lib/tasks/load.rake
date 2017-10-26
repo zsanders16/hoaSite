@@ -18,7 +18,7 @@ namespace :load do |loader_namespace|
   desc "Load Test Home Pages"
   task homepages: :environment do
     HomePage.destroy_all
-    fileImage = '/Users/biosci/Pictures/Jesus and Javascript.png'
+    fileImage = '/Users/biosci/Pictures/TestHeader.png'
     20.times do
       HomePage.create(
         title: Faker::Lorem.sentence,
@@ -42,6 +42,23 @@ namespace :load do |loader_namespace|
         description: Faker::Lorem.paragraph(5),
         date: Time.now,
         active: status.sample
+      )
+    end
+  end
+
+  desc "Load Test Images for Carousel Model"
+  task carousel: :environment do
+    Carousel.destroy_all
+
+    true_false = [0,1]
+    file_image = '/Users/biosci/Pictures/carouselImage.png'
+
+    30.times do
+      Carousel.create(
+        filename: Faker::File.file_name('/my/secret/path','imagefile','png'),
+        image: 'data:image/png;base64,' + Base64.encode64(open(file_image).read),
+        active: true_false.sample,
+        category: Faker::Lorem.word,
       )
     end
   end
