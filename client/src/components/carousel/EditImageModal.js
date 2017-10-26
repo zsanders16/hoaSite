@@ -13,10 +13,10 @@ class EditImageModal extends Component {
     if( props.newImage ) {
       this.setState({ openModal: true })
     } else {
-      const { imageId: {id} } = props
+      const { imageId } = props
       this.setState({
         openModal: true,
-        activeImage: this.props.carousel.find( image => image.id === id ),
+        activeImage: this.props.carousel.find( image => image.id === imageId ),
       })
     }
   }
