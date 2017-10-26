@@ -155,10 +155,11 @@ class Homeowners extends React.Component{
                       <Table.HeaderCell />
                       <Table.HeaderCell>Homeowner</Table.HeaderCell>
                       <Table.HeaderCell>Email Address</Table.HeaderCell>
-                      <Table.HeaderCell>Number</Table.HeaderCell>
+                      <Table.HeaderCell textAlign='center'>Number</Table.HeaderCell>
                       <Table.HeaderCell>Address</Table.HeaderCell>
-                      <Table.HeaderCell>IsAdmin</Table.HeaderCell>
-                      <Table.HeaderCell>Status</Table.HeaderCell>
+                      <Table.HeaderCell textAlign='center'>IsAdmin</Table.HeaderCell>
+                      <Table.HeaderCell textAlign='center'>IsWatch</Table.HeaderCell>
+                      <Table.HeaderCell textAlign='center' >Status</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
@@ -171,7 +172,7 @@ class Homeowners extends React.Component{
                   </Table.Body>
                   <Table.Footer fullWidth>
                     <Table.Row>
-                      <Table.HeaderCell colSpan={7}>
+                      <Table.HeaderCell colSpan={8}>
                         &nbsp;
                       </Table.HeaderCell>
                     </Table.Row>

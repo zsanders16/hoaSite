@@ -6,6 +6,7 @@ class EventModal extends Component {
   state = { openModal: true }
 
   componentWillReceiveProps = ( nextProps ) => this.setState({ openModal: true })
+  
   handleClose = () => {
     this.setState({ openModal: false })
     this.props.closeEventModal()

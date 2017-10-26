@@ -17,9 +17,10 @@ import ChangePassword from './ChangePassword'
 import ProtectedRoute from './ProtectedRoute'
 import AdminRoute from './AdminRoute'
 import AllEvents from './AllEvents'
+import Watch from './Watch'
 import { Switch, Route } from 'react-router-dom'
 import FetchUser from './FetchUser';
-import { Container, Segment, Grid } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import ViewPDF from './ViewPDF'
 import Members from './board/Members'
 import ForgotPassword from './ForgotPassword'
@@ -84,6 +85,7 @@ class App extends Component {
               <Route exact path='/board_members' component={Members} />
               <Route exact path='/forgotPassword' component={ForgotPassword} />
               <Route exact path='/allEvents' component={AllEvents} />
+              <Route exact path='/watch' component={Watch} />
               <ProtectedRoute exect path='/changepassword' component={ChangePassword} />
               { this.createRoutes() }
               <AdminRoute path='/admin' component={AdminRoutes} />

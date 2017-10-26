@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Divider, Header, Table, Grid, Button, Form, Popup, Icon, Select } from 'semantic-ui-react'
+import { Segment, Divider, Header, Table, Grid, Button, Popup, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {
   getEvents,
@@ -10,14 +10,9 @@ import {
 } from '../../actions/events'
 import EventModal from './EventModal'
 
-const options = [
-    { key: 'active', text: 'Active', value: true },
-    { key: 'inactive', text: 'Inactive', value: false },
-]
-
 class Events extends React.Component{
     defaults = {
-        eventForm: false, edit: false, eventId: '',
+        edit: false, eventId: '',
         title: '', date: '', description: '', id: '', active: true,
     }
     state = { ...this.defaults }
@@ -63,13 +58,13 @@ class Events extends React.Component{
                   key={i}
                   >
                     <Table.Cell>
-                        <Header as='h4'>{event.title.substr(0,30) + '...'}</Header>
+                        <Header as='h4'>{event.title}</Header>
                     </Table.Cell>
                     <Table.Cell singleLine collapsing >
                         {event.date}
                     </Table.Cell>
                     <Table.Cell>
-                        {event.description.substr(0,50) + '...'}
+                        {event.description}
                     </Table.Cell>
                     <Table.Cell>
                       { event.active ? 'Active' : 'Inactive' }
@@ -118,7 +113,7 @@ class Events extends React.Component{
                     <Grid.Column width={12}>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <Button primary onClick={ this.showEventForm } >Create Event</Button>
+                        <Button primary onClick={ () => this.displayEventModal('0') } >Create Event</Button>
                     </Grid.Column>
                 </Grid>
             </Segment>
@@ -179,13 +174,6 @@ class Events extends React.Component{
         )
     }
 
-    showEventForm = () => {
-        let { eventForm } = this.state
-        if(eventForm){
-            this.setState({...this.defaults})
-        }
-        this.setState({ eventForm: !eventForm })
-    }
 
     handleOnChange = (e) => {
         const id = e.target.id;
@@ -210,43 +198,54 @@ class Events extends React.Component{
       this.setState({ [data.id]: data.value })
     }
 
-    displayForm = () => {
-        let { title, description, edit } = this.state
-        return(
-            <Segment basic >
-                <Grid.Column width={4}>
-                </Grid.Column>
-                <Grid.Column width={12}>
-                    <Form onSubmit={this.handleOnSubmit} >
-                        <Form.Field>
-                            <label>Title</label>
-                            <input placeholder='Title' value={title} id='title' onChange={this.handleOnChange} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label >Meeting Date : </label><input type="date" id='date' onChange={this.handleOnChange} />
-                        </Form.Field>
-                        <Form.Field>
-                            <Form.TextArea label='Description' placeholder='Description of the event...' value={description} id='description' onChange={this.handleOnChange} />
-                        </Form.Field>
-                        <Form.Field
-                            options={options}
-                            label='Status'
-                            placeholder='Status'
-                            control={Select}
-                            id='active'
-                            onChange={this.handleStatusChange} 
-                        >
-                        </Form.Field>
-                        <Button primary onClick={this.showEventForm} >Cancel</Button>
-                        <Button primary type='submit'>{ edit ? 'Update' : 'Submit' }</Button>
-                    </Form>
-                </Grid.Column>
-            </Segment>
-        )
-    }
+    handleDateChange = ( moment ) => {
+        this.setState({ date: moment.utc().format() })
+      }
+
+    // displayForm = () => {
+    //     let { title, description, edit, date } = this.state
+    //     return(
+    //         <Segment basic >
+    //             <Grid.Column width={4}>
+    //             </Grid.Column>
+    //             <Grid.Column width={12}>
+    //                 <Form onSubmit={this.handleOnSubmit} >
+    //                     <Form.Field>
+    //                         <label>Title</label>
+    //                         <input placeholder='Title' value={title} id='title' onChange={this.handleOnChange} />
+    //                     </Form.Field>
+    //                     <Form.Field>
+    //                         <label>Date</label>
+    //                         <DatePicker
+    //                             required
+    //                             selected={moment(date).local()}
+    //                             onChange={this.handleDateChange}
+    //                             timeIntervals={15}
+    //                             dateFormat="LLL"
+    //                         />
+    //                         {/* <label >Meeting Date : </label><input type="date" id='date' onChange={this.handleOnChange} /> */}
+    //                     </Form.Field>
+    //                     <Form.Field>
+    //                         <Form.TextArea label='Description' placeholder='Description of the event...' value={description} id='description' onChange={this.handleOnChange} />
+    //                     </Form.Field>
+    //                     <Form.Field
+    //                         options={options}
+    //                         label='Status'
+    //                         placeholder='Status'
+    //                         control={Select}
+    //                         id='active'
+    //                         onChange={this.handleStatusChange} 
+    //                     >
+    //                     </Form.Field>
+    //                     <Button primary onClick={this.showEventForm} >Cancel</Button>
+    //                     <Button primary type='submit'>{ edit ? 'Update' : 'Submit' }</Button>
+    //                 </Form>
+    //             </Grid.Column>
+    //         </Segment>
+    //     )
+    // }
 
     render(){
-        let { eventForm } = this.state
         return(
             <Segment>
                 <Header
@@ -259,7 +258,7 @@ class Events extends React.Component{
                   </Header.Content>
                 </Header>
                 <Segment basic>
-                    { eventForm ? this.displayForm() : this.events() }
+                    { this.events() }
                 </Segment>
             </Segment>
         )

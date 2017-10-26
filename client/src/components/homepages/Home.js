@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Container, Segment, Grid, Divider, Header } from 'semantic-ui-react';
+import { Container, Segment, Grid, Divider, Header, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
-// import logo from '../assets/logo.jpg'
+import neighWatch from '../../assets/neighWatch.png'
 
 // Actions
 import { activeHomepage } from '../../actions/homepage'
@@ -58,12 +58,24 @@ class Home extends Component {
             </Grid.Row>
           </Grid>
           <footer>
-            <Segment basic textAlign='center'>
-              <h3 style={{marginBottom: '10px'}}>Woodstock Village Homeowners Association</h3>
-              <h5 style={{marginTop: '-10px'}}>Mailing Address:</h5>
-              <p style={{marginBottom: '10px'}}>P.O. Box 71963 </p>
-              <p style={{marginTop: '-10px'}}>SLC UT, 84171-0963 </p>
-            </Segment>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column width={5} textAlign='left' >
+                  <Link to='/watch' >
+                    <Header as='h4' style={{margin: '10px 0 0 15px'}} >Your Neighborhood Watch</Header>
+                    <Image src={neighWatch} size='tiny' style={{marginLeft: '55px'}}/>
+                  </Link>
+                </Grid.Column>
+                <Grid.Column width={11}>
+                  <Segment basic >
+                    <h3 style={{marginBottom: '10px', marginLeft: '20px'}}>Woodstock Village Homeowners Association</h3>
+                    <h5 style={{marginTop: '-10px', marginLeft: '140px'}}>Mailing Address:</h5>
+                    <p style={{marginBottom: '10px', marginLeft: '140px'}}>P.O. Box 71963 </p>
+                    <p style={{marginTop: '-10px', marginLeft: '140px'}}>SLC UT, 84171-0963 </p>
+                  </Segment>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </footer>
         </Container>
       </div>

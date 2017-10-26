@@ -16,6 +16,7 @@ export const getEvents = () => {
 }
 
 export const addEvent = (event) => {
+    debugger
     return(dispatch) => {
         axios.post('/api/events', {event})
             .then( res => {

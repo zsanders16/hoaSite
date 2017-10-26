@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Segment, Form, Button } from 'semantic-ui-react'
+import { Segment, Form, Button, Select } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import _ from 'lodash'
@@ -15,7 +15,7 @@ import {
 
 class EventForm extends Component {
   defaults = {
-    id: '', title: '', date: '', description: '', active: '',
+    id: '', title: '', date: '', description: '', active: '1',
   }
   state = { ...this.defaults }
 
@@ -27,7 +27,15 @@ class EventForm extends Component {
     if( eventId && events.length > 0 ){
       if( _.isNumber(eventId) ) {
         const event = events.find( e => e.id === eventId )
-        this.setState({ ...event })
+        let isActive = event.active === true ? '1' : '0'
+        let incomingEvent = {
+          title: event.title,
+          date: event.date,
+          description: event.description,
+          active: isActive,
+          id: event.id
+        }
+        this.setState({ ...incomingEvent })
       } else if ( _.isBoolean ) {
         this.setState({ ...this.defaults })
       }
@@ -41,12 +49,31 @@ class EventForm extends Component {
   }
 
   handleSubmit = ( event ) => {
+    let { id } = this.state
     event.preventDefault()
     const { dispatch, closeFormModal } = this.props
-    if( _.isNumber(this.state.id) ) {
-      dispatch(updateEvent(this.state))
-    } else if( _.isBoolean(this.state.id) ){
-      dispatch(addEvent(this.state))
+    debugger
+    if( _.isNumber(id) ) {
+      debugger
+      let isActive = this.state.active === '1' ? true : false
+      let updatedEvent = {
+        id: this.state.id,
+        title: this.state.title,
+        date: this.state.date,
+        description: this.state.description,
+        active: isActive,
+      }
+      debugger
+      dispatch(updateEvent(updatedEvent))
+    } else if( _.isString(id) ){
+      let isActive = this.state.active === '1' ? true : false
+      let newEvent = {
+        title: this.state.title,
+        date: this.state.date,
+        description: this.state.description,
+        active: isActive,
+      }
+      dispatch(addEvent(newEvent))
     }
     closeFormModal()
   }
@@ -58,7 +85,7 @@ class EventForm extends Component {
   }
 
   handleDateChange = ( moment ) => {
-    this.setState({ date: moment.utc().format() })
+    this.setState({ date: moment.format('LL') })
   }
 
   render() {
@@ -84,21 +111,22 @@ class EventForm extends Component {
             <label>Date</label>
             <DatePicker
               required
-              selected={moment(date).local()}
-              onChange={this.handleDateChange}
-              timeIntervals={15}
-              dateFormat="LLL"
+              value={date}
+              selected={moment()}
+              onChange={() => this.handleDateChange(moment())}
+              dateFormat="LL"
               />
           </Form.Field>
-          <Form.Select
+          <Form.Field
             required
             width={4}
             label='Status'
+            control={Select}
             id='active'
             value={active}
             options={[
-              { key: 'active', text: 'Active', value: true },
-              { key: 'inactive', text: 'Inactive', value: false },
+              { key: 'active', text: 'Active', value: '1' },
+              { key: 'inactive', text: 'Inactive', value: '0' },
             ]}
             onChange={this.handleStatusChange} />
         </Form.Group>

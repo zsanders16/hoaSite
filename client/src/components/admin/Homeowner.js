@@ -5,11 +5,13 @@ import { updateHomeowner, statusHomeowners } from '../../actions/homeowners'
 import { connect } from 'react-redux'
 
 class Homeowner extends React.Component {
-    state = { admin: false, status: '', openActivate: false, openDeactivate: false, openDelete: false}
+    state = { admin: false, status: '', openActivate: false, openDeactivate: false, openDelete: false, isWatch: false}
 
     componentDidMount() {
         let { homeowner } = this.props
-        this.setState({admin: homeowner.admin, status: homeowner.status })
+        let newStatus = homeowner.admin === 1 ? true : false
+        let newIsWatch = homeowner.isWatch === 1 ? true: false
+        this.setState({admin: newStatus, status: homeowner.status, isWatch: newIsWatch })
     }
 
     deleteUser = () => {
@@ -21,6 +23,13 @@ class Homeowner extends React.Component {
         let updateAdmin = homeowner.admin
         homeowner.admin = !updateAdmin
         this.setState({admin: !updateAdmin})
+        this.props.dispatch(updateHomeowner(homeowner))
+    }
+
+    handleWatchSwitch = (homeowner) => {
+        let updateWatch = !homeowner.isWatch
+        homeowner.isWatch = updateWatch ? 1 : 0
+        this.setState({isWatch: updateWatch})
         this.props.dispatch(updateHomeowner(homeowner))
     }
 
@@ -58,18 +67,18 @@ class Homeowner extends React.Component {
 
     render(){
         const { homeowner } = this.props
-        const { admin, status } = this.state
+        const { admin, status, isWatch } = this.state
         return(
             <Table.Row>
                 <Table.Cell collapsing>
                     <Segment basic textAlign='center'>
                         <Popup
-                            trigger={<Button color='twitter' size='mini' onClick={() => this.props.editHomeowner(homeowner)} ><Icon name='sticky note outline' /></Button>}
+                            trigger={<Button color='twitter' size='mini' onClick={() => this.props.editHomeowner(homeowner)} floated='left'><Icon name='sticky note outline' /></Button>}
                             content='Edit Homeowner'
                             hideOnScroll
                         />
                         <Popup
-                            trigger={<Button color='google plus' size='mini' onClick={this.showDelete} ><Icon name='remove' /></Button>}
+                            trigger={<Button color='google plus' size='mini' onClick={this.showDelete} floated='left'><Icon name='remove' /></Button>}
                             content='Delete Homeowner'
                             hideOnScroll
                         />
@@ -85,17 +94,22 @@ class Homeowner extends React.Component {
                 <Table.Cell collapsing>
                     {homeowner.name}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell collapsing>
                     {homeowner.email}
                 </Table.Cell>
                 <Table.Cell collapsing>
                     {homeowner.number}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell collapsing>
                     {homeowner.address}
                 </Table.Cell>
-                <Table.Cell collapsing textAlign='center'><Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} /></Table.Cell>
-                <Table.Cell collapsing >
+                <Table.Cell collapsing textAlign='center'>
+                    <Checkbox checked={admin} onChange={() => this.handleAdminSwitch(homeowner)} />
+                </Table.Cell>
+                <Table.Cell collapsing textAlign='center'>
+                    <Checkbox checked={isWatch} onChange={() => this.handleWatchSwitch(homeowner)} />
+                </Table.Cell>
+                <Table.Cell collapsing verticalAlign='top' textAlign='center'>
                     { status === 0 ?
                         <div>
                             <Button primary onClick={this.showDeactivate}>Active</Button>

@@ -44,7 +44,6 @@ class Api::HomeownersController < ApplicationController
     end
 
     def unlock
-        binding.pry
         user = with_reset_password_token(params[:reset_password_token])
         render json: user
     end
@@ -58,7 +57,7 @@ class Api::HomeownersController < ApplicationController
 
         def homeowner_params
             params.require(:homeowner)
-              .permit(:name, :email, :admin, :address, :number, :title, :status)
+              .permit(:name, :email, :admin, :address, :number, :title, :status, :isWatch)
         end
 
 end

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const ProtectedRoute = ({ isAdmin, component: Component, ...rest }) => (
+const AdminRoute = ({ isAdmin, component: Component, ...rest }) => (
   
   <Route {...rest} render={props => (
     isAdmin ? (
@@ -20,4 +20,4 @@ const mapStateToProps = (state) => {
   return { isAdmin: state.user.admin }
 }
 
-export default connect(mapStateToProps)(ProtectedRoute);
+export default connect(mapStateToProps)(AdminRoute);

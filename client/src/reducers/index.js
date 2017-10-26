@@ -18,6 +18,7 @@ import homepages from './homepages'
 import homepage from './homepage'
 import requests from './requests'
 import members from './members'
+import watch from './watch'
 
 const rootReducer = combineReducers({
     members,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
     comments,
     archived,
     events,
+    watch,
 })
 
 export default rootReducer

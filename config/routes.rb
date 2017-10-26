@@ -110,6 +110,7 @@
 
 Rails.application.routes.draw do
 
+  
   mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do
     #API ROUTES SHOULD GO HERE
@@ -184,6 +185,8 @@ Rails.application.routes.draw do
     end
 
     resources :board_members, only: [ :index ]
+    resources :watch_members, only: [ :index ]
+    
 
   end
 

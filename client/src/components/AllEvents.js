@@ -32,7 +32,7 @@ class AllEvents extends React.Component{
 
             nextProps.events.forEach( (createdEvent) => {
                 let d = moment(createdEvent.date)
-                let month = d.add(1,'year').format('LL').split(' ')[0]
+                let month = d.format('LL').split(' ')[0]
                 eventList[month] = [...eventList[month], createdEvent]
             })
             this.setState({ eventList: eventList })
