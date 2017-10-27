@@ -120,17 +120,6 @@ class Events extends React.Component{
         )
     }
 
-    loadMore = ( page ) => {
-      const { dispatch, pagination } = this.props
-      const { hasMore } = this.state
-      if( hasMore && pagination.total_pages ) {
-        if( page <= pagination.total_pages ) {
-          dispatch(getEvents(page))
-        } else {
-          this.setState({ hasMore: false })
-        }
-      }
-    }
 
     displayEvents = () => {
       const { eventId } = this.state
