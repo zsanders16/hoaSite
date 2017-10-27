@@ -2,7 +2,6 @@ import React from 'react'
 import { getEvents, clearEvents } from '../actions/events'
 import { connect } from 'react-redux'
 import { Header, Segment, Table, Icon } from 'semantic-ui-react'
-import moment from 'moment'
 
 class AllEvents extends React.Component{
     state = { eventList: {}}
@@ -31,8 +30,7 @@ class AllEvents extends React.Component{
             }
 
             nextProps.events.forEach( (createdEvent) => {
-                let d = moment(createdEvent.date)
-                let month = d.format('LL').split(' ')[0]
+                let month = createdEvent.date.split(' ')[0]
                 eventList[month] = [...eventList[month], createdEvent]
             })
             this.setState({ eventList: eventList })

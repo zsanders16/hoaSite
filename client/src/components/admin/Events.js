@@ -202,49 +202,6 @@ class Events extends React.Component{
         this.setState({ date: moment.utc().format() })
       }
 
-    // displayForm = () => {
-    //     let { title, description, edit, date } = this.state
-    //     return(
-    //         <Segment basic >
-    //             <Grid.Column width={4}>
-    //             </Grid.Column>
-    //             <Grid.Column width={12}>
-    //                 <Form onSubmit={this.handleOnSubmit} >
-    //                     <Form.Field>
-    //                         <label>Title</label>
-    //                         <input placeholder='Title' value={title} id='title' onChange={this.handleOnChange} />
-    //                     </Form.Field>
-    //                     <Form.Field>
-    //                         <label>Date</label>
-    //                         <DatePicker
-    //                             required
-    //                             selected={moment(date).local()}
-    //                             onChange={this.handleDateChange}
-    //                             timeIntervals={15}
-    //                             dateFormat="LLL"
-    //                         />
-    //                         {/* <label >Meeting Date : </label><input type="date" id='date' onChange={this.handleOnChange} /> */}
-    //                     </Form.Field>
-    //                     <Form.Field>
-    //                         <Form.TextArea label='Description' placeholder='Description of the event...' value={description} id='description' onChange={this.handleOnChange} />
-    //                     </Form.Field>
-    //                     <Form.Field
-    //                         options={options}
-    //                         label='Status'
-    //                         placeholder='Status'
-    //                         control={Select}
-    //                         id='active'
-    //                         onChange={this.handleStatusChange} 
-    //                     >
-    //                     </Form.Field>
-    //                     <Button primary onClick={this.showEventForm} >Cancel</Button>
-    //                     <Button primary type='submit'>{ edit ? 'Update' : 'Submit' }</Button>
-    //                 </Form>
-    //             </Grid.Column>
-    //         </Segment>
-    //     )
-    // }
-
     render(){
         return(
             <Segment>

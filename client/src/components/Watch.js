@@ -10,7 +10,7 @@ class Watch extends React.Component{
     }
 
     componentWillUnmount(){
-        indexWatch(this.props.dispatch)
+        resetWatch(this.props.dispatch)
     }
 
     displayWatch = () => {
@@ -32,13 +32,13 @@ class Watch extends React.Component{
             <Header as='h1' icon textAlign='center'  size='huge'>
               <Icon name='group' circular/>
               <Header.Content>
-                Woodstock Village Neighborhood Watch watch
+                Woodstock Village Neighborhood Watch
               </Header.Content>
             </Header>
             <Table celled>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Member</Table.HeaderCell>
+                  <Table.HeaderCell>Members</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>

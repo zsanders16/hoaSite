@@ -51,10 +51,9 @@ class EventForm extends Component {
   handleSubmit = ( event ) => {
     let { id } = this.state
     event.preventDefault()
-    const { dispatch, closeFormModal } = this.props
+    const { dispatch } = this.props
     debugger
     if( _.isNumber(id) ) {
-      debugger
       let isActive = this.state.active === '1' ? true : false
       let updatedEvent = {
         id: this.state.id,
@@ -63,9 +62,8 @@ class EventForm extends Component {
         description: this.state.description,
         active: isActive,
       }
-      debugger
       dispatch(updateEvent(updatedEvent))
-    } else if( _.isString(id) ){
+    } else{
       let isActive = this.state.active === '1' ? true : false
       let newEvent = {
         title: this.state.title,
@@ -75,7 +73,7 @@ class EventForm extends Component {
       }
       dispatch(addEvent(newEvent))
     }
-    closeFormModal()
+    this.props.closeFormModal()
   }
 
   handleChange = ({target:{id,value}}) => this.setState({ [id]: value })
