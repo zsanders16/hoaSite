@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Image, Button, Icon } from 'semantic-ui-react'
+import { Grid, Image, Button, Icon, Popup } from 'semantic-ui-react'
 import CarouselImage from './CarouselImage'
 import CarouselPaginator from './CarouselPaginator'
 
@@ -34,13 +34,14 @@ class Carousel extends Component {
       }
     }
   }
-
+  // trigger={<CarouselImage size='tiny' image={image}></CarouselImage>} >
+  // <CarouselImage size='small' image={image} />
   displayCarouselImages = () => {
     const { carousel } = this.props
     if( carousel.length > 0 ) {
       return carousel.map( image => {
         return (
-          <CarouselImage key={image.id} image={image} />
+          <CarouselImage image={image} width='250px' />
         )
       })
     }

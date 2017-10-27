@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { setFlash } from './flash'
 
-const query_string = ( page = 1, per = 6 ) => {
+const query_string = ( page = 1, per = 4 ) => {
   return `?page=${page}&per=${per}`
 }
 
