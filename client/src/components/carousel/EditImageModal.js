@@ -13,17 +13,10 @@ class EditImageModal extends Component {
     if( props.newImage ) {
       this.setState({ openModal: true })
     } else {
-<<<<<<< HEAD
       const { imageId } = props
       this.setState({
         openModal: true,
         activeImage: this.props.carousel.find( image => image.id === imageId ),
-=======
-      const { imageId: {id} } = props
-      this.setState({
-        openModal: true,
-        activeImage: this.props.carousel.find( image => image.id === id ),
->>>>>>> WIP Carousel Editing form, and layouts finished
       })
     }
   }
