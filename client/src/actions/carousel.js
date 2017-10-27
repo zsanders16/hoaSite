@@ -125,7 +125,7 @@ export const deleteCarouselImage = ( imageId ) => {
     .then( resp => {
       dispatch({
         type: 'DELETE_CAROUSEL_IMAGE',
-        data: resp.data,
+        data: imageId,
         headers: resp.headers,
       })
     })

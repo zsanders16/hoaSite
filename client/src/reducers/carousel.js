@@ -28,7 +28,7 @@ const carousel = ( state = defaults, action ) => {
         ]
       }
     case 'UPDATE_CAROUSEL_IMAGE':
-      const index = state.findIndex( ci => ci.id === action.data.id )
+      const index = state.data.findIndex( ci => ci.id === action.data.id )
       return {
         ...state,
         data: [
@@ -38,7 +38,7 @@ const carousel = ( state = defaults, action ) => {
         ],
       }
     case 'DELETE_CAROUSEL_IMAGE':
-      const filtered = state.data.filter( ci => ci.id !== action.data.id )
+      const filtered = state.data.filter( ci => ci.id !== action.data )
       return {
         ...state,
         data: filtered

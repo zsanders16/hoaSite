@@ -2,13 +2,14 @@ class Api::CarouselsController < ApplicationController
   before_action :set_image, only: [:show, :update, :destroy]
 
   def index
-    carousel = Carousel.all.page(params[:page]).per_page(params[:per])
+    carousel = Carousel.all.order(:updated_at).page(params[:page]).per_page(params[:per])
     render_paginated_model_to_json(carousel)
   end
 
   def active
     active_carousel = Carousel
       .where(active: 1)
+      .order(:updated_at)
       .page(params[:page]).per_page(params[:per])
     render_paginated_model_to_json(active_carousel)
   end
@@ -16,6 +17,7 @@ class Api::CarouselsController < ApplicationController
   def inactive
     inactive_carousel = Carousel
       .where(active: 0)
+      .order(:updated_at)
       .page(params[:page]).per_page(params[:per])
     render_paginated_model_to_json(inactive_carousel)
   end

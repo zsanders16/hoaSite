@@ -71,7 +71,6 @@ class CarouselPaginator extends Component {
           <Menu.Item
             key={pageNum+'M'}
             icon
-            borderless
             name={pageNum}
             active={active}
             onClick={this.loadPage}>
@@ -133,7 +132,7 @@ class CarouselPaginator extends Component {
   }
 
   isActive = ( activeItem, pageNum ) => {
-    return parseInt(activeItem) === parseInt(pageNum)
+    return parseInt(activeItem,10) === parseInt(pageNum,10)
   }
 
   /**

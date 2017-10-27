@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Dimmer } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 
 class CarouselImage extends Component {
   state = { width: '15%' }

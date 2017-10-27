@@ -13,6 +13,7 @@ import { Switch, Route } from 'react-router-dom'
 import NoMatch from '../NoMatch';
 import Emails from '../emails/Emails'
 import HomePages from '../homepages/HomePages'
+import CarouselAdmin from '../carousel/CarouselAdmin'
 
 class AdminRoutes extends Component {
   render() {
@@ -29,6 +30,7 @@ class AdminRoutes extends Component {
             <AdminRoute exact path='/admin/emails' component={Emails} />
             <AdminRoute exact path='/admin/homepages' component={HomePages} />
             <AdminRoute exact path='/admin/events' component={Events} />
+            <AdminRoute exact path='/admin/carousel' component={CarouselAdmin} />
             <Route component={NoMatch} />
         </Switch>
     );
