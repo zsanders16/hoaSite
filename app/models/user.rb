@@ -33,6 +33,7 @@
 #  locked_at              :datetime
 #  title                  :string
 #  status                 :integer          default(1)
+#  isWatch                :integer          default(0)
 #
 
 class User < ActiveRecord::Base

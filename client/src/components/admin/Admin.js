@@ -13,6 +13,7 @@ let adminModules = [
     {title: 'Events', link: 'admin/events', description: 'View, Add or Modify all upcoming events.'},
     {title: 'Home Pages', link: 'admin/homepages', description: 'View all Home Pages; add, remove, or archive them.'},
     {title: 'Carousel Images', link: 'admin/carousel', description: 'View Home Page Carousel Images; add, remove, or delete.'},
+    {title: 'External Links', link: 'admin/links', description: 'View External Links; add, remove, or manage them.'},
 ]
 
 class Admin extends React.Component{

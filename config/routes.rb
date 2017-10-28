@@ -62,7 +62,10 @@
 #                 api_minutes GET      /api/minutes(.:format)                           api/minutes#index
 #                             POST     /api/minutes(.:format)                           api/minutes#create
 #                  api_minute GET      /api/minutes/:id(.:format)                       api/minutes#show
+#                             PATCH    /api/minutes/:id(.:format)                       api/minutes#update
+#                             PUT      /api/minutes/:id(.:format)                       api/minutes#update
 #                             DELETE   /api/minutes/:id(.:format)                       api/minutes#destroy
+#       api_minutes_non_admin GET      /api/minutes_non_admin(.:format)                 api/minutes#index_non_admin
 #        api_message_comments GET      /api/messages/:message_id/comments(.:format)     api/comments#index
 #                             POST     /api/messages/:message_id/comments(.:format)     api/comments#create
 #         api_message_comment DELETE   /api/messages/:message_id/comments/:id(.:format) api/comments#destroy
@@ -112,13 +115,21 @@
 #                             PATCH    /api/carousels/:id(.:format)                     api/carousels#update
 #                             PUT      /api/carousels/:id(.:format)                     api/carousels#update
 #                             DELETE   /api/carousels/:id(.:format)                     api/carousels#destroy
+#            footer_api_links GET      /api/links/footer(.:format)                      api/links#footer
+#                   api_links GET      /api/links(.:format)                             api/links#index
+#                             POST     /api/links(.:format)                             api/links#create
+#                    api_link GET      /api/links/:id(.:format)                         api/links#show
+#                             PATCH    /api/links/:id(.:format)                         api/links#update
+#                             PUT      /api/links/:id(.:format)                         api/links#update
+#                             DELETE   /api/links/:id(.:format)                         api/links#destroy
 #           api_board_members GET      /api/board_members(.:format)                     api/board_members#index
+#           api_watch_members GET      /api/watch_members(.:format)                     api/watch_members#index
 #                             GET      /*other(.:format)                                static#index
 # 
 
 Rails.application.routes.draw do
 
-  
+
   mount_devise_token_auth_for 'User', at: 'api/auth'
   namespace :api do
     #API ROUTES SHOULD GO HERE
@@ -198,9 +209,14 @@ Rails.application.routes.draw do
       get 'inactive', on: :collection
     end
 
+    # Routes for Links Controller
+    resources :links, shallow: true do
+      get 'footer', on: :collection
+    end
+
     resources :board_members, only: [ :index ]
     resources :watch_members, only: [ :index ]
-    
+
 
   end
 

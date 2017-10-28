@@ -63,6 +63,20 @@ namespace :load do |loader_namespace|
     end
   end
 
+  desc "Load Test Links for Link Model"
+  task links: :environment do
+    Link.destroy_all
+
+    10.times do
+      Link.create(
+        title: Faker::Lorem.words(3).join(' '),
+        link: Faker::Internet.url,
+        active: [0,1].sample,
+        category: %w[General Safety Community City State].sample
+      )
+    end
+  end
+
   task :all do
     loader_namespace.tasks.each do |task|
       Rake::Task[task].invoke

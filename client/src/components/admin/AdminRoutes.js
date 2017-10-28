@@ -14,6 +14,7 @@ import NoMatch from '../NoMatch';
 import Emails from '../emails/Emails'
 import HomePages from '../homepages/HomePages'
 import CarouselAdmin from '../carousel/CarouselAdmin'
+import LinksAdmin from '../links/LinksAdmin'
 
 class AdminRoutes extends Component {
   render() {
@@ -31,6 +32,7 @@ class AdminRoutes extends Component {
             <AdminRoute exact path='/admin/homepages' component={HomePages} />
             <AdminRoute exact path='/admin/events' component={Events} />
             <AdminRoute exact path='/admin/carousel' component={CarouselAdmin} />
+            <AdminRoute exact path='/admin/links' component={LinksAdmin} />
             <Route component={NoMatch} />
         </Switch>
     );

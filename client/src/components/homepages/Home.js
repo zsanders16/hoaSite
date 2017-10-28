@@ -12,6 +12,7 @@ import HomeMainBody from './HomeMainBody'
 import Events from './Events'
 import Access from '../requests/Access'
 import Carousel from '../carousel/Carousel'
+import LinksFooter from '../links/LinksFooter'
 
 
 class Home extends Component {
@@ -82,7 +83,7 @@ class Home extends Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={4} textAlign='left' >
-                  
+                  <LinksFooter />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
