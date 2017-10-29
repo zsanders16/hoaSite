@@ -5,7 +5,7 @@ import EventForm from './EventForm'
 class EventModal extends Component {
   
   handleClose = () => {
-     this.props.displayEventModal()
+     this.props.closeEventModal()
   }
 
   render() {

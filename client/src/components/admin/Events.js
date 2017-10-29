@@ -31,7 +31,6 @@ class Events extends React.Component{
     deleteEvent = (event) => {
         let { dispatch } = this.props
         dispatch(removeEvent(event))
-        this.displayEventModal()
     }
 
     compare (a, b) {
@@ -46,11 +45,10 @@ class Events extends React.Component{
         return comparison;
     }
 
-    displayEventModal = () => {
-        let { showForm } = this.state
-        this.setState({ showForm: !showForm })
-    }
-    // closeEventModal = () => this.setState({  })
+    displayEventModal = () => this.setState({ showForm: true })
+
+
+    closeEventModal = () => this.setState({ showForm: false, eventId: '' })
 
     handleEditButton = (id) => {
         this.setState({ eventId: id }, this.displayEventModal)
@@ -146,17 +144,6 @@ class Events extends React.Component{
                     <Table.Body>
                         { this.displayEachEvent()}
                     </Table.Body>
-                    <Table.Footer>
-                      <Table.Row>
-                        <Table.HeaderCell colSpan={5}>
-                          { eventId &&
-                            <EventModal
-                              eventId={eventId}
-                              displayEventModal={this.displayEventModal} />
-                          }
-                        </Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Footer>
                 </Table>
             </Segment>
             )
@@ -164,7 +151,7 @@ class Events extends React.Component{
             return (
                 <EventModal
                 eventId={eventId}
-                displayEventModal={this.displayEventModal}
+                closeEventModal={this.closeEventModal}
                 showForm={showForm} />
             )
         }

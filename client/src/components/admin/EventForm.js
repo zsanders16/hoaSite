@@ -20,7 +20,7 @@ class EventForm extends Component {
   state = { ...this.defaults }
 
   componentDidMount = () => this.loadEvent( this.props )
-  componentWillReceiveProps = ( nextProps ) => this.loadEvent( nextProps )
+ 
 
   loadEvent = ( props ) => {
     const { eventId, events } = props
