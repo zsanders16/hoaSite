@@ -3,25 +3,21 @@ import { Modal, Button, Header } from 'semantic-ui-react'
 import EventForm from './EventForm'
 
 class EventModal extends Component {
-  state = { openModal: true }
-
-  componentWillReceiveProps = ( nextProps ) => this.setState({ openModal: true })
   
   handleClose = () => {
-    this.setState({ openModal: false })
-    this.props.closeEventModal()
+     this.props.displayEventModal()
   }
 
   render() {
     return (
       <Modal
-        open={this.state.openModal}
+        open={this.props.showForm}
         onClose={this.handleClose}>
         <Header as='h1' icon='calendar' content='Event Information' />
         <Modal.Content>
           <EventForm
             eventId={this.props.eventId}
-            closeFormModal={this.handleClose} />
+            handleClose={this.handleClose} />
         </Modal.Content>
         <Modal.Actions>
           <Button

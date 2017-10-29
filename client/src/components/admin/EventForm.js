@@ -45,14 +45,13 @@ class EventForm extends Component {
   handleNewForm = () => this.setState({ ...this.defaults })
   handleDelete = () => {
     this.props.dispatch(removeEvent(this.state))
-    this.props.closeFormModal()
+    this.props.handleClose()
   }
 
   handleSubmit = ( event ) => {
     let { id } = this.state
     event.preventDefault()
     const { dispatch } = this.props
-    debugger
     if( _.isNumber(id) ) {
       let isActive = this.state.active === '1' ? true : false
       let updatedEvent = {
@@ -73,7 +72,7 @@ class EventForm extends Component {
       }
       dispatch(addEvent(newEvent))
     }
-    this.props.closeFormModal()
+    this.props.handleClose()
   }
 
   handleChange = ({target:{id,value}}) => this.setState({ [id]: value })

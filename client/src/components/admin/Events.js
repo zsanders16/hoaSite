@@ -12,7 +12,7 @@ import EventModal from './EventModal'
 
 class Events extends React.Component{
     defaults = {
-        edit: false, eventId: '',
+        edit: false, eventId: '', showForm: false,
         title: '', date: '', description: '', id: '', active: true,
     }
     state = { ...this.defaults }
@@ -31,7 +31,7 @@ class Events extends React.Component{
     deleteEvent = (event) => {
         let { dispatch } = this.props
         dispatch(removeEvent(event))
-        this.closeEventModal()
+        this.displayEventModal()
     }
 
     compare (a, b) {
@@ -46,8 +46,15 @@ class Events extends React.Component{
         return comparison;
     }
 
-    displayEventModal = ( eventId ) => this.setState({ eventId })
-    closeEventModal = () => this.setState({ eventId: '' })
+    displayEventModal = () => {
+        let { showForm } = this.state
+        this.setState({ showForm: !showForm })
+    }
+    // closeEventModal = () => this.setState({  })
+
+    handleEditButton = (id) => {
+        this.setState({ eventId: id }, this.displayEventModal)
+    }
 
     displayEachEvent = () => {
         let { events } = this.props
@@ -75,7 +82,7 @@ class Events extends React.Component{
                             <Button
                               color='twitter'
                               size='mini'
-                              onClick={() => this.displayEventModal(event.id)}
+                              onClick={() => this.handleEditButton(event.id)}
                               floated='right'>
                                 <Icon name='sticky note outline' />
                             </Button>
@@ -122,9 +129,8 @@ class Events extends React.Component{
 
 
     displayEvents = () => {
-      const { eventId } = this.state
-      debugger
-        if(!eventId){
+      const { showForm, eventId } = this.state
+        if(!showForm){
             return (
                 <Segment basic>
                 <Table celled padded>
@@ -146,7 +152,7 @@ class Events extends React.Component{
                           { eventId &&
                             <EventModal
                               eventId={eventId}
-                              closeEventModal={this.closeEventModal} />
+                              displayEventModal={this.displayEventModal} />
                           }
                         </Table.HeaderCell>
                       </Table.Row>
@@ -158,7 +164,8 @@ class Events extends React.Component{
             return (
                 <EventModal
                 eventId={eventId}
-                closeEventModal={this.closeEventModal} />
+                displayEventModal={this.displayEventModal}
+                showForm={showForm} />
             )
         }
     }
