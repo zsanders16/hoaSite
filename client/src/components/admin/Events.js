@@ -118,7 +118,7 @@ class Events extends React.Component{
                     <Grid.Column width={12}>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <Button primary onClick={ () => this.displayEventModal('0') } >Create Event</Button>
+                        <Button primary onClick={ this.displayEventModal } >Create Event</Button>
                     </Grid.Column>
                 </Grid>
             </Segment>
