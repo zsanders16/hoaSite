@@ -108,29 +108,39 @@ class Events extends React.Component{
     }
 
     events = () => {
+        let { showForm, eventId } = this.state
         let { events } = this.props
-        return(
-            <Segment basic>
-                <Header textAlign='center' as='h2'>Upcoming Events</Header>
-                <Divider />
-                { events.length>0 ? this.displayEvents() : this.displayNoEvents()}
-                <Grid>
-                    <Grid.Column width={12}>
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <Button primary onClick={ this.displayEventModal } >Create Event</Button>
-                    </Grid.Column>
-                </Grid>
-            </Segment>
-        )
+        if(showForm){
+            return (
+                <EventModal
+                    eventId={eventId}
+                    closeEventModal={this.closeEventModal}
+                    showForm={showForm} 
+                />
+            )
+        }else{
+            return(
+                <Segment basic>
+                    <Header textAlign='center' as='h2'>Upcoming Events</Header>
+                    <Divider />
+                    { events.length>0 ? this.displayEvents() : this.displayNoEvents()}
+                    <Grid>
+                        <Grid.Column width={12}>
+                        </Grid.Column>
+                        <Grid.Column width={4}>
+                            <Button primary onClick={this.displayEventModal}>Crete Event</Button>
+                        </Grid.Column>
+                    </Grid>
+                </Segment>
+            )
+        } 
     }
 
 
     displayEvents = () => {
-      const { showForm, eventId } = this.state
-        if(!showForm){
-            return (
-                <Segment basic>
+    const { eventId } = this.state
+        return (
+            <Segment basic>
                 <Table celled padded>
                     <Table.Header>
                         <Table.Row>
@@ -146,15 +156,7 @@ class Events extends React.Component{
                     </Table.Body>
                 </Table>
             </Segment>
-            )
-        }else{
-            return (
-                <EventModal
-                eventId={eventId}
-                closeEventModal={this.closeEventModal}
-                showForm={showForm} />
-            )
-        }
+        )
     }
 
     displayNoEvents = () => {
