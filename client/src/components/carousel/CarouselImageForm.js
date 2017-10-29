@@ -88,13 +88,13 @@ class CarouselImageForm extends Component {
         <FileBase64 multiple={false} onDone={this.handleBase64File} />
         <Segment basic textAlign='right'>
           <Button.Group size='mini'>
-            <Button type='submit'>
+            <Button primary type='submit'>
               { id ? 'Update' : 'Create' }
             </Button>
             <Button.Or />
-            <Button type='button' onClick={this.handleDelete}>Delete</Button>
+            <Button color='red' type='button' onClick={this.handleDelete}>Delete</Button>
             <Button.Or />
-            <Button type='button' onClick={this.handleNew}>New Form</Button>
+            <Button primary type='button' onClick={this.handleNew}>New Form</Button>
           </Button.Group>
         </Segment>
       </Form>

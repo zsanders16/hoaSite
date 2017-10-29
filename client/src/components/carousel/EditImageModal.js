@@ -37,7 +37,7 @@ class EditImageModal extends Component {
             handleOnClose={this.handleOnClose} />
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={this.handleOnClose} color='red'>
+          <Button onClick={this.handleOnClose} primary >
             Back
           </Button>
         </Modal.Actions>

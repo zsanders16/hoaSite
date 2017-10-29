@@ -105,7 +105,7 @@ class CarouselAdmin extends Component {
             <Table.Cell>{image.category}</Table.Cell>
             <Table.Cell>{image.active ? 'Yes' : 'No'}</Table.Cell>
             <Table.Cell>
-              <Button onClick={()=>this.handleEditImage(image.id)}>
+              <Button primary onClick={()=>this.handleEditImage(image.id)}>
                 Edit
               </Button>
             </Table.Cell>
@@ -151,17 +151,17 @@ class CarouselAdmin extends Component {
               <ButtonLabel>Filter Images</ButtonLabel>
               { !filter ?
                 <Button.Group size='mini'>
-                  <Button onClick={this.handleActiveCarousel}>
+                  <Button primary onClick={this.handleActiveCarousel}>
                     Active
                   </Button>
                   <Button.Or />
-                  <Button onClick={this.handleInactiveCarousel}>
+                  <Button primary onClick={this.handleInactiveCarousel}>
                     Inactive
                   </Button>
                 </Button.Group>
                 :
                 <Button.Group size='mini'>
-                  <Button onClick={this.handleResetFilters}>
+                  <Button primary onClick={this.handleResetFilters}>
                     No Filter
                   </Button>
                 </Button.Group>
@@ -169,6 +169,7 @@ class CarouselAdmin extends Component {
               {' '}
               <Button.Group size='mini'>
                 <Button
+                  primary
                   type='button'
                   onClick={this.handleNewImage}>
                   Add New Image

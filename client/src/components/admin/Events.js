@@ -123,8 +123,10 @@ class Events extends React.Component{
 
     displayEvents = () => {
       const { eventId } = this.state
-        return(
-            <Segment basic>
+      debugger
+        if(!eventId){
+            return (
+                <Segment basic>
                 <Table celled padded>
                     <Table.Header>
                         <Table.Row>
@@ -151,7 +153,14 @@ class Events extends React.Component{
                     </Table.Footer>
                 </Table>
             </Segment>
-        )
+            )
+        }else{
+            return (
+                <EventModal
+                eventId={eventId}
+                closeEventModal={this.closeEventModal} />
+            )
+        }
     }
 
     displayNoEvents = () => {

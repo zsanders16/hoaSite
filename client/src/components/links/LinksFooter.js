@@ -41,6 +41,8 @@ class LinksFooter extends Component {
           </List.Item>
         )
       })
+    }else{
+      return <p>No Links to Display</p>
     }
   }
 
