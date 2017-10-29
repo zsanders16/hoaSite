@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Table, Segment, Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import Paginator from '../Paginator'
 import NewLinkModal from './NewLinkModal'
 
@@ -49,6 +49,7 @@ class LinksAdmin extends Component {
             <Table.Cell>{link.category}</Table.Cell>
             <Table.Cell>
               <Button
+                color='red'
                 size='mini'
                 type='button'
                 onClick={()=>this.handleDeleteLink(link.id)}>
@@ -89,6 +90,7 @@ class LinksAdmin extends Component {
             <Table.HeaderCell colSpan={5}>
               <Button.Group size='mini'>
                 <Button
+                  primary
                   type='button'
                   onClick={this.handleNewLink}>
                   New Link

@@ -64,10 +64,13 @@ class NavBar extends Component {
       <div style={{backgroundColor: '#17202A', marginTop: '-14px', borderRadius: '0 0 7px 7px'}}>
         <Menu pointing secondary stackable>
           <Link to='/' >
-            <Menu.Item name='home' style={{color: '#FDFEFE'}} />
+            <Menu.Item name='Home' style={{color: '#FDFEFE'}} />
           </Link>
           <Link to='/board_members'>
             <Menu.Item name='HOA Board' style={{ color: '#FDFEFE' }} />
+          </Link>
+          <Link to='/allEvents'>
+            <Menu.Item name='AllEvents' style={{ color: '#FDFEFE' }} />
           </Link>
           { this.showAdmin() }
           <Menu.Menu position='right'>

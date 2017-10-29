@@ -7,7 +7,7 @@ import { Button } from 'semantic-ui-react';
 const fadeFlash = (dispatch) => {
   setTimeout( () => {
     dispatch(clearFlash());
-  }, 15000)
+  }, 10000)
 }
 
 const Flash = ({ flash, dispatch }) => {
@@ -20,7 +20,7 @@ const Flash = ({ flash, dispatch }) => {
       >
         { flash.message }
         { fadeFlash(dispatch) }
-        <Button style={{float: 'right', marginTop: '-10px'}} onClick={ () => dispatch(clearFlash()) }> X </Button>
+        <Button basic color='black' style={{float: 'right', marginTop: '-10px'}} onClick={ () => dispatch(clearFlash()) }> X </Button>
       </div>
     )
   } else {

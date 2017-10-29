@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Image, Button, Icon, Popup } from 'semantic-ui-react'
+import { Grid, Image } from 'semantic-ui-react'
 import CarouselImage from './CarouselImage'
 import CarouselPaginator from './CarouselPaginator'
 
 // Actions
-import {
-  indexCarousel,
-  activeCarousel,
-  inactiveCarousel,
-  resetCarousel,
-} from '../../actions/carousel'
+import { indexCarousel } from '../../actions/carousel'
 
 class Carousel extends Component {
   state = { hasMore: false }
@@ -39,9 +34,9 @@ class Carousel extends Component {
   displayCarouselImages = () => {
     const { carousel } = this.props
     if( carousel.length > 0 ) {
-      return carousel.map( image => {
+      return carousel.map( (image, i) => {
         return (
-          <CarouselImage image={image} width='250px' />
+          <CarouselImage key={i} image={image} width='250px' />
         )
       })
     }

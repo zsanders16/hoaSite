@@ -58,8 +58,6 @@ class Home extends Component {
               </Grid.Column>
               <Grid.Column width={4}>
                 <Access />
-                <Divider style={{marginTop: '-30px'}}/>
-                <Link to='/allEvents'><Header textAlign='center'>All Events</Header></Link>
                 <Divider />
                 <Events />
               </Grid.Column>

@@ -97,7 +97,6 @@ class CarouselPaginator extends Component {
       <Menu.Item
         key={pageNum+'L'}
         icon
-        borderless
         name={pageNum}
         active={active}
         onClick={this.loadPage} >
@@ -120,7 +119,6 @@ class CarouselPaginator extends Component {
       <Menu.Item
         key={pageNum+'R'}
         icon
-        borderless
         name={pageNum}
         active={active}
         onClick={this.loadPage}>

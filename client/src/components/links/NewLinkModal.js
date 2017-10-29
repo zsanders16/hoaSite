@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Form, Button } from 'semantic-ui-react'
+import { Modal, Button } from 'semantic-ui-react'
 import NewLinkForm from './NewLinkForm'
 
 class NewLinkModal extends Component {
@@ -21,6 +21,7 @@ class NewLinkModal extends Component {
         <Modal.Actions>
           <Button.Group size='mini'>
             <Button
+              primary
               type='button'
               onClick={this.handleOnClose}>
               Exit

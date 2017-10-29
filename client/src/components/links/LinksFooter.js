@@ -26,9 +26,9 @@ class LinksFooter extends Component {
   displayLinks = () => {
     const { footer } = this.props
     if( footer && footer.length > 0 ) {
-      return footer.map( foot => {
+      return footer.map( (foot, i) => {
         return (
-          <List.Item>
+          <List.Item key={i}>
             <List.Icon name='external' size='mini' />
             <List.Content>
               <List.Header>
