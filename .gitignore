@@ -13,6 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 
-.byebug_history
 .env
+
 /public/system
